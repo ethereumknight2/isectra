@@ -225,7 +225,7 @@ export default function RealResults() {
             ) => (
               <div
                 key={label}
-                className="group relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-blue-200"
+                className="group relative rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-blue-200 min-w-0"
                 style={{ animationDelay: `${delays[idx]}ms` }}
               >
                 {/* Top accent (blue gradient) */}
@@ -238,16 +238,17 @@ export default function RealResults() {
 
                 {/* Metric with count-up */}
                 <div className="text-4xl md:text-5xl font-extrabold mb-1 bg-gradient-to-r from-slate-900 via-slate-900 to-blue-700 bg-clip-text text-transparent">
-                  <CountUp
-                    value={value}
-                    decimals={decimals ?? 0}
-                    duration={1100 + idx * 150}
-                    prefix={prefix}
-                    suffix={suffix}
-                    lessThan={!!lessThan}
-                  />
+                  <span className="inline-block whitespace-nowrap pr-1">
+                    <CountUp
+                      value={value}
+                      decimals={decimals ?? 0}
+                      duration={1100 + idx * 150}
+                      prefix={prefix}
+                      suffix={suffix}
+                      lessThan={!!lessThan}
+                    />
+                  </span>
                 </div>
-
                 {/* Label + description */}
                 <div className="text-base font-semibold text-blue-700 mb-2 tracking-wide">
                   {label}
