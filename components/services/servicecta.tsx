@@ -105,7 +105,7 @@ export default function ServiceCTA({
               </p>
               <div className="mt-4">
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-white font-semibold
                              bg-[linear-gradient(90deg,#7dca00,#64ad00)]
                              hover:shadow-[0_10px_24px_-10px_rgba(125,202,0,0.6)] transition-all"
@@ -122,7 +122,7 @@ export default function ServiceCTA({
         {/* CTAs */}
         <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            href="/contact"
+            href="/contact-us"
             className="group inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 text-white font-semibold shadow-[0_10px_30px_-10px_rgba(125,202,0,0.6)] transition-all
                        bg-[linear-gradient(90deg,#7dca00,#64ad00)]
                        hover:shadow-[0_14px_34px_-10px_rgba(125,202,0,0.75)] hover:-translate-y-0.5
@@ -133,7 +133,7 @@ export default function ServiceCTA({
           </Link>
 
           <Link
-            href="/contact"
+            href="/contact-us"
             className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 font-semibold transition-all
                        border-2 border-[#7dca00] text-[#2c4a00]
                        hover:bg-[#7dca00] hover:text-white hover:-translate-y-0.5"

@@ -238,6 +238,7 @@ export default function ProjectsInfrastructureOfficeMovesPage() {
         imagePath="/images/infrastructure-office-moves.jpeg"
         ctaPrimary="Plan My Office IT Move"
         ctaSecondary=""
+        compact
       />
 
       {/* FEATURES */}

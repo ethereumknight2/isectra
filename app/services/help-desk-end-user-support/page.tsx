@@ -222,6 +222,7 @@ export default function HelpDeskEndUserSupportPage() {
         imagePath="/images/support-desk.jpeg"
         ctaPrimary="Get Started"
         ctaSecondary="See SLAs & Pricing"
+        compact
       />
 
       {/* FEATURES */}

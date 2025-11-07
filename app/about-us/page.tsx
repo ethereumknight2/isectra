@@ -1055,7 +1055,7 @@ export default function AboutPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="group inline-flex items-center justify-center gap-2 px-12 py-6
              bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500
              text-white font-semibold text-lg rounded-lg shadow-xl

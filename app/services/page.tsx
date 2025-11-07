@@ -448,14 +448,14 @@ export default function ServicesPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="group inline-flex items-center justify-center gap-2 px-12 py-6 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-lg rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
                 >
                   Schedule Consultation
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="inline-flex items-center justify-center gap-2 px-12 py-6 bg-white text-slate-900 font-semibold text-lg rounded-xl border-2 border-slate-200 hover:border-blue-600 hover:shadow-xl transition-all duration-300"
                 >
                   Start Free Trial

@@ -146,6 +146,7 @@ export default function ManagedITServicesPage() {
         gradientTo="to-cyan-500"
         iconName="server"
         imagePath="/images/managed-it.jpeg"
+        compact
       />
 
       {/* What's Included Section */}

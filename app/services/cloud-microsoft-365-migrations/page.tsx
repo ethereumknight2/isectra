@@ -213,6 +213,7 @@ export default function CloudMicrosoft365MigrationsPage() {
         imagePath="/images/cloud-microsoft-365-migrations.jpeg"
         ctaPrimary="Start Your Migration"
         ctaSecondary=""
+        compact
       />
 
       {/* FEATURES */}

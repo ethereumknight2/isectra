@@ -209,6 +209,7 @@ export default function CybersecurityDataProtectionPage() {
         imagePath="/images/cybersecurity-data-protection.jpeg"
         ctaPrimary="Get a Security Assessment"
         ctaSecondary=""
+        compact
       />
 
       {/* FEATURES */}
