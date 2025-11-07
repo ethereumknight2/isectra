@@ -1,0 +1,78 @@
+# === Node & Dependencies ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# === Environment Files ===
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# === Next.js Build ===
+.next/
+out/
+dist/
+build/
+
+# === Logs & Reports ===
+*.log
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# === OS / Editor Files ===
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# === TypeScript ===
+*.tsbuildinfo
+
+# === Coverage / Testing ===
+coverage/
+.nyc_output/
+jest.cache/
+cypress/screenshots/
+cypress/videos/
+
+# === Temporary & Cache Files ===
+.cache/
+.parcel-cache/
+tmp/
+temp/
+*.tmp
+*.temp
+
+# === Vercel / Deployment ===
+.vercel/
+.now/
+
+# === Lint / Formatter Cache ===
+.eslintcache
+.stylelintcache
+.prettierignore
+.prettiercache
+
+# === Local Data / Backups ===
+*.bak
+*.backup
+*.orig
+*.rej
+
+# === Build Outputs / Artifacts ===
+*.tgz
+*.zip
+*.tar
+*.tar.gz
+
+# === Misc ===
+# Ignore generated files from scripts or builds
+public/static/generated/
+scripts/tmp/
