@@ -516,18 +516,12 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  {/* Top Right */}
-                  <div className="group relative bg-white border-2 border-[#7dca00] rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                    <div className="text-center">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#7dca00] to-green-500 rounded-xl flex items-center justify-center shadow-lg">
-                        <span className="text-2xl font-bold text-white">
-                          100%
-                        </span>
-                      </div>
-                      <p className="text-slate-900 font-bold text-lg mb-1">
-                        Client Retention
-                      </p>
-                      <p className="text-slate-600 text-sm">
+                  {/* Top Right - SOLID GRADIENT */}
+                  <div className="group relative bg-gradient-to-br from-[#7dca00] to-green-500 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                    <div className="text-center text-white">
+                      <div className="text-3xl font-bold mb-2">100%</div>
+                      <p className="font-bold mb-1">Client Retention</p>
+                      <p className="text-sm text-green-100">
                         Never lost a customer
                       </p>
                     </div>
