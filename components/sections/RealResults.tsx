@@ -98,7 +98,7 @@ const stats: Stat[] = [
     icon: TrendingUp,
     label: "Uptime",
     description: "Average uptime across all managed clients",
-    value: 99.97,
+    value: 99.99,
     decimals: 2,
     suffix: "%",
   },
@@ -107,7 +107,7 @@ const stats: Stat[] = [
     label: "Response Time",
     description: "Average help-desk response time",
     value: 10,
-    lessThan: true,
+    lessThan: false,
     suffix: "min",
   },
   {

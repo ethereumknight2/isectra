@@ -1,4 +1,3 @@
-import Header from "../components/sections/Header";
 import HeroNew from "../components/sections/Hero";
 import WhyTechnologyFrees from "../components/sections/WhyTechnologyFrees";
 import TrustedTwoDecades from "../components/sections/TrustedTwoDecades";
@@ -14,9 +13,6 @@ import CTA from "../components/sections/CTA";
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Navigation Header */}
-      <Header />
-
       {/* Hero Section - NEW */}
       <HeroNew />
 

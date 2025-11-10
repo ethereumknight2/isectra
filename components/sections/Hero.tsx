@@ -20,7 +20,7 @@ export default function HeroAnimated() {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] flex items-center overflow-hidden pt-32 pb-20"
+      className="relative min-h-[84vh] flex items-center overflow-hidden pt-20 pb-20"
     >
       {/* ===== Background (unchanged) ===== */}
       <div
@@ -105,7 +105,7 @@ export default function HeroAnimated() {
         >
           <span className="w-2 h-2 bg-blue-600 rounded-full motion-safe:animate-pulse" />
           <span className="text-sm font-semibold text-blue-700 tracking-wide uppercase">
-            No Contracts • No Obligations • Free Trial
+            Free Trial • No Obligations
           </span>
         </div>
 

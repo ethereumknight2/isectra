@@ -24,14 +24,6 @@ const leaders: Leader[] = [
     videoId: "mBTh-ylU_fw",
   },
   {
-    name: "Bob Larsen",
-    title: "COO",
-    description:
-      "Watch Bob Larsen, COO of iSectra talk about why he joined iSectra, about his beliefs in customer service and how he manages and grows the Operations of iSectra, prioritizing the personal touch and care that every one at iSectra bring to every single customer.",
-    linkedin: "https://www.linkedin.com/in/bob-larsen-13336a8/",
-    videoId: "PVQieouFnAk",
-  },
-  {
     name: "Roni Banerjee",
     title: "CMO & Investment Officer",
     description:

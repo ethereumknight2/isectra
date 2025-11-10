@@ -143,7 +143,7 @@ export default function ServiceHero({
           <div className={`flex flex-col sm:flex-row ${ctaGap} mb-6`}>
             {ctaPrimary && (
               <Link
-                href="#contact"
+                href="/contact-us"
                 className={`group px-7 py-3.5 bg-gradient-to-r from-[#7dca00] to-[#64ad00] text-white 
   rounded-xl font-semibold text-base md:text-lg hover:shadow-2xl hover:scale-105 
   transition-all duration-300 flex items-center justify-center gap-2 

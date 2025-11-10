@@ -57,7 +57,7 @@ const industries = [
     ],
     results: [
       "A biotech startup engaged us at seed stage; over 5 years we scaled their IT operations, supported them through FDA audits and their IPO — zero downtime and zero audit findings.",
-      "Another client reduced their IT cost by ~35% while upgrading their systems to commercial standards and maintaining 99.97% uptime.",
+      "Another client reduced their IT cost by ~35% while upgrading their systems to commercial standards and maintaining 99.99% uptime.",
       "Pharmaceutical firms using our services report improved productivity, faster time-to-market for launches, and fewer vendor surprises.",
     ],
     anchor: "pharmaceutical-life-sciences",
@@ -96,7 +96,7 @@ const caseStudies = [
     title: "Pharma Startup → IPO",
     client: "Biotech company (seed stage → public company)",
     stats: [
-      { label: "Uptime", value: "99.97%" },
+      { label: "Uptime", value: "99.99%" },
       { label: "Audit Findings", value: "0" },
       { label: "Scale", value: "5 → 250+ users" },
     ],
@@ -109,7 +109,7 @@ const caseStudies = [
     ],
     outcome: [
       "Zero audit findings across FDA/GxP checkpoints",
-      "99.97% uptime through growth and IPO",
+      "99.99% uptime through growth and IPO",
       "Seamless scale with minimal disruption",
     ],
     bannerFrom: "from-blue-600",

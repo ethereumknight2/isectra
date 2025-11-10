@@ -16,6 +16,7 @@ import {
   Lightbulb,
   Shield,
   TrendingUp,
+  Linkedin,
 } from "lucide-react";
 
 const missionPoints = [
@@ -155,54 +156,80 @@ const steps = [
   },
 ];
 
+/**
+ * Team — replaced with the 10 members from Images_new/OurTeam,
+ * alphabetized by first name. LinkedIn included where provided.
+ */
 const team = [
+  {
+    name: "Adam Looney",
+    role: "Lead Engineer",
+    focus: "Network performance, endpoint security, operations",
+    photo: "/images/Adam-Looney.png",
+    linkedin: undefined,
+  },
+  {
+    name: "Brian Martins",
+    role: "Senior Support Engineer",
+    focus: "Help desk leadership, customer experience",
+    photo: "/images/Brian-Martins.png",
+    linkedin: "https://www.linkedin.com/in/brian-martins-46246a262/",
+  },
+  {
+    name: "Dalton Thompson",
+    role: "Support Engineer",
+    focus: "End-user support, onboarding, monitoring",
+    photo: "/images/Dalton-Thompson.png",
+    linkedin: "https://www.linkedin.com/in/dalton-lee-thompson/",
+  },
   {
     name: "Damian Colarte",
     role: "Founder & CEO",
     focus: "Strategic vision, client relationships, long-term growth",
-    photo: "/images/Damian-Colarte.JPG",
+    photo: "/images/Damian-Colarte.png",
+    linkedin: "https://www.linkedin.com/in/dcolarte/",
+  },
+  {
+    name: "Joseph Cerniglia",
+    role: "Project Manager",
+    focus: "Office relocations, new build-outs, implementation logistics",
+    photo: "/images/Joseph_Cerniglia.png",
+    linkedin: undefined,
+  },
+  {
+    name: "Michael Colarte",
+    role: "Operations",
+    focus: "Vendor coordination, asset management",
+    photo: "/images/Michael-Colarte.png",
+    linkedin: "https://www.linkedin.com/in/michael-colarte-5b74a5228/",
+  },
+  {
+    name: "RJ Garrett",
+    role: "Cloud Specialist",
+    focus: "Microsoft 365, Azure, hybrid cloud setups",
+    photo: "/images/RJ-Garrett.png",
+    linkedin: undefined,
   },
   {
     name: "Roni Banerjee",
     role: "Chief Strategy Officer",
     focus: "Systems architecture, compliance alignment, analytics",
-    photo: "/images/Roni-Thomas.jpg",
+    photo: "/images/Roni-Banerjee.png",
+    linkedin: "https://www.linkedin.com/in/ronibanerjee/",
   },
   {
     name: "Santiago Aristizabal",
     role: "CTO",
     focus: "Infrastructure design, cloud architecture, security",
     photo: "/images/Santiago-Aristizabal.jpg",
-  },
-  {
-    name: "Adam Looney",
-    role: "Lead Engineer",
-    focus: "Network performance, endpoint security, operations",
-    photo: "/images/Paul-Careccia.JPG",
-  },
-  {
-    name: "Brian Martins",
-    role: "Senior Support Engineer",
-    focus: "Help desk leadership, customer experience",
-    photo: "/images/Bob-Larsen.jpg",
-  },
-  {
-    name: "Joseph Cerniglia",
-    role: "Project Manager",
-    focus: "Office relocations, new build-outs, implementation logistics",
-    photo: "/images/Michael-Fernando.JPG",
+    linkedin: "https://www.linkedin.com/in/santiago-aristizabal-1a5b89146/",
   },
   {
     name: "Thomas Mauro",
     role: "Systems Specialist",
     focus: "Servers, backups, monitoring and automation",
-    photo: "/images/Matt-Hodges.jpeg",
-  },
-  {
-    name: "RJ Garrett",
-    role: "Cloud Specialist",
-    focus: "Microsoft 365, Azure, hybrid cloud setups",
-    photo: "/images/Raul-Colarte.JPG",
+    photo: "/images/Thomas-Mauro.png",
+    linkedin: undefined,
   },
 ];
 
@@ -238,6 +265,7 @@ export default function AboutPage() {
       name: member.name,
       jobTitle: member.role,
       description: member.focus,
+      sameAs: member.linkedin ? [member.linkedin] : undefined,
     })),
     sameAs: [
       "https://www.linkedin.com/company/isectra",
@@ -365,28 +393,28 @@ export default function AboutPage() {
       />
 
       <main className="bg-white text-slate-900">
-        {/* ====== PREMIUM HERO ====== */}
-        <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden">
+        {/* ====== PREMIUM HERO (tighter + better crop) ====== */}
+        <section className="relative pt-28 pb-20 md:pt-32 md:pb-28 min-h-[620px] md:min-h-[720px] overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/images/iSectra-Crew.jpg"
+              src="/images/iSectraTeam.png"
               alt="iSectra Team"
               fill
               priority
               quality={90}
-              className="object-cover object-center"
+              className="object-cover object-[50%_30%] md:object-[50%_28%]"
             />
             {/* Premium Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/70 to-slate-900/50"></div>
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-transparent to-white"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/70 to-slate-900/50" />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-transparent to-white" />
           </div>
 
           <div className="container-custom relative z-10">
             <div className="max-w-4xl">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 mb-8 animate-fadeInUp">
-                <div className="w-2 h-2 bg-[#7dca00] rounded-full"></div>
+                <div className="w-2 h-2 bg-[#7dca00] rounded-full" />
                 <span className="text-sm font-semibold text-white tracking-wide uppercase">
                   About iSectra
                 </span>
@@ -408,7 +436,7 @@ export default function AboutPage() {
               <div
                 className="w-24 h-1 bg-gradient-to-r from-blue-500 to-[#7dca00] mb-8 animate-fadeInUp"
                 style={{ animationDelay: "0.2s" }}
-              ></div>
+              />
 
               {/* Subheadline */}
               <p
@@ -439,7 +467,7 @@ export default function AboutPage() {
 
                 {/* Right: consistent green gradient primary */}
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="group inline-flex items-center justify-center gap-2 px-8 py-4
                bg-gradient-to-r from-[#7dca00] to-[#64ad00] text-white
                font-semibold rounded-lg shadow-xl hover:shadow-2xl
@@ -840,7 +868,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ====== TEAM SECTION - COMPLETELY REDESIGNED ====== */}
+        {/* ====== TEAM SECTION - UPDATED MEMBERS & LINKEDIN ====== */}
         <section
           id="team"
           className="py-20 md:py-28 bg-gradient-to-b from-slate-50 to-white"
@@ -883,17 +911,21 @@ export default function AboutPage() {
                 {team.map((m, index) => (
                   <li
                     key={m.name}
-                    className="group animate-fadeInUp"
+                    className="group animate-fadeInUp flex"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <div className="relative bg-white rounded-2xl overflow-hidden border-2 border-slate-200 hover:border-blue-600 transition-all duration-300 hover:shadow-2xl">
+                    <div className="relative bg-white rounded-2xl overflow-hidden border-2 border-slate-200 hover:border-blue-600 transition-all duration-300 hover:shadow-2xl flex flex-col w-full">
                       {/* Image */}
                       <div className="relative aspect-[3/4] bg-slate-200 overflow-hidden">
                         <Image
                           src={m.photo}
                           alt={m.name}
                           fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                          className={`object-cover group-hover:scale-110 transition-transform duration-500 ${
+                            m.name === "Brian Martins"
+                              ? "object-[30%_center]"
+                              : "object-center"
+                          }`}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
 
@@ -906,11 +938,29 @@ export default function AboutPage() {
                       </div>
 
                       {/* Info */}
-                      <div className="p-6">
+                      <div className="p-6 flex flex-col flex-1">
                         <h3 className="font-bold text-slate-900 text-xl mb-1">
                           {m.name}
                         </h3>
-                        <p className="text-blue-600 font-semibold">{m.role}</p>
+                        <p className="text-blue-600 font-semibold mb-4">
+                          {m.role}
+                        </p>
+
+                        {/* LinkedIn button (only if profile provided) - pushed to bottom */}
+                        <div className="mt-auto">
+                          {m.linkedin && (
+                            <a
+                              href={m.linkedin}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={`Connect with ${m.name} on LinkedIn`}
+                              className="inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg bg-[#0a66c2] text-white hover:bg-[#095aab] transition-colors"
+                            >
+                              <Linkedin className="w-4 h-4" />
+                              Connect with {m.name.split(" ")[0]} on LinkedIn
+                            </a>
+                          )}
+                        </div>
                       </div>
 
                       {/* Decorative corner */}

@@ -13,10 +13,7 @@ const COMPANY = {
   domain: "https://isectra.com",
   email: "info@isectra.com",
   phone: "+1-845-563-0346",
-  street: "230 Arlington Rd N",
-  city: "Jacksonville",
-  region: "FL",
-  postal: "32211",
+  regions: ["NY", "NJ", "MA", "CT", "PA", "MD", "VA", "FL"],
   country: "US",
 };
 
@@ -68,14 +65,19 @@ function JsonLd() {
         url: COMPANY.domain,
         email: COMPANY.email,
         telephone: COMPANY.phone,
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: COMPANY.street,
-          addressLocality: COMPANY.city,
-          addressRegion: COMPANY.region,
-          postalCode: COMPANY.postal,
-          addressCountry: COMPANY.country,
-        },
+        // No physical street address since the building is being sold.
+        // Use areaServed to reflect operating states and national coverage.
+        areaServed: [
+          "US-NY",
+          "US-NJ",
+          "US-MA",
+          "US-CT",
+          "US-PA",
+          "US-MD",
+          "US-VA",
+          "US-FL",
+          "US",
+        ],
         contactPoint: [
           {
             "@type": "ContactPoint",
@@ -338,9 +340,9 @@ export default function PrivacyPage() {
               <address className="mt-3 not-italic text-slate-700">
                 {COMPANY.name}
                 <br />
-                {COMPANY.street}
+                Operating in: {COMPANY.regions.join(", ")}
                 <br />
-                {COMPANY.city}, {COMPANY.region} {COMPANY.postal}
+                Serving customers across all 50 U.S. states.
                 <br />
                 <a
                   className="text-cyan-700 hover:underline"

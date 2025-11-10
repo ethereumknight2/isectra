@@ -1,19 +1,29 @@
 // components/sections/DataCenter.tsx
 "use client";
 
-import { Server, Shield, Users, Clock, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
+import {
+  Server,
+  Shield,
+  Users,
+  Clock,
+  CheckCircle2,
+  ArrowRight,
+} from "lucide-react";
 
 const teamMembers = [
   {
     name: "Santiago Aristizabal",
     role: "Engineering Team",
     image: "https://isectra.com/hubfs/Santialog%20Aristizabal-3.png",
+    objectPos: "center" as const,
   },
   {
-    name: "Azariel Israel",
+    name: "Joseph Cerniglia",
     role: "Engineering Team",
-    image:
-      "https://isectra.com/hubfs/Azariel%20Israel%20White%20Background-1.png",
+    image: "/images/Joseph_Cerniglia.png",
+    // Use top focus so hair/forehead aren't clipped in the circle crop
+    objectPos: "top" as const,
   },
 ];
 
@@ -43,7 +53,7 @@ const highlights = [
 export default function DataCenter() {
   return (
     <section className="relative overflow-hidden py-20 lg:py-24 bg-gradient-to-b from-white to-slate-50">
-      {/* Calm background: faint gradient wash + static grid (no heavy animation) */}
+      {/* Calm background */}
       <div
         className="absolute inset-0 -z-10 opacity-90"
         style={{
@@ -61,7 +71,6 @@ export default function DataCenter() {
           backgroundSize: "52px 52px",
         }}
       />
-      {/* Very subtle “data-flow” lines to tie in with the system */}
       <svg
         className="absolute -z-10 right-0 top-0 h-full w-full opacity-15 pointer-events-none"
         viewBox="0 0 1200 800"
@@ -90,7 +99,7 @@ export default function DataCenter() {
       <div className="container mx-auto px-6 relative">
         {/* Main Grid */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          {/* Left - Data Center Image (with refined overlay) */}
+          {/* Left - Data Center Image */}
           <div>
             <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/60 bg-white/70 backdrop-blur">
               <div className="aspect-[4/3] relative">
@@ -103,7 +112,6 @@ export default function DataCenter() {
                       "none";
                   }}
                 />
-                {/* Subtle darkening + info chips */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-slate-900/20 to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center gap-3">
                   <span className="px-3 py-1.5 rounded-xl text-white/90 text-sm font-semibold bg-slate-900/50 backdrop-blur border border-white/10">
@@ -116,7 +124,6 @@ export default function DataCenter() {
                     Redundant Power & Cooling
                   </span>
                 </div>
-                {/* Corner accent */}
                 <span className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600" />
               </div>
             </div>
@@ -141,7 +148,6 @@ export default function DataCenter() {
               outsource work. We are proudly an all-American company.
             </p>
 
-            {/* Quick bullet list with brand-green ticks */}
             <ul className="grid sm:grid-cols-2 gap-3 pt-2">
               {[
                 "Level 3 engineers across the team",
@@ -160,14 +166,13 @@ export default function DataCenter() {
           </div>
         </div>
 
-        {/* Highlights Grid (glass tiles; neutral with subtle accents) */}
+        {/* Highlights */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {highlights.map(({ icon: Icon, title, description }, i) => (
+          {highlights.map(({ icon: Icon, title, description }) => (
             <div
               key={title}
               className="group relative rounded-2xl border border-white/60 bg-white/70 backdrop-blur p-6 shadow-sm hover:shadow-xl transition-shadow"
             >
-              {/* static conic halo (no motion) */}
               <div className="absolute -top-6 -left-6 w-20 h-20 opacity-50">
                 <div
                   className="w-full h-full rounded-full"
@@ -185,24 +190,36 @@ export default function DataCenter() {
               </div>
               <h3 className="font-bold text-lg text-slate-900 mb-1">{title}</h3>
               <p className="text-slate-600 text-sm">{description}</p>
-
-              {/* brand-green micro accent on hover */}
               <span className="pointer-events-none absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 origin-left bg-[linear-gradient(90deg,#7dca00,#5ea300)] transition-transform duration-300 group-hover:scale-x-100" />
             </div>
           ))}
         </div>
 
-        {/* Team Members (cards refined to match system) */}
-        <div className="space-y-8">
-          <h3 className="text-3xl md:text-4xl font-bold text-center text-slate-900">
-            Meet Our{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-              Engineering Team
-            </span>
-          </h3>
+        {/* Team */}
+        <div className="space-y-6">
+          <div className="flex flex-col items-center gap-3">
+            <h3 className="text-3xl md:text-4xl font-bold text-center text-slate-900">
+              Meet Our{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                Engineering Team
+              </span>
+            </h3>
+
+            {/* Premium link */}
+            <Link
+              href="/about-us#team"
+              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 p-[2px] shadow-sm hover:shadow-md transition-shadow"
+              aria-label="See full Engineering Team on About Us page"
+            >
+              <span className="inline-flex items-center gap-2 rounded-full bg-slate-900 text-white px-4 py-1.5 text-sm font-semibold">
+                See Full Team
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {teamMembers.map((member, index) => (
+            {teamMembers.map((member) => (
               <div
                 key={member.name}
                 className="relative rounded-2xl border border-white/60 bg-white/70 backdrop-blur p-8 text-center shadow-sm hover:shadow-xl transition-shadow"
@@ -211,7 +228,11 @@ export default function DataCenter() {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover ${
+                      member.objectPos === "top"
+                        ? "object-top"
+                        : "object-center"
+                    }`}
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).style.display =
                         "none";
@@ -223,14 +244,13 @@ export default function DataCenter() {
                 </h4>
                 <p className="text-blue-600 font-semibold">{member.role}</p>
 
-                {/* corner glow */}
                 <div className="pointer-events-none absolute -right-12 -top-12 w-40 h-40 rounded-full blur-3xl opacity-20 bg-gradient-to-br from-blue-600 to-cyan-400" />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Key Points (glass banner with soft accent) */}
+        {/* Key Points */}
         <div className="mt-16">
           <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/70 backdrop-blur p-8">
             <span className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600" />
@@ -256,7 +276,6 @@ export default function DataCenter() {
         </div>
       </div>
 
-      {/* Local keyframes (very subtle) */}
       <style jsx>{`
         @keyframes dashmove {
           to {

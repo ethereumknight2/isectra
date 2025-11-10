@@ -12,6 +12,7 @@ import {
   Clock,
   Shield,
   Users,
+  Headphones,
 } from "lucide-react";
 
 const ContactForm = dynamic(() => import("@/components/sections/ContactForm"), {
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://isectra.com/og/isectra-contact.jpg",
+        url: "https://isectra.com/og/isectra-logo.png",
         width: 1200,
         height: 630,
         alt: "Contact iSectra",
@@ -48,11 +49,14 @@ export const metadata: Metadata = {
   },
 };
 
-const ADDRESS_LINES = ["230 Arlington Rd N", "Jacksonville, FL 32211"];
+// === Updated constants (removed physical address, added regions + support) ===
 const PHONE = "+1-845-563-0346";
 const EMAIL = "info@isectra.com";
+const SUPPORT_EMAIL = "support@isectra.com";
+const REGIONS = ["NY", "NJ", "MA", "CT", "PA", "MD", "VA", "FL"];
 
 /* ------------------------------ JSON-LD SCHEMA ---------------------------- */
+/** NOTE: Physical street address removed. We declare service footprint via areaServed. */
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness"],
@@ -61,15 +65,18 @@ const organizationSchema = {
   logo: "https://isectra.com/logo.png",
   telephone: PHONE,
   email: EMAIL,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "230 Arlington Rd N",
-    addressLocality: "Jacksonville",
-    addressRegion: "FL",
-    postalCode: "32211",
-    addressCountry: "US",
-  },
-  areaServed: { "@type": "Country", name: "United States" },
+  // Reflect operating states + national coverage
+  areaServed: [
+    "US-NY",
+    "US-NJ",
+    "US-MA",
+    "US-CT",
+    "US-PA",
+    "US-MD",
+    "US-VA",
+    "US-FL",
+    "US", // customers across all 50 states
+  ],
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -78,6 +85,15 @@ const organizationSchema = {
       telephone: PHONE,
       areaServed: "US",
       availableLanguage: ["English"],
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "technical support",
+      email: SUPPORT_EMAIL,
+      telephone: PHONE,
+      areaServed: "US",
+      availableLanguage: ["English"],
+      hoursAvailable: "24/7",
     },
   ],
 };
@@ -132,23 +148,15 @@ export default function ContactPage() {
           {/* Right side image with stronger blue overlay */}
           <div className="absolute top-0 right-0 bottom-0 left-1/2 lg:block hidden">
             <Image
-              src="/images/jacksonville.jpg"
-              alt="Jacksonville, FL - iSectra Headquarters"
+              src="/images/contactpage.jpeg"
+              alt="iSectra contact us"
               fill
               className="object-cover object-center"
               priority
             />
-
-            {/* Stronger left gradient fade - more aggressive blend */}
             <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 via-35% via-white/40 via-50% to-transparent" />
-
-            {/* Stronger blue tint overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-500 opacity-30 mix-blend-multiply" />
-
-            {/* Additional color wash */}
             <div className="absolute inset-0 bg-blue-600/20" />
-
-            {/* Top and bottom fades */}
             <div className="absolute inset-0 bg-gradient-to-b from-blue-100/40 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-blue-100/40 to-transparent" />
           </div>
@@ -202,10 +210,8 @@ export default function ContactPage() {
               </h1>
 
               <p className="text-xl md:text-2xl text-slate-700 mb-8 leading-relaxed animate-fadeInUp animation-delay-400">
-                We don't do hard sells — we do real conversations. At iSectra,
-                we believe the best way to support your business is by first
-                understanding it. Tell us about your goals, your challenges, and
-                what you want your technology to do.
+                We operate in {REGIONS.join(", ")} and support customers across
+                all 50 states with U.S.-based senior engineers.
               </p>
 
               {/* Highlight Grid */}
@@ -291,7 +297,6 @@ export default function ContactPage() {
                 <p className="text-slate-700 leading-relaxed">
                   We offer a no-obligation one-month free trial of our
                   full-service IT model to ensure we're the right fit.
-                  Experience our 24/7 support firsthand.
                 </p>
               </div>
 
@@ -312,126 +317,100 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* CONTACT INFO + MAP SECTION - 2 Columns */}
+        {/* CONTACT INFO / SERVICE FOOTPRINT SECTION (address removed) */}
         <section className="py-24 md:py-32 bg-white">
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6">
                 <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
                 <span className="text-sm font-semibold text-blue-600 tracking-wide uppercase">
-                  Visit Us
+                  Where We Operate
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                Company Headquarters
+                Service Footprint
               </h2>
               <p className="text-xl text-slate-600">
-                Based in Jacksonville, FL — serving clients across all 50 U.S.
-                states
+                We operate out of these states: {REGIONS.join(", ")} — and we
+                have customers across all 50 U.S. states.
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12">
-              {/* LEFT - Contact Information */}
-              <div className="space-y-6">
-                {/* Contact Cards */}
-                <div className="bg-white rounded-2xl p-6 border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900 mb-1">
-                        Address
-                      </h3>
-                      <address className="not-italic text-slate-600">
-                        {ADDRESS_LINES[0]}
-                        <br />
-                        {ADDRESS_LINES[1]}
-                      </address>
-                      <Link
-                        href="https://maps.google.com/?q=230%20Arlington%20Rd%20N%2C%20Jacksonville%2C%20FL%2032211"
-                        target="_blank"
-                        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm mt-2"
-                      >
-                        View on Google Maps
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </div>
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Phone */}
+              <div className="bg-white rounded-2xl p-6 border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#7dca00]/10 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-[#7dca00]" />
                   </div>
-                </div>
-
-                <div className="bg-white rounded-2xl p-6 border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-[#7dca00]/10 flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-[#7dca00]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900 mb-1">
-                        Phone
-                      </h3>
-                      <a
-                        href={`tel:${PHONE}`}
-                        className="text-slate-600 hover:text-slate-900 text-lg"
-                      >
-                        {PHONE}
-                      </a>
-                      <p className="text-sm text-slate-500 mt-1">
-                        Available 24/7
-                      </p>
-                    </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-900 mb-1">Phone</h3>
+                    <a
+                      href={`tel:${PHONE}`}
+                      className="text-slate-600 hover:text-slate-900 text-lg"
+                    >
+                      {PHONE}
+                    </a>
+                    {/* Removed “Available 24/7” per request */}
                   </div>
-                </div>
-
-                <div className="bg-white rounded-2xl p-6 border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-cyan-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900 mb-1">
-                        Email
-                      </h3>
-                      <a
-                        href={`mailto:${EMAIL}`}
-                        className="text-slate-600 hover:text-slate-900"
-                      >
-                        {EMAIL}
-                      </a>
-                      <p className="text-sm text-slate-500 mt-1">
-                        We respond within 24 hours
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Service Area Note */}
-                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-100">
-                  <h3 className="font-semibold text-slate-900 mb-2 flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-blue-600" />
-                    Nationwide Coverage
-                  </h3>
-                  <p className="text-slate-700 leading-relaxed">
-                    Even if your business is based outside Florida, our
-                    U.S.-based engineers and secure remote infrastructure mean
-                    we can support you anywhere in the country.
-                  </p>
                 </div>
               </div>
 
-              {/* RIGHT - Map */}
-              <div>
-                <div className="rounded-3xl overflow-hidden border-2 border-slate-200 shadow-lg h-full min-h-[500px]">
-                  <iframe
-                    title="iSectra Headquarters Map"
-                    aria-label="Map showing 230 Arlington Rd N, Jacksonville, FL 32211"
-                    className="w-full h-full"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps?q=230%20Arlington%20Rd%20N%2C%20Jacksonville%2C%20FL%2032211&output=embed"
-                  />
+              {/* Email (Sales/General) */}
+              <div className="bg-white rounded-2xl p-6 border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-cyan-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-900 mb-1">Email</h3>
+                    <a
+                      href={`mailto:${EMAIL}`}
+                      className="text-slate-600 hover:text-slate-900"
+                    >
+                      {EMAIL}
+                    </a>
+                    <p className="text-sm text-slate-500 mt-1">
+                      We respond within 24 hours
+                    </p>
+                  </div>
                 </div>
               </div>
+
+              {/* NEW Support block */}
+              <div className="bg-white rounded-2xl p-6 border-2 border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                    <Headphones className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-slate-900 mb-1">
+                      Support
+                    </h3>
+                    <a
+                      href={`mailto:${SUPPORT_EMAIL}`}
+                      className="text-slate-600 hover:text-slate-900"
+                    >
+                      {SUPPORT_EMAIL}
+                    </a>
+                    <p className="text-sm text-slate-500 mt-1">
+                      365×24×7 support
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Nationwide coverage note */}
+            <div className="mt-8 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-100">
+              <h3 className="font-semibold text-slate-900 mb-2 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-blue-600" />
+                Nationwide Coverage
+              </h3>
+              <p className="text-slate-700 leading-relaxed">
+                Our U.S.-based engineers and secure remote infrastructure mean
+                we can support you anywhere in the country.
+              </p>
             </div>
           </div>
         </section>
@@ -455,8 +434,8 @@ export default function ContactPage() {
               </h2>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
                 Schedule your free consultation today. Our senior engineers will
-                respond within 24 hours — no hard sells, just real conversations
-                about your technology needs.
+                respond within 24 hours — no hard sells, just real
+                conversations.
               </p>
 
               {/* Quick Action Buttons */}
@@ -483,7 +462,7 @@ export default function ContactPage() {
               </p>
             </div>
 
-            {/* Contact Form */}
+            {/* Contact Form (unchanged import) */}
             <ContactForm />
 
             {/* Trust Indicators Below Form */}

@@ -297,7 +297,7 @@ export default function FAQPage() {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold text-lg hover:bg-slate-50 transition-all duration-300 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
                 >
                   Contact Us
@@ -356,7 +356,7 @@ export default function FAQPage() {
               <p className="text-sm text-slate-500 mt-6">
                 Or visit our{" "}
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="text-blue-600 hover:text-blue-700 font-semibold"
                 >
                   contact page
