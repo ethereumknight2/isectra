@@ -187,8 +187,8 @@ export default function FAQPage() {
       />
 
       <main>
-        {/* HERO - Service Page Style with Image */}
-        <section className="relative min-h-[70vh] flex items-center overflow-hidden pt-32 pb-20">
+        {/* HERO - Service Page Style with Image - COMPACT VERSION */}
+        <section className="relative min-h-[58vh] flex items-center overflow-hidden pt-22 pb-12">
           <div className="absolute inset-0 bg-gradient-to-r from-white via-blue-50 via-50% to-blue-200" />
 
           {/* Right side image with stronger blue overlay */}
@@ -259,11 +259,11 @@ export default function FAQPage() {
                 </span>
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 animate-fadeInUp animation-delay-200 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-5 animate-fadeInUp animation-delay-200 leading-tight">
                 Your Questions, Answered
               </h1>
 
-              <p className="text-xl md:text-2xl text-slate-700 mb-8 leading-relaxed animate-fadeInUp animation-delay-400">
+              <p className="text-lg md:text-xl text-slate-700 mb-6 leading-relaxed animate-fadeInUp animation-delay-400">
                 At iSectra, we believe in transparency. Below are the most
                 common questions we hear — and our clear, straightforward
                 answers. If your question isn't listed, please reach out. We're
@@ -271,7 +271,7 @@ export default function FAQPage() {
               </p>
 
               {/* Highlight Grid */}
-              <div className="grid md:grid-cols-2 gap-4 mb-10 animate-fadeInUp animation-delay-600">
+              <div className="grid md:grid-cols-2 gap-3 mb-8 animate-fadeInUp animation-delay-600">
                 {[
                   "13 detailed answers",
                   "Transparent pricing info",
@@ -282,23 +282,23 @@ export default function FAQPage() {
                     key={index}
                     className="flex items-start gap-3 text-slate-800"
                   >
-                    <CheckCircle2 className="w-6 h-6 flex-shrink-0 text-blue-600 mt-0.5" />
-                    <span className="text-lg font-medium">{highlight}</span>
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-blue-600 mt-0.5" />
+                    <span className="text-base font-medium">{highlight}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-4 animate-fadeInUp animation-delay-800">
+              <div className="flex flex-wrap gap-3 animate-fadeInUp animation-delay-800">
                 <a
                   href="#faqs"
-                  className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                  className="group px-7 py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-base hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
                 >
                   Browse Questions
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <Link
                   href="/contact-us"
-                  className="px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold text-lg hover:bg-slate-50 transition-all duration-300 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
+                  className="px-7 py-3.5 bg-white text-slate-900 rounded-xl font-semibold text-base hover:bg-slate-50 transition-all duration-300 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
                 >
                   Contact Us
                 </Link>
@@ -306,7 +306,7 @@ export default function FAQPage() {
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/60 to-transparent pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/60 to-transparent pointer-events-none" />
         </section>
 
         {/* FAQ CONTENT */}
