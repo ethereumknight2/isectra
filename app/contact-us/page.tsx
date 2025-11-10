@@ -1,154 +1,110 @@
-// app/faq/page.tsx - REDESIGNED
+// app/contact/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle2, Phone, Mail } from "lucide-react";
-import FaqClient from "@/components/FaqClient";
+import dynamic from "next/dynamic";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  ArrowRight,
+  CheckCircle2,
+  Clock,
+  Shield,
+  Users,
+  Headphones,
+} from "lucide-react";
+
+const ContactForm = dynamic(() => import("@/components/sections/ContactForm"), {
+  ssr: true,
+});
 
 export const metadata: Metadata = {
-  title: "IT Services FAQ | iSectra — Pharma & SMB IT Experts",
+  title: "Contact iSectra | Virtual IT Department for Pharma & SMB",
   description:
-    "Read the frequently asked questions about how iSectra delivers enterprise-grade IT for pharmaceutical companies and small businesses. Pricing, services, trials, onboarding and more.",
-  alternates: { canonical: "https://isectra.com/faq" },
+    "Contact iSectra for enterprise-grade IT services targeting pharmaceutical companies and small businesses. Free consultation, no hidden fees, U.S.-based support.",
+  alternates: { canonical: "https://isectra.com/contact" },
   openGraph: {
-    title: "IT Services FAQ | iSectra — Pharma & SMB IT Experts",
+    title: "Contact iSectra | Virtual IT Department for Pharma & SMB",
     description:
-      "Answers about pricing, onboarding, compliance, remote support, and switching to iSectra.",
-    url: "https://isectra.com/faq",
+      "Let's talk about your technology. Free consultation, transparent pricing, U.S.-based engineers.",
+    url: "https://isectra.com/contact",
     siteName: "iSectra",
     type: "website",
     images: [
       {
-        url: "https://isectra.com/og/isectra-faq.jpg",
+        url: "https://isectra.com/og/isectra-logo.png",
         width: 1200,
         height: 630,
-        alt: "iSectra — Frequently Asked Questions",
+        alt: "Contact iSectra",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IT Services FAQ | iSectra — Pharma & SMB IT Experts",
+    title: "Contact iSectra | Virtual IT Department for Pharma & SMB",
     description:
-      "Transparent answers to the most common questions about working with iSectra.",
-    images: ["https://isectra.com/og/isectra-faq.jpg"],
+      "Free consultation within 24 hours. No hard sells — just real conversations.",
+    images: ["https://isectra.com/og/isectra-contact.jpg"],
   },
 };
 
-const FaqData = [
-  {
-    id: "pricing",
-    q: "How Do You Price Your Services?",
-    a: `We start with a free consultation to learn about your business. During this session, we use industry-standard frameworks to map your environment — including markets, customers, suppliers, employees, partners, competition, marketing channels, sales, R&D, manufacturing, operations, financials, and regulatory/compliance systems.
+// === Updated constants (removed physical address, added regions + support) ===
+const PHONE = "+1-845-563-0346";
+const EMAIL = "info@isectra.com";
+const SUPPORT_EMAIL = "support@isectra.com";
+const REGIONS = ["NY", "NJ", "MA", "CT", "PA", "MD", "VA", "FL"];
 
-Once we have this map, we assess your current technology and compare it to best-practice models to build a tailored technology roadmap. Finally, we present you with a proposal based on a monthly retainer model, aligned with your business and budget.
-
-We believe that building a long-term partnership is more valuable than short-term contracts — so if we are a good fit for each other, we work with your constraints to make it work.`,
-  },
-  {
-    id: "difference",
-    q: "Why Are You Different Than Typical MSPs?",
-    a: `Many Managed Service Providers treat your business as a collection of "nodes" — devices, servers, endpoints — whose uptime they monitor. While uptime matters, we believe that technology has moved out of the server room into the board room.
-
-At iSectra, our focus is on aligning technology with your business drivers — growth, compliance, productivity, cost management — not just device-health. We become your full IT department, not just your help desk.`,
-  },
-  {
-    id: "partial-services",
-    q: "What If We Don't Need All Your Services?",
-    a: `While we believe every business will benefit from end-to-end IT and infrastructure management, we understand budget constraints and changing needs.
-
-We therefore do not expect you to pay for services you don't use. After our discovery and roadmap process, we build a service agreement together that reflects your risk profile, cost of ownership, and expected return. You only pay for what you need.`,
-  },
-  {
-    id: "onboarding",
-    q: "How Do You Onboard Customers?",
-    a: `Our onboarding process is structured, thorough, and designed to minimize disruption:
-
-1) Discovery & Roadmap Creation — we analyze your environment, business goals, systems, risks, and build a technology roadmap.
-2) Implementation Kick-Off — we begin with stabilizing your IT estate so it runs 24×7×365, then move into optimization and compliance.
-3) Platform Transition — we bring your systems into our monitoring, support, and management platform — your virtual IT department is live.
-4) Continuous Improvement — we monitor performance, adjust as you grow, review regularly, and keep aligning IT with business outcomes.`,
-  },
-  {
-    id: "expensive",
-    q: "Are You More Expensive Than My Current IT Vendor?",
-    a: `No. When you compare the total cost of ownership — including contract costs, downtime, risk of non-compliance, lost productivity due to poor support — you'll find that we are always cheaper than many IT companies or MSPs with similar promises. We deliver senior-level engineers, enterprise-grade processes and monitoring, without the enterprise cost.`,
-  },
-  {
-    id: "remote",
-    q: "Can You Support Us Remotely?",
-    a: `Yes. With over 15 years of experience and investment in remote-monitoring and support tools, we can deliver most services remotely — saving you time, money and resources.
-
-If your scenario requires onsite support, we have engineering teams and logistics to serve your physical location as needed.`,
-  },
-  {
-    id: "compliance",
-    q: "Are You Compliant?",
-    a: `Yes. We have decades of experience supporting clients in regulated industries including pharma, life sciences and manufacturing. We work with frameworks such as HIPAA, SOX, CMMC, NIST, and others. Our systems and processes are designed for compliance, audit readiness, security, and business continuity — so you don't have to worry.`,
-  },
-  {
-    id: "trial",
-    q: "Do You Offer a Free Trial of Your Services?",
-    a: `Yes. We can offer one month of free services, with no obligation and no long-term contract required. We ask only that you sign an NDA agreeing not to disclose our internal processes to competitors.
-
-To get started, just email info@isectra.com or fill out our Contact Us form and mention the free-trial offer.`,
-  },
-  {
-    id: "termination",
-    q: "Are There Termination Clauses in Your Contracts?",
-    a: `Yes. All of our contracts include simple, fair termination clauses. We don't like locking up our customers with restrictive terms. If you're unsatisfied, we will work hard to make it right — and if we're still not the right fit, you can terminate.
-
-Proudly, we have never lost a customer to a competitor.`,
-  },
-  {
-    id: "switching",
-    q: "How Hard Is It to Switch from My Current IT Company to Yours?",
-    a: `It's easy. We perform a free assessment of your current IT environment, then transition your systems into our management platform. You will have a worry-free, full-service IT department at a fraction of the cost of an internal team.
-
-And yes — you can try us free for one month.`,
-  },
-  {
-    id: "how-much",
-    q: "How Much Does It Cost?",
-    a: `Cost depends on many factors — number of users, devices, cloud assets, complexity of systems and regulatory needs. As a rough estimate: a 10-employee business might pay around $2,000/month for full-service IT: monitoring devices 24×7×365, help desk, infrastructure management, cloud backup, patching, asset management and consulting.
-
-We'll provide you a custom quote based on your business during the free consultation.`,
-  },
-  {
-    id: "data-safety",
-    q: "Is My Data Safe With You?",
-    a: `Yes. We prioritize your data safety. Our preferred approach is backup of all devices and systems to the Microsoft Azure cloud. As Certified Microsoft Partners, we receive tier-one support from Microsoft.
-
-If your business prefers not to use public cloud services, we also offer secure data-center hosting and colocation — already in use for many of our clients for over two decades.`,
-  },
-  {
-    id: "other",
-    q: "All Other Questions",
-    a: `We're happy to answer any other question you have. Whether it's about licensing, compliance, datacenters, remote work, or vendor strategy — feel free to call, text, chat or fill out our Contact Us page.`,
-  },
-];
-
-/* ------------------------------ JSON-LD SCHEMAS ---------------------------- */
-const faqSchema = {
+/* ------------------------------ JSON-LD SCHEMA ---------------------------- */
+/** NOTE: Physical street address removed. We declare service footprint via areaServed. */
+const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FaqData.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.a.replace(/\n/g, " "),
+  "@type": ["Organization", "LocalBusiness"],
+  name: "iSectra",
+  url: "https://isectra.com/",
+  logo: "https://isectra.com/logo.png",
+  telephone: PHONE,
+  email: EMAIL,
+  // Reflect operating states + national coverage
+  areaServed: [
+    "US-NY",
+    "US-NJ",
+    "US-MA",
+    "US-CT",
+    "US-PA",
+    "US-MD",
+    "US-VA",
+    "US-FL",
+    "US", // customers across all 50 states
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      email: EMAIL,
+      telephone: PHONE,
+      areaServed: "US",
+      availableLanguage: ["English"],
     },
-  })),
+    {
+      "@type": "ContactPoint",
+      contactType: "technical support",
+      email: SUPPORT_EMAIL,
+      telephone: PHONE,
+      areaServed: "US",
+      availableLanguage: ["English"],
+      hoursAvailable: "24/7",
+    },
+  ],
 };
 
 const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Frequently Asked Questions — iSectra",
-  url: "https://isectra.com/faq",
+  name: "Contact iSectra",
+  url: "https://isectra.com/contact",
   description:
-    "Frequently asked questions about iSectra's industry-focused IT services for pharma and SMBs, including pricing, onboarding, compliance, and trials.",
+    "Contact iSectra to schedule a free consultation. Enterprise-grade IT for pharma & SMBs.",
   breadcrumb: {
     "@type": "BreadcrumbList",
     itemListElement: [
@@ -161,8 +117,8 @@ const webPageSchema = {
       {
         "@type": "ListItem",
         position: 2,
-        name: "FAQ",
-        item: "https://isectra.com/faq",
+        name: "Contact",
+        item: "https://isectra.com/contact",
       },
     ],
   },
@@ -170,47 +126,37 @@ const webPageSchema = {
     "@type": "SpeakableSpecification",
     cssSelector: ["h1", "h2"],
   },
-  inLanguage: "en",
-  isPartOf: { "@type": "WebSite", url: "https://isectra.com/" },
 };
 
-export default function FAQPage() {
+export default function ContactPage() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
       />
 
       <main>
-        {/* HERO - Service Page Style with Image */}
-        <section className="relative min-h-[54vh] flex items-center overflow-hidden pt-22 pb-12">
+        {/* HERO - Service Page Style with Image - COMPACT VERSION */}
+        <section className="relative min-h-[58vh] flex items-center overflow-hidden pt-22 pb-12">
           <div className="absolute inset-0 bg-gradient-to-r from-white via-blue-50 via-50% to-blue-200" />
 
           {/* Right side image with stronger blue overlay */}
           <div className="absolute top-0 right-0 bottom-0 left-1/2 lg:block hidden">
             <Image
-              src="/images/faqs.jpeg"
-              alt="iSectra support team - FAQ assistance"
+              src="/images/contactpage.jpeg"
+              alt="iSectra contact us"
               fill
               className="object-cover object-center"
               priority
             />
-
-            {/* Stronger left gradient fade - more aggressive blend */}
             <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 via-35% via-white/40 via-50% to-transparent" />
-
-            {/* Stronger blue tint overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-500 opacity-30 mix-blend-multiply" />
-
-            {/* Additional color wash */}
             <div className="absolute inset-0 bg-blue-600/20" />
-
-            {/* Top and bottom fades */}
             <div className="absolute inset-0 bg-gradient-to-b from-blue-100/40 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-blue-100/40 to-transparent" />
           </div>
@@ -248,143 +194,239 @@ export default function FAQPage() {
                     </Link>
                   </li>
                   <li>›</li>
-                  <li className="text-blue-600 font-semibold">FAQ</li>
+                  <li className="text-blue-600 font-semibold">Contact</li>
                 </ol>
               </nav>
 
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6 animate-fadeInUp">
                 <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
                 <span className="text-sm font-semibold text-blue-600 tracking-wide uppercase">
-                  Frequently Asked Questions
+                  Contact Us
                 </span>
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 animate-fadeInUp animation-delay-200 leading-tight">
-                Your Questions, Answered
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-5 animate-fadeInUp animation-delay-200 leading-tight">
+                Let's talk about your technology.
               </h1>
 
-              <p className="text-xl md:text-2xl text-slate-700 mb-8 leading-relaxed animate-fadeInUp animation-delay-400">
-                At iSectra, we believe in transparency. Below are the most
-                common questions we hear — and our clear, straightforward
-                answers. If your question isn't listed, please reach out. We're
-                always happy to talk.
+              <p className="text-lg md:text-xl text-slate-700 mb-6 leading-relaxed animate-fadeInUp animation-delay-400">
+                We operate in {REGIONS.join(", ")} and support customers across
+                all 50 states with U.S.-based senior engineers.
               </p>
 
               {/* Highlight Grid */}
-              <div className="grid md:grid-cols-2 gap-4 mb-10 animate-fadeInUp animation-delay-600">
+              <div className="grid md:grid-cols-2 gap-3 mb-8 animate-fadeInUp animation-delay-600">
                 {[
-                  "13 detailed answers",
-                  "Transparent pricing info",
-                  "Free trial available",
-                  "No long-term contracts",
+                  "Free 30-minute consultation",
+                  "Response within 24 hours",
+                  "No obligation, no pressure",
+                  "U.S.-based senior engineers",
                 ].map((highlight, index) => (
                   <div
                     key={index}
                     className="flex items-start gap-3 text-slate-800"
                   >
-                    <CheckCircle2 className="w-6 h-6 flex-shrink-0 text-blue-600 mt-0.5" />
-                    <span className="text-lg font-medium">{highlight}</span>
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-blue-600 mt-0.5" />
+                    <span className="text-base font-medium">{highlight}</span>
                   </div>
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-4 animate-fadeInUp animation-delay-800">
-                <a
-                  href="#faqs"
-                  className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
-                >
-                  Browse Questions
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
+              <div className="flex flex-wrap gap-3 animate-fadeInUp animation-delay-800">
                 <Link
-                  href="/contact-us"
-                  className="px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold text-lg hover:bg-slate-50 transition-all duration-300 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
+                  href="#contact-form"
+                  className="group px-7 py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-base hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
                 >
-                  Contact Us
+                  Get Started
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
+                <a
+                  href={`tel:${PHONE}`}
+                  className="px-7 py-3.5 bg-white text-slate-900 rounded-xl font-semibold text-base hover:bg-slate-50 transition-all duration-300 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
+                >
+                  Call {PHONE}
+                </a>
               </div>
             </div>
           </div>
 
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/60 to-transparent pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white/60 to-transparent pointer-events-none" />
         </section>
 
-        {/* FAQ CONTENT */}
-        <div id="faqs">
-          <FaqClient faqs={FaqData} />
-        </div>
-
-        {/* CTA + CONTACT SECTION - Matches Contact Page Style */}
-        <section className="py-24 md:py-32 bg-gradient-to-br from-slate-50 to-blue-50">
-          <div className="container mx-auto px-6 max-w-5xl">
-            {/* CTA Header */}
-            <div className="text-center mb-12">
+        {/* WHY REACH OUT TODAY - 3 Card Section */}
+        <section className="py-24 md:py-32 bg-white">
+          <div className="container mx-auto px-6 max-w-7xl">
+            <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6">
                 <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
                 <span className="text-sm font-semibold text-blue-600 tracking-wide uppercase">
-                  Still Have Questions?
+                  Why iSectra
                 </span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-                Let's Start a Conversation
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+                Why Reach Out Today?
               </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
-                Book a free consultation or try us free for one month — no
-                long-term contract required. Our senior engineers are ready to
-                help.
-              </p>
-
-              {/* Quick Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="tel:+1-845-563-0346"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold text-lg rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-105 transition-all duration-300"
-                >
-                  <Phone className="w-5 h-5" />
-                  Call (845) 563-0346
-                </a>
-
-                <a
-                  href="mailto:info@isectra.com"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-slate-900 font-semibold text-lg rounded-xl hover:bg-slate-50 transition-all duration-300 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
-                >
-                  <Mail className="w-5 h-5" />
-                  Email Us
-                </a>
-              </div>
-
-              <p className="text-sm text-slate-500 mt-6">
-                Or visit our{" "}
-                <Link
-                  href="/contact-us"
-                  className="text-blue-600 hover:text-blue-700 font-semibold"
-                >
-                  contact page
-                </Link>{" "}
-                to send us a message
+              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+                Start your journey with a risk-free consultation and experience
+                enterprise-grade IT support
               </p>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              {[
-                { icon: CheckCircle2, label: "24-Hour Response" },
-                { icon: CheckCircle2, label: "No Obligation" },
-                { icon: CheckCircle2, label: "Free Consultation" },
-                { icon: CheckCircle2, label: "One Month Free Trial" },
-              ].map((item, i) => {
-                const Icon = item.icon;
-                return (
-                  <div key={i} className="flex flex-col items-center gap-2">
-                    <div className="w-12 h-12 rounded-xl bg-white border-2 border-blue-100 flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-blue-600" />
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 border-2 border-blue-100 hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center mb-6">
+                  <Users className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                  Real Expertise, Zero Hassle
+                </h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Skip the sales pitch. Talk directly with our senior engineers
+                  who understand pharma compliance, SMB growth challenges, and
+                  real-world IT needs.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 border-2 border-blue-100 hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center mb-6">
+                  <Clock className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                  Fast, Transparent Process
+                </h3>
+                <p className="text-slate-600 leading-relaxed">
+                  No runaround, no hidden fees. We'll assess your setup, provide
+                  honest recommendations, and get you a clear proposal — all
+                  within 24 hours.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 border-2 border-blue-100 hover:shadow-xl transition-shadow">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center mb-6">
+                  <Shield className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">
+                  Risk-Free Trial Period
+                </h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Try our services with no long-term contract. Experience the
+                  iSectra difference firsthand before committing to a full
+                  partnership.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT FORM SECTION */}
+        <section id="contact-form" className="py-24 md:py-32 bg-slate-50">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6">
+                <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
+                <span className="text-sm font-semibold text-blue-600 tracking-wide uppercase">
+                  Get In Touch
+                </span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+                Ready to Get Started?
+              </h2>
+              <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+                Fill out the form below and we'll get back to you within 24
+                hours
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-12">
+              {/* Contact Form - Takes up 2/3 width (2 columns) */}
+              <div className="lg:col-span-2">
+                <ContactForm />
+              </div>
+
+              {/* Contact Info & Additional Details - Takes up 1/3 width (1 column) */}
+              <div className="space-y-8">
+                <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-200">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-6">
+                    Other Ways to Reach Us
+                  </h3>
+
+                  <div className="space-y-6">
+                    <a
+                      href={`tel:${PHONE}`}
+                      className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 transition-colors">
+                        <Phone className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-slate-900 mb-1">
+                          Call Us
+                        </p>
+                        <p className="text-slate-600">{PHONE}</p>
+                        <p className="text-sm text-slate-500 mt-1">
+                          Available 24/7
+                        </p>
+                      </div>
+                    </a>
+
+                    <a
+                      href={`mailto:${EMAIL}`}
+                      className="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors group"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 transition-colors">
+                        <Mail className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-slate-900 mb-1">
+                          Email Us
+                        </p>
+                        <p className="text-slate-600">{EMAIL}</p>
+                        <p className="text-sm text-slate-500 mt-1">
+                          Response within 24 hours
+                        </p>
+                      </div>
+                    </a>
+
+                    <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50">
+                      <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+                        <MapPin className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-slate-900 mb-1">
+                          Service Areas
+                        </p>
+                        <p className="text-slate-600">
+                          {REGIONS.join(", ")} and all 50 U.S. states
+                        </p>
+                        <p className="text-sm text-slate-500 mt-1">
+                          Remote and on-site support available
+                        </p>
+                      </div>
                     </div>
-                    <span className="text-sm font-medium text-slate-700">
-                      {item.label}
-                    </span>
                   </div>
-                );
-              })}
+                </div>
+
+                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-8 border-2 border-blue-100">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Headphones className="w-8 h-8 text-blue-600" />
+                    <h3 className="text-xl font-bold text-slate-900">
+                      24/7 Support Available
+                    </h3>
+                  </div>
+                  <p className="text-slate-600 leading-relaxed mb-4">
+                    Our U.S.-based support team is always available to help.
+                    Average response time under 10 minutes.
+                  </p>
+                  <div className="flex items-center gap-2 text-sm text-slate-600">
+                    <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                    <span>No outsourced support teams</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-slate-600 mt-2">
+                    <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                    <span>Senior engineers on every call</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
