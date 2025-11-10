@@ -167,36 +167,36 @@ export default function ServicesPage() {
       />
 
       <main>
-        {/* Hero Section - Compact */}
-        <section className="relative py-16 md:py-20 lg:py-24 flex items-center overflow-hidden">
+        {/* Hero Section - Consistent white to blue gradient */}
+        <section className="relative min-h-screen flex items-center overflow-hidden pt-32 pb-40">
           {/* Gradient background - white to blue */}
           <div className="absolute inset-0 bg-gradient-to-r from-white via-blue-50 via-50% to-blue-200" />
 
-          {/* Decorative blur elements (smaller, hidden on small screens) */}
+          {/* Decorative blur elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="hidden md:block absolute top-24 right-[-80px] w-[420px] h-[420px] bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full mix-blend-multiply blur-3xl opacity-10 motion-safe:animate-float" />
-            <div className="hidden md:block absolute bottom-10 right-32 w-56 h-56 bg-gradient-to-r from-cyan-600 to-blue-500 rounded-full mix-blend-multiply blur-3xl opacity-15 motion-safe:animate-float-delayed" />
+            <div className="absolute top-40 right-0 w-[600px] h-[600px] bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-float" />
+            <div className="absolute bottom-20 right-40 w-80 h-80 bg-gradient-to-r from-cyan-600 to-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-float-delayed" />
           </div>
 
-          {/* Grid pattern only on large screens */}
+          {/* Grid pattern on right side */}
           <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
             <div
-              className="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2"
+              className="absolute right-0 top-0 bottom-0 w-1/2"
               style={{
                 backgroundImage: `
-          linear-gradient(90deg, rgba(59,130,246,.3) 1px, transparent 1px),
-          linear-gradient(180deg, rgba(59,130,246,.3) 1px, transparent 1px)
-        `,
+                  linear-gradient(90deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px),
+                  linear-gradient(180deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px)
+                `,
                 backgroundSize: "60px 60px",
               }}
             />
           </div>
 
           <div className="relative container mx-auto px-6">
-            <div className="max-w-3xl">
+            <div className="max-w-4xl">
               {/* Breadcrumb */}
-              <div className="mb-4 motion-safe:animate-fadeInUp">
-                <span className="text-xs md:text-sm font-semibold text-blue-600 tracking-wider uppercase">
+              <div className="mb-6 animate-fadeInUp">
+                <span className="text-sm font-semibold text-blue-600 tracking-wider uppercase">
                   Services
                 </span>
               </div>
