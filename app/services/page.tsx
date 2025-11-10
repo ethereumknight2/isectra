@@ -167,42 +167,42 @@ export default function ServicesPage() {
       />
 
       <main>
-        {/* Hero Section - Consistent white to blue gradient - COMPACT VERSION */}
-        <section className="relative min-h-[58vh] flex items-center overflow-hidden pt-22 pb-12">
+        {/* Hero Section - Compact */}
+        <section className="relative py-16 md:py-20 lg:py-24 flex items-center overflow-hidden">
           {/* Gradient background - white to blue */}
           <div className="absolute inset-0 bg-gradient-to-r from-white via-blue-50 via-50% to-blue-200" />
 
-          {/* Decorative blur elements */}
+          {/* Decorative blur elements (smaller, hidden on small screens) */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-40 right-0 w-[600px] h-[600px] bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-float" />
-            <div className="absolute bottom-20 right-40 w-80 h-80 bg-gradient-to-r from-cyan-600 to-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-float-delayed" />
+            <div className="hidden md:block absolute top-24 right-[-80px] w-[420px] h-[420px] bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full mix-blend-multiply blur-3xl opacity-10 motion-safe:animate-float" />
+            <div className="hidden md:block absolute bottom-10 right-32 w-56 h-56 bg-gradient-to-r from-cyan-600 to-blue-500 rounded-full mix-blend-multiply blur-3xl opacity-15 motion-safe:animate-float-delayed" />
           </div>
 
-          {/* Grid pattern on right side */}
+          {/* Grid pattern only on large screens */}
           <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
             <div
-              className="absolute right-0 top-0 bottom-0 w-1/2"
+              className="hidden lg:block absolute right-0 top-0 bottom-0 w-1/2"
               style={{
                 backgroundImage: `
-                  linear-gradient(90deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px),
-                  linear-gradient(180deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px)
-                `,
+          linear-gradient(90deg, rgba(59,130,246,.3) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(59,130,246,.3) 1px, transparent 1px)
+        `,
                 backgroundSize: "60px 60px",
               }}
             />
           </div>
 
           <div className="relative container mx-auto px-6">
-            <div className="max-w-4xl">
+            <div className="max-w-3xl">
               {/* Breadcrumb */}
-              <div className="mb-6 animate-fadeInUp">
-                <span className="text-sm font-semibold text-blue-600 tracking-wider uppercase">
+              <div className="mb-4 motion-safe:animate-fadeInUp">
+                <span className="text-xs md:text-sm font-semibold text-blue-600 tracking-wider uppercase">
                   Services
                 </span>
               </div>
 
               {/* Title */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-5 animate-fadeInUp animation-delay-200 leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 animate-fadeInUp animation-delay-200 leading-tight">
                 Your Virtual IT Department —
                 <br />
                 <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
@@ -211,7 +211,7 @@ export default function ServicesPage() {
               </h1>
 
               {/* Description */}
-              <p className="text-lg md:text-xl text-slate-700 mb-6 leading-relaxed animate-fadeInUp animation-delay-400">
+              <p className="text-xl md:text-2xl text-slate-700 mb-8 leading-relaxed animate-fadeInUp animation-delay-400">
                 At iSectra, we don't just provide IT services. We become your
                 full-service technology partner. For growing pharmaceutical
                 companies and businesses with 15-50 employees, we deliver
@@ -220,33 +220,33 @@ export default function ServicesPage() {
               </p>
 
               {/* Trust signals */}
-              <div className="flex flex-wrap gap-6 text-base text-slate-800 mb-8 animate-fadeInUp animation-delay-600">
+              <div className="flex flex-wrap gap-6 text-lg text-slate-800 mb-10 animate-fadeInUp animation-delay-600">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-[#76ca00]" />
+                  <CheckCircle2 className="w-6 h-6 text-[#76ca00]" />
                   <span className="font-medium">No hidden fees</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-[#76ca00]" />
+                  <CheckCircle2 className="w-6 h-6 text-[#76ca00]" />
                   <span className="font-medium">No vendor mark-ups</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-[#76ca00]" />
+                  <CheckCircle2 className="w-6 h-6 text-[#76ca00]" />
                   <span className="font-medium">No long-term contracts</span>
                 </div>
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-wrap gap-3 animate-fadeInUp animation-delay-800">
+              <div className="flex flex-wrap gap-4 animate-fadeInUp animation-delay-800">
                 <Link
                   href="#services"
-                  className="group px-7 py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-base hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                  className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
                 >
                   Explore Services
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="px-7 py-3.5 bg-white text-slate-900 rounded-xl font-semibold text-base hover:bg-slate-50 transition-all duration-300 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
+                  className="px-8 py-4 bg-white text-slate-900 rounded-xl font-semibold text-lg hover:bg-slate-50 transition-all duration-300 border-2 border-slate-200 hover:border-slate-300 shadow-sm"
                 >
                   Get Free Consultation
                 </Link>
