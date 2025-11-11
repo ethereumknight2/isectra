@@ -1,6 +1,8 @@
 // app/api/subscribe/route.ts
 import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
+
 export const runtime = "nodejs";
 
 const API_KEY = process.env.MAILCHIMP_API_KEY!;
@@ -12,6 +14,11 @@ const DOUBLE_OPT_IN =
 const DEV_BYPASS =
   (process.env.MAILCHIMP_DEV_BYPASS || "").toLowerCase() === "true";
 const MC_BASE = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0`;
+
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
+const NOTIFICATION_EMAIL =
+  process.env.RESEND_NOTIFICATION_EMAIL || "info@isectra.com";
 
 function subscriberHash(email: string) {
   return crypto.createHash("md5").update(email.toLowerCase()).digest("hex");
@@ -37,6 +44,41 @@ async function mcFetch(path: string, init: RequestInit) {
     throw err;
   }
   return json;
+}
+
+async function sendNewsletterNotificationEmail(subscriberData: {
+  email: string;
+  firstName?: string;
+  status: string;
+}) {
+  try {
+    await resend.emails.send({
+      from: "notifications@isectra.com", // Must be a verified domain in Resend
+      to: NOTIFICATION_EMAIL,
+      subject: `New Newsletter Subscription: ${subscriberData.email}`,
+      html: `
+        <h2>New Newsletter Subscription</h2>
+        <p><strong>Email:</strong> <a href="mailto:${subscriberData.email}">${
+        subscriberData.email
+      }</a></p>
+        ${
+          subscriberData.firstName
+            ? `<p><strong>Name:</strong> ${subscriberData.firstName}</p>`
+            : ""
+        }
+        <p><strong>Status:</strong> ${
+          subscriberData.status === "pending"
+            ? "Pending confirmation"
+            : "Subscribed"
+        }</p>
+        <hr>
+        <p style="color: #666; font-size: 12px;">Submitted at ${new Date().toLocaleString()}</p>
+      `,
+    });
+  } catch (error) {
+    console.error("Failed to send newsletter notification email:", error);
+    // Don't throw - we don't want email failure to break the form submission
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -87,10 +129,17 @@ export async function POST(req: NextRequest) {
       tags: (verify.tags || []).map((t: any) => t.name),
     });
 
+    // Send notification email (non-blocking)
+    await sendNewsletterNotificationEmail({
+      email: verify.email_address,
+      firstName,
+      status: verify.status,
+    });
+
     const humanMsg =
       verify.status === "pending"
         ? "Thanks! Please check your email to confirm your subscription."
-        : "Subscribed! You’re on the list.";
+        : "Subscribed! You're on the list.";
 
     return NextResponse.json(
       {

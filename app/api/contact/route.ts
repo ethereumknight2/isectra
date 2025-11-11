@@ -1,6 +1,7 @@
 // app/api/contact/route.ts
 import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
 // Ensure this runs on Node, not Edge
 export const runtime = "nodejs";
@@ -13,6 +14,11 @@ const DOUBLE_OPT_IN =
   "true";
 
 const MC_BASE = `https://${SERVER_PREFIX}.api.mailchimp.com/3.0`;
+
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
+const NOTIFICATION_EMAIL =
+  process.env.RESEND_NOTIFICATION_EMAIL || "info@isectra.com";
 
 function subscriberHash(email: string) {
   return crypto.createHash("md5").update(email.toLowerCase()).digest("hex");
@@ -35,6 +41,49 @@ async function mcFetch(path: string, init: RequestInit) {
     throw new Error(`Mailchimp ${status}: ${message}`);
   }
   return json;
+}
+
+async function sendNotificationEmail(contactData: {
+  firstName: string;
+  lastName?: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  message?: string;
+}) {
+  try {
+    await resend.emails.send({
+      from: "notifications@isectra.com", // Must be a verified domain in Resend
+      to: NOTIFICATION_EMAIL,
+      subject: `New Contact Form Submission from ${contactData.firstName}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${contactData.firstName} ${
+        contactData.lastName || ""
+      }</p>
+        <p><strong>Email:</strong> <a href="mailto:${contactData.email}">${
+        contactData.email
+      }</a></p>
+        ${
+          contactData.phone
+            ? `<p><strong>Phone:</strong> ${contactData.phone}</p>`
+            : ""
+        }
+        ${
+          contactData.company
+            ? `<p><strong>Company:</strong> ${contactData.company}</p>`
+            : ""
+        }
+        <p><strong>Message:</strong></p>
+        <p>${contactData.message || "(No message provided)"}</p>
+        <hr>
+        <p style="color: #666; font-size: 12px;">Submitted at ${new Date().toLocaleString()}</p>
+      `,
+    });
+  } catch (error) {
+    console.error("Failed to send notification email:", error);
+    // Don't throw - we don't want email failure to break the form submission
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -97,6 +146,16 @@ ${message || "(none)"}`,
     } catch {
       // Notes may require plan capabilities; ignore if it fails
     }
+
+    // Send notification email (non-blocking)
+    await sendNotificationEmail({
+      firstName,
+      lastName,
+      email,
+      phone,
+      company,
+      message,
+    });
 
     const msg = DOUBLE_OPT_IN
       ? "Thanks! Please check your email to confirm your subscription."
