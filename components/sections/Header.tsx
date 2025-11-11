@@ -120,17 +120,19 @@ export default function Header() {
 
                     {/* Dropdown menu */}
                     {activeDropdown === item.name && (
-                      <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border-2 border-slate-100 py-2 animate-fadeIn">
-                        {item.dropdown.map((subItem) => (
-                          <Link
-                            key={subItem.name}
-                            href={subItem.href}
-                            onClick={() => setActiveDropdown(null)}
-                            className="block px-6 py-3 text-slate-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 font-medium"
-                          >
-                            {subItem.name}
-                          </Link>
-                        ))}
+                      <div className="absolute top-full left-0 pt-2 w-80 animate-fadeIn">
+                        <div className="bg-white rounded-xl shadow-2xl border-2 border-slate-100 py-2">
+                          {item.dropdown.map((subItem) => (
+                            <Link
+                              key={subItem.name}
+                              href={subItem.href}
+                              onClick={() => setActiveDropdown(null)}
+                              className="block px-6 py-3 text-slate-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200 font-medium"
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -190,7 +192,6 @@ export default function Header() {
                       <Link
                         href={item.href}
                         onClick={() => {
-                          // keep menu open if you want; close if you prefer:
                           setIsMobileMenuOpen(false);
                           setActiveDropdown(null);
                         }}
