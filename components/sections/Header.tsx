@@ -93,11 +93,14 @@ export default function Header() {
               <div key={item.name} className="relative group">
                 {item.dropdown ? (
                   // Services with dropdown
-                  <div className="relative">
+                  <div
+                    className="relative"
+                    onMouseEnter={() => setActiveDropdown(item.name)}
+                    onMouseLeave={() => setActiveDropdown(null)}
+                  >
                     <Link
                       href={item.href}
                       className="flex items-center gap-1 text-slate-700 hover:text-blue-600 font-medium transition-colors duration-200 py-2"
-                      onMouseEnter={() => setActiveDropdown(item.name)}
                     >
                       {item.name}
                       <button
@@ -117,10 +120,7 @@ export default function Header() {
 
                     {/* Dropdown menu */}
                     {activeDropdown === item.name && (
-                      <div
-                        className="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border-2 border-slate-100 py-2 animate-fadeIn"
-                        onMouseLeave={() => setActiveDropdown(null)}
-                      >
+                      <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border-2 border-slate-100 py-2 animate-fadeIn">
                         {item.dropdown.map((subItem) => (
                           <Link
                             key={subItem.name}
