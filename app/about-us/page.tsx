@@ -166,7 +166,7 @@ const team = [
     role: "Lead Engineer",
     focus: "Network performance, endpoint security, operations",
     photo: "/images/Adam-Looney.png",
-    linkedin: undefined,
+    linkedin: "https://www.linkedin.com/company/isectra/",
   },
   {
     name: "Brian Martins",
@@ -194,7 +194,7 @@ const team = [
     role: "Project Manager",
     focus: "Office relocations, new build-outs, implementation logistics",
     photo: "/images/Joseph_Cerniglia.png",
-    linkedin: undefined,
+    linkedin: "https://www.linkedin.com/company/isectra/",
   },
   {
     name: "Michael Colarte",
@@ -208,7 +208,7 @@ const team = [
     role: "Cloud Specialist",
     focus: "Microsoft 365, Azure, hybrid cloud setups",
     photo: "/images/RJ-Garrett.png",
-    linkedin: undefined,
+    linkedin: "https://www.linkedin.com/company/isectra/",
   },
   {
     name: "Roni Banerjee",
@@ -229,7 +229,7 @@ const team = [
     role: "Systems Specialist",
     focus: "Servers, backups, monitoring and automation",
     photo: "/images/Thomas-Mauro.png",
-    linkedin: undefined,
+    linkedin: "https://www.linkedin.com/company/isectra/",
   },
 ];
 
