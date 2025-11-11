@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { Play, Linkedin, ImageOff } from "lucide-react";
+import { Play, Linkedin } from "lucide-react";
 import Link from "next/link";
 
 type Leader = {
@@ -31,6 +31,14 @@ const leaders: Leader[] = [
     linkedin: "https://www.linkedin.com/in/ronibanerjee/",
     videoId: "EcYST3Rbyuo",
   },
+  {
+    name: "Santiago Aristizabale",
+    title: "CTO",
+    description:
+      "Watch Santiago Aristizabale, CTO of iSectra talk about why his training and IT work in the Navy shaped his beliefs and motivations, and how he stays on the forefront of technology to bring the best of IT to all our customers.",
+    linkedin: "https://www.linkedin.com/in/santiago-aristizabal-1a5b89146/",
+    videoId: "2rU9JONRhPc",
+  },
 ];
 
 export default function Leadership() {
@@ -56,11 +64,11 @@ export default function Leadership() {
 
         <div className="space-y-16">
           {leaders.map((leader, index) => {
-            const reversed = index % 2 === 1;
+            const reversed = index % 2 === 1; // alternate layout
             return (
               <div
                 key={leader.name}
-                className={`grid lg:grid-cols-2 gap-10 items-center`}
+                className="grid lg:grid-cols-2 gap-10 items-center"
               >
                 {/* Video */}
                 <div className={reversed ? "lg:order-2" : ""}>
@@ -91,8 +99,7 @@ export default function Leadership() {
                       href={leader.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-white
-                                 bg-[linear-gradient(90deg,#7dca00,#5ea300)] hover:shadow-lg hover:shadow-lime-500/30 hover:translate-y-[-1px] transition-all"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-white bg-[linear-gradient(90deg,#7dca00,#5ea300)] hover:shadow-lg hover:shadow-lime-500/30 hover:translate-y-[-1px] transition-all"
                     >
                       <Linkedin className="w-5 h-5" />
                       Connect with {leader.name.split(" ")[0]} on LinkedIn
@@ -146,7 +153,6 @@ function VideoWithPoster({
         >
           {/* Poster image with graceful fallback */}
           <picture>
-            {/* if you want webp first, uncomment: */}
             {/* <source srcSet={`https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp`} type="image/webp" /> */}
             <img
               src={posterOverride ?? maxres}
