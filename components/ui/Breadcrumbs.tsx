@@ -20,7 +20,7 @@ export default function Breadcrumbs({
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`pt-20 sm:pt-24 mb-3 text-sm text-slate-600 ${className}`}
+      className={`pt-14 sm:pt-14 mb-3 text-sm text-slate-600 ${className}`}
     >
       <ol className="flex items-center flex-wrap gap-2">
         {items.map((crumb, index) => {

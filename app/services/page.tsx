@@ -236,7 +236,7 @@ export default function ServicesPage() {
               </div>
 
               {/* CTAs */}
-              <div className="flex flex-wrap gap-4 animate-fadeInUp animation-delay-800">
+              <div className="flex flex-wrap gap-4 mb-8 sm:mb-0 animate-fadeInUp animation-delay-800">
                 <Link
                   href="#services"
                   className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-xl font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
