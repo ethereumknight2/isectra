@@ -104,7 +104,7 @@ export default function DataCenter() {
             <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/60 bg-white/70 backdrop-blur">
               <div className="aspect-[4/3] relative">
                 <img
-                  src="/images/iSectraDatacenter.jpg"
+                  src="/images/iSectraDatacenter.png"
                   alt="iSectra Data Center in Jacksonville FL"
                   className="w-full h-full object-cover"
                   onError={(e) => {
