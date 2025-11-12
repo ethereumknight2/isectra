@@ -49,8 +49,8 @@ export const metadata: Metadata = {
       "Looking for reliable IT support for your small business in Jacksonville, FL? Explore virtual IT Support offering expert support and cost-effective IT solutions.",
   },
   icons: {
-    icon: "https://isectra.com/hubfs/iSectraBALL.png",
-    shortcut: "https://isectra.com/hubfs/iSectraBALL.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
   },
 };
 
