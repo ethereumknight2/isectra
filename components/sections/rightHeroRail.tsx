@@ -122,7 +122,7 @@ export default function RightHeroRail() {
             Support
           </p>
 
-          {/* badges */}
+          {/* badges - OPTIMIZED FOR PERFORMANCE */}
           <div className="mt-4 flex flex-wrap items-center gap-2.5">
             {badges.map((b) => (
               <div
@@ -134,8 +134,10 @@ export default function RightHeroRail() {
                   alt={b.alt}
                   width={56}
                   height={28}
+                  quality={60}
+                  loading="lazy"
+                  decoding="async"
                   className="h-6 w-auto object-contain"
-                  priority={false}
                 />
               </div>
             ))}

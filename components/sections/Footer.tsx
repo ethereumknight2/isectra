@@ -226,6 +226,7 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* OPTIMIZED COMPLIANCE BADGES */}
         <div className="py-4 border-t border-slate-800">
           <div className="flex items-center gap-4 flex-wrap">
             <div className="flex items-center gap-3 ml-auto">
@@ -239,6 +240,9 @@ export default function Footer() {
                     alt={badge.alt}
                     width={56}
                     height={28}
+                    quality={60}
+                    loading="lazy"
+                    decoding="async"
                     className="h-7 w-auto object-contain"
                   />
                 </div>
@@ -250,10 +254,10 @@ export default function Footer() {
         {/* Tagline */}
         <div className="py-4 border-t border-slate-800">
           <p className="text-center text-xs text-slate-400">
-            <strong> iSectra — </strong>
+            <strong>iSectra —</strong>{" "}
             <span className="text-slate-200">
               Your IT Department, Reimagined. Reliable. Transparent. Human.
-            </span>{" "}
+            </span>
           </p>
         </div>
 

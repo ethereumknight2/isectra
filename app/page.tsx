@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import HeroNew from "../components/sections/Hero";
 import WhyTechnologyFrees from "../components/sections/WhyTechnologyFrees";
 import TrustedTwoDecades from "../components/sections/TrustedTwoDecades";
@@ -9,6 +10,12 @@ import Testimonials from "../components/sections/Testimonials";
 import MicrosoftPartner from "@/components/sections/MicrosoftPartner";
 import FAQPreview from "../components/sections/FAQPreview";
 import CTA from "../components/sections/CTA";
+
+export const metadata: Metadata = {
+  title: "IT Services, Cybersecurity & Cloud for Pharma | iSectra",
+  description:
+    "iSectra provides end-to-end Managed IT, Cloud, and Cybersecurity solutions for Pharmaceutical companies and small-to-mid-sized businesses (15–50 employees). Trusted for 20+ years.",
+};
 
 export default function Home() {
   return (

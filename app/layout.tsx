@@ -367,17 +367,17 @@ export default function RootLayout({
 
         {/* TopBar – shows background above/below the button */}
         <div className="fixed top-0 left-0 right-0 z-[60] bg-slate-900/95 text-white border-b border-slate-800">
-          <div className="container mx-auto px-4 sm:px-6">
-            {/* Make the bar taller than the button */}
+          <div className="container mx-auto px-3 sm:px-6">
             <div className="h-12 flex items-center justify-between text-sm">
-              <div className="flex items-center gap-4 sm:gap-5">
-                {/* Shorter, rectangular button so bar peeks above/below */}
+              {/* Left: Support + Phone */}
+              <div className="flex items-center gap-3 sm:gap-5">
+                {/* Support Portal (hide the label on very small screens) */}
                 <a
                   href="https://halo.isectra.com/portal"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open iSectra Support Portal"
-                  className="inline-flex items-center gap-2 rounded-md px-4 py-1.5 leading-none
+                  className="inline-flex items-center gap-2 rounded-md px-3 sm:px-4 py-1.5 leading-none
                      text-white shadow-sm ring-1 ring-inset ring-white/10
                      bg-gradient-to-r from-cyan-600 to-blue-600
                      hover:from-cyan-500 hover:to-blue-500 hover:shadow-md transition-all"
@@ -396,18 +396,18 @@ export default function RootLayout({
                       d="M4 12a8 8 0 1116 0v5a3 3 0 01-3 3h-2m-6 0H7a3 3 0 01-3-3v-2m2 0h3m8 0h3M8 17v-2a2 2 0 012-2h4a2 2 0 012 2v2"
                     />
                   </svg>
-                  <span>Support Portal</span>
-                  <span className="ml-1 hidden sm:inline-flex items-center gap-1 rounded-sm bg-white/10 px-2 py-0.5 text-[11px] font-medium">
+                  <span className="hidden xs:inline">Support Portal</span>
+                  <span className="ml-1 hidden md:inline-flex items-center gap-1 rounded-sm bg-white/10 px-2 py-0.5 text-[11px] font-medium">
                     <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     24/7
                   </span>
                 </a>
 
-                {/* Phone: icon only (number hidden on all sizes) */}
+                {/* Phone: icon only (no visible number) */}
                 <a
                   href="tel:+1-845-563-0346"
                   aria-label="Call iSectra"
-                  className="inline-flex items-center justify-center text-white/85 hover:text-white transition-colors p-2 w-10 h-10 min-w-[40px] min-h-[40px]"
+                  className="inline-flex items-center justify-center text-white/85 hover:text-white transition-colors p-2 w-9 h-9 sm:w-10 sm:h-10"
                 >
                   <svg
                     className="w-4 h-4 flex-shrink-0"
@@ -423,17 +423,16 @@ export default function RootLayout({
                       d="M3.5 5.5A2.5 2.5 0 016 3h2.3a1 1 0 01.95.68l1.3 3.9a1 1 0 01-.5 1.2l-1.8.9a10.5 10.5 0 005.82 5.82l.9-1.8a1 1 0 011.2-.5l3.9 1.3a1 1 0 01.68.95V18a2.5 2.5 0 01-2.5 2.5H19C10.72 20.5 3.5 13.28 3.5 5.5z"
                     />
                   </svg>
-                  {/* No number text on purpose */}
                 </a>
               </div>
 
-              {/* Right: Socials – ensure all five show on small screens */}
-              <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto -mr-2 pr-2">
+              {/* Right: Socials (force single row + scroll on very small screens) */}
+              <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto whitespace-nowrap scroll-smooth scrollbar-none -mr-2 pr-2">
                 <a
                   href="https://www.linkedin.com/company/isectra/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors inline-flex items-center justify-center p-2 w-10 h-10 flex-shrink-0"
+                  className="text-white/80 hover:text-white inline-flex items-center justify-center p-2 w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0"
                   aria-label="LinkedIn"
                 >
                   <svg
@@ -442,14 +441,14 @@ export default function RootLayout({
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />
                   </svg>
                 </a>
                 <a
                   href="https://www.youtube.com/channel/UC-wt1L0VzRFdHGPnIPL3FmA"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors inline-flex items-center justify-center p-2 w-10 h-10 flex-shrink-0"
+                  className="text-white/80 hover:text-white inline-flex items-center justify-center p-2 w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0"
                   aria-label="YouTube"
                 >
                   <svg
@@ -465,7 +464,7 @@ export default function RootLayout({
                   href="https://twitter.com/iSectraIT"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors inline-flex items-center justify-center p-2 w-10 h-10 flex-shrink-0"
+                  className="text-white/80 hover:text-white inline-flex items-center justify-center p-2 w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0"
                   aria-label="Twitter"
                 >
                   <svg
@@ -481,7 +480,7 @@ export default function RootLayout({
                   href="https://www.facebook.com/iSectra/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors inline-flex items-center justify-center p-2 w-10 h-10 flex-shrink-0"
+                  className="text-white/80 hover:text-white inline-flex items-center justify-center p-2 w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0"
                   aria-label="Facebook"
                 >
                   <svg
@@ -497,7 +496,7 @@ export default function RootLayout({
                   href="https://www.instagram.com/Isectrait/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors inline-flex items-center justify-center p-2 w-10 h-10 flex-shrink-0"
+                  className="text-white/80 hover:text-white inline-flex items-center justify-center p-2 w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0"
                   aria-label="Instagram"
                 >
                   <svg

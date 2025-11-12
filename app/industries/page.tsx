@@ -2,6 +2,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Script from "next/script";
 import {
   ArrowRight,
@@ -290,6 +291,7 @@ const schemaOrg = {
 };
 
 export default function IndustriesPage() {
+  const breadcrumbs = [{ label: "Home", href: "/" }, { label: "Industries" }];
   return (
     <>
       {/* AEO JSON-LD */}

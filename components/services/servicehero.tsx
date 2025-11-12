@@ -21,6 +21,8 @@ const iconMap = {
   briefcase: Briefcase,
 };
 
+type Crumb = { label: string; href?: string };
+
 interface ServiceHeroProps {
   title: string;
   description: string;
@@ -32,7 +34,12 @@ interface ServiceHeroProps {
   iconName: string;
   imagePath?: string;
   trustBadge?: string;
-  compact?: boolean; // <-- NEW
+  compact?: boolean;
+
+  /** NEW — show/hide visible breadcrumb trail (default: true) */
+  showBreadcrumbs?: boolean;
+  /** NEW — override crumb items; default is Home > Services > {title} */
+  breadcrumbs?: Crumb[];
 }
 
 export default function ServiceHero({
@@ -46,18 +53,21 @@ export default function ServiceHero({
   iconName,
   imagePath,
   trustBadge = "Trusted by pharmaceutical and SMB clients nationwide",
-  compact = false, // <-- default off
+  compact = false,
+
+  showBreadcrumbs = true,
+  breadcrumbs,
 }: ServiceHeroProps) {
   const Icon = iconMap[iconName as keyof typeof iconMap] || Server;
   const hasSecondary = Boolean(ctaSecondary);
 
   // --- sizing presets for normal vs compact ---
   const minH = compact
-    ? "min-h-[68svh] md:min-h-[64svh] lg:min-h-[60svh]" // compact
+    ? "min-h-[68svh] md:min-h-[64svh] lg:min-h-[60svh]"
     : "min-h-[90svh]";
   const padY = compact ? "pt-24 pb-10 md:pt-24 md:pb-12" : "pt-32 pb-20";
   const titleClasses = compact
-    ? "text-[40px] md:text-5xl lg:text-6xl leading-[1.1]" // compact
+    ? "text-[40px] md:text-5xl lg:text-6xl leading-[1.1]"
     : "text-5xl md:text-6xl lg:text-7xl leading-tight";
   const descClasses = compact
     ? "text-lg md:text-xl mb-6"
@@ -71,9 +81,19 @@ export default function ServiceHero({
       ? "gap-3"
       : "gap-0"
     : hasSecondary
-    ? "gap-4"
-    : "gap-0";
+      ? "gap-4"
+      : "gap-0";
   const imageMaskOpacity = compact ? "opacity-30" : "opacity-35";
+
+  // --- default breadcrumbs if none provided ---
+  const crumbItems: Crumb[] =
+    breadcrumbs && breadcrumbs.length
+      ? breadcrumbs
+      : [
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: title },
+        ];
 
   return (
     <section
@@ -112,6 +132,41 @@ export default function ServiceHero({
 
       <div className="relative container mx-auto px-6">
         <div className={`max-w-2xl ${leftWidth}`}>
+          {/* ===== Breadcrumbs (visible, mobile-safe offset) ===== */}
+          {showBreadcrumbs && (
+            <nav
+              aria-label="Breadcrumb"
+              className="pt-14 sm:pt-0 mb-3 text-sm text-slate-600"
+            >
+              <ol className="flex items-center flex-wrap gap-2">
+                {crumbItems.map((c, i) => {
+                  const last = i === crumbItems.length - 1;
+                  return (
+                    <li key={i} className="flex items-center">
+                      {c.href && !last ? (
+                        <Link
+                          href={c.href}
+                          className="hover:text-blue-600 transition-colors"
+                        >
+                          {c.label}
+                        </Link>
+                      ) : (
+                        <span
+                          className={
+                            last ? "text-blue-600 font-semibold" : undefined
+                          }
+                        >
+                          {c.label}
+                        </span>
+                      )}
+                      {!last && <span className="mx-2 text-slate-400">›</span>}
+                    </li>
+                  );
+                })}
+              </ol>
+            </nav>
+          )}
+
           <div
             className={`mb-6 inline-flex items-center justify-center ${iconBox} rounded-2xl bg-gradient-to-br ${gradientFrom} ${gradientTo} shadow-lg`}
           >

@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import dynamic from "next/dynamic";
 import {
   Mail,
@@ -129,6 +130,8 @@ const webPageSchema = {
 };
 
 export default function ContactPage() {
+  const breadcrumbs = [{ label: "Home", href: "/" }, { label: "Contact Us" }];
+
   return (
     <>
       <script

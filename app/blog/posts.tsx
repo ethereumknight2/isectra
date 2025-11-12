@@ -60,8 +60,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-06-13",
     author: "iSectra CIO",
     categories: ["Microsoft"],
-    image:
-      "https://isectra.com/hubfs/Green-Blue%20Gradient_Most%20Microsoft%20Users_Blog%20Post_Featured%20Image%20(1200%20x%20628%20px).png",
+    image: "/images/blog/best_practices_microsoft.png",
     readingTime: "5 min",
   },
   {
@@ -117,8 +116,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-06-11",
     author: "iSectra CIO",
     categories: ["Microsoft"],
-    image:
-      "https://isectra.com/hubfs/%5BDRAFT%5D%20Facebook%20Ad_Porche_v1-1.png",
+    image: "images/blog/porsche.jpeg",
     readingTime: "4 min",
   },
   {
@@ -167,7 +165,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-04-03",
     author: "iSectra CIO",
     categories: ["pharmaceutical"],
-    image: "https://isectra.com/hubfs/Cover_DCAT%20Week%202025.png",
+    image: "images/blog/Cover_DCAT_Week_2025.png",
     readingTime: "6 min",
   },
   {
@@ -289,7 +287,7 @@ export const blogPosts: BlogPost[] = [
       "pharmaceutical",
       "compliance",
     ],
-    image: "https://isectra.com/hubfs/unnamed.jpg",
+    image: "/images/blog/essential_cyber.jpg",
     readingTime: "8 min",
   },
   {
@@ -357,7 +355,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-02-04",
     author: "iSectra CIO",
     categories: ["pharmaceutical"],
-    image: "https://isectra.com/hubfs/iSectraLogo%20(2)-svg%20(1).svg",
+    image: "/images/logo.svg",
     readingTime: "7 min",
   },
   {
@@ -542,8 +540,7 @@ export const blogPosts: BlogPost[] = [
       "pharmaceutical",
       "compliance",
     ],
-    image:
-      "https://isectra.com/hubfs/iSectra%20IT%20Compliance%20for%20Pharmaceutical%20Companies-1.webp",
+    image: "/images/blog/iSectra_IT_Compliance_for_Pharmaceutical.webp",
     readingTime: "10 min",
   },
   {
@@ -689,8 +686,7 @@ export const blogPosts: BlogPost[] = [
     date: "2024-12-12",
     author: "iSectra CIO",
     categories: [],
-    image:
-      "https://isectra.com/hubfs/2%20employees%20pointing%20at%20a%20laptop.jpg",
+    image: "/images/blog/top_it_support.jpg",
     readingTime: "9 min",
   },
   {
@@ -870,8 +866,7 @@ export const blogPosts: BlogPost[] = [
     date: "2023-08-07",
     author: "iSectra CIO",
     categories: ["IT Budgeting", "IT Department"],
-    image:
-      "https://isectra.com/hubfs/Group%20of%20men%20working%20on%20computers%20in%20an%20IT%20Department.jpg",
+    image: "/images/blog/how_to_create_manage_it.jpg",
     readingTime: "11 min",
   },
   {
@@ -1091,8 +1086,7 @@ export const blogPosts: BlogPost[] = [
     date: "2023-07-18",
     author: "iSectra Engineering",
     categories: ["cybersecurity", "IT Controls"],
-    image:
-      "https://isectra.com/hubfs/Work%20from%20home%20showing%20video%20conference%20meeting%20on%20a%20laptop.jpg",
+    image: "/images/blog/work_from_home.jpeg",
     readingTime: "12 min",
   },
   {
@@ -1316,8 +1310,7 @@ export const blogPosts: BlogPost[] = [
     date: "2023-07-07",
     author: "iSectra CIO",
     categories: ["IT Budgeting"],
-    image:
-      "https://isectra.com/hubfs/2%20employees%20pointing%20at%20a%20laptop.jpg",
+    image: "/images/blog/it_budget.jpeg",
     readingTime: "13 min",
   },
 ];
