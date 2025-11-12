@@ -132,11 +132,11 @@ export default function ServiceHero({
 
       <div className="relative container mx-auto px-6">
         <div className={`max-w-2xl ${leftWidth}`}>
-          {/* ===== Breadcrumbs (visible, mobile-safe offset) ===== */}
+          {/* ===== Breadcrumbs (visible, fixed-header-safe on all screens) ===== */}
           {showBreadcrumbs && (
             <nav
               aria-label="Breadcrumb"
-              className="pt-14 sm:pt-0 mb-3 text-sm text-slate-600"
+              className="pt-20 sm:pt-24 mb-3 text-sm text-slate-600"
             >
               <ol className="flex items-center flex-wrap gap-2">
                 {crumbItems.map((c, i) => {
