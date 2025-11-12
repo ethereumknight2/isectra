@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import Breadcrumbs from "@/components/ui/Breadcrumbs";
 
 const iconMap = {
   server: Server,
@@ -40,6 +41,8 @@ interface ServiceHeroProps {
   showBreadcrumbs?: boolean;
   /** NEW — override crumb items; default is Home > Services > {title} */
   breadcrumbs?: Crumb[];
+  /** NEW — custom offset class for breadcrumbs (e.g., "pt-14 sm:pt-0" for compact heroes) */
+  breadcrumbOffsetClass?: string;
 }
 
 export default function ServiceHero({
@@ -57,6 +60,7 @@ export default function ServiceHero({
 
   showBreadcrumbs = true,
   breadcrumbs,
+  breadcrumbOffsetClass, // ← NEW: Allow custom offset per page
 }: ServiceHeroProps) {
   const Icon = iconMap[iconName as keyof typeof iconMap] || Server;
   const hasSecondary = Boolean(ctaSecondary);
@@ -132,39 +136,12 @@ export default function ServiceHero({
 
       <div className="relative container mx-auto px-6">
         <div className={`max-w-2xl ${leftWidth}`}>
-          {/* ===== Breadcrumbs (visible, fixed-header-safe on all screens) ===== */}
+          {/* ===== Breadcrumbs (visible, fixed-header-safe) ===== */}
           {showBreadcrumbs && (
-            <nav
-              aria-label="Breadcrumb"
-              className="pt-16 sm:pt-16 mb-3 text-sm text-slate-600"
-            >
-              <ol className="flex items-center flex-wrap gap-2">
-                {crumbItems.map((c, i) => {
-                  const last = i === crumbItems.length - 1;
-                  return (
-                    <li key={i} className="flex items-center">
-                      {c.href && !last ? (
-                        <Link
-                          href={c.href}
-                          className="hover:text-blue-600 transition-colors"
-                        >
-                          {c.label}
-                        </Link>
-                      ) : (
-                        <span
-                          className={
-                            last ? "text-blue-600 font-semibold" : undefined
-                          }
-                        >
-                          {c.label}
-                        </span>
-                      )}
-                      {!last && <span className="mx-2 text-slate-400">›</span>}
-                    </li>
-                  );
-                })}
-              </ol>
-            </nav>
+            <Breadcrumbs
+              items={crumbItems}
+              offsetClass={breadcrumbOffsetClass} // ← Pass custom offset if provided
+            />
           )}
 
           <div

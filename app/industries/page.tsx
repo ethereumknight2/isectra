@@ -320,6 +320,8 @@ export default function IndustriesPage() {
           imagePath="/images/industries.jpeg"
           trustBadge="Trusted by pharmaceutical & SMB clients nationwide"
           compact
+          breadcrumbs={breadcrumbs}
+          breadcrumbOffsetClass="pt-14 sm:pt-0"
         />
 
         {/* INDUSTRY SECTIONS (titles + intros centered) */}

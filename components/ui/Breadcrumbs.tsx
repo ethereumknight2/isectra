@@ -11,16 +11,19 @@ export type Crumb = {
 interface BreadcrumbsProps {
   items: Crumb[];
   className?: string;
+  /** Mobile-safe top padding to avoid fixed header overlap (Tailwind classes). Default: pt-16 sm:pt-0 */
+  offsetClass?: string;
 }
 
 export default function Breadcrumbs({
   items,
   className = "",
+  offsetClass = "pt-16 sm:pt-0",
 }: BreadcrumbsProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`pt-14 sm:pt-14 mb-3 text-sm text-slate-600 ${className}`}
+      className={`mb-3 text-sm text-slate-600 ${offsetClass} ${className}`}
     >
       <ol className="flex items-center flex-wrap gap-2">
         {items.map((crumb, index) => {
