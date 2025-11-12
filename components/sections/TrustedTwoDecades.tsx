@@ -150,12 +150,11 @@ export default function TrustedTwoDecades() {
                 ].map((b) => (
                   <div
                     key={b.label}
-                    className={`px-4 py-2 rounded-lg border backdrop-blur text-sm font-semibold
-                      ${
-                        b.color === "blue"
-                          ? "bg-white/70 border-blue-200 text-slate-800"
-                          : "bg-white/70 border-lime-200 text-slate-800"
-                      }`}
+                    className={`px-4 py-2 rounded-lg border backdrop-blur text-sm font-semibold ${
+                      b.color === "blue"
+                        ? "bg-white/70 border-blue-200 text-slate-800"
+                        : "bg-white/70 border-lime-200 text-slate-800"
+                    }`}
                   >
                     <div className="flex items-center gap-2">
                       <CheckCircle
@@ -199,8 +198,7 @@ export default function TrustedTwoDecades() {
                   {/* conic ring halo */}
                   <div className="absolute -top-8 -left-8 w-24 h-24">
                     <div
-                      className="w-full h-full rounded-full opacity-60
-                        motion-safe:animate-[spin_14s_linear_infinite]"
+                      className="w-full h-full rounded-full opacity-60 motion-safe:animate-[spin_14s_linear_infinite]"
                       style={{
                         background:
                           "conic-gradient(from 0deg, rgba(59,130,246,.0), rgba(59,130,246,.45), rgba(6,182,212,.45), rgba(99,102,241,.45), rgba(59,130,246,.0))",
@@ -211,10 +209,7 @@ export default function TrustedTwoDecades() {
                   </div>
 
                   <div className="relative">
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow
-                                    bg-gradient-to-br from-blue-600 to-cyan-500 text-white"
-                    >
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow bg-gradient-to-br from-blue-600 to-cyan-500 text-white">
                       <Icon className="w-6 h-6" />
                     </div>
                     <div className="text-3xl font-bold text-slate-900">
@@ -258,10 +253,7 @@ export default function TrustedTwoDecades() {
               {/* corner glow */}
               <div className="absolute -right-12 -top-12 w-40 h-40 rounded-full blur-3xl opacity-20 bg-gradient-to-br from-blue-600 to-cyan-400" />
               <div className="relative">
-                <div
-                  className="w-14 h-14 rounded-xl mb-5 flex items-center justify-center text-white
-                                bg-gradient-to-br from-blue-600 to-cyan-500 shadow"
-                >
+                <div className="w-14 h-14 rounded-xl mb-5 flex items-center justify-center text-white bg-gradient-to-br from-blue-600 to-cyan-500 shadow">
                   <Icon className="w-7 h-7" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-900">{title}</h3>

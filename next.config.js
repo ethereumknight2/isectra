@@ -1,25 +1,22 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // EITHER use remotePatterns...
     remotePatterns: [
       { protocol: "https", hostname: "isectra.com" },
       // HubSpot CDN (wildcard)
       { protocol: "https", hostname: "**.hubspotusercontent-na1.net" },
     ],
-    // ...OR the simpler images.domains approach:
-    // domains: ["isectra.com", "hubspotusercontent-na1.net"],
     formats: ["image/avif", "image/webp"],
   },
 
   reactStrictMode: true,
-  optimizeFonts: true,
+  // optimizeFonts is removed - it's enabled by default in Next.js 15
+  // swcMinify is removed - it's enabled by default in Next.js 15
 
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
+    styledComponents: true,
   },
-
-  swcMinify: true,
 
   async headers() {
     return [

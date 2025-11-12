@@ -273,7 +273,6 @@ export default function FAQPage() {
               {/* Highlight Grid */}
               <div className="grid md:grid-cols-2 gap-3 mb-8 animate-fadeInUp animation-delay-600">
                 {[
-                  "13 detailed answers",
                   "Transparent pricing info",
                   "Free trial available",
                   "No long-term contracts",

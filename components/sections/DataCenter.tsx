@@ -15,7 +15,7 @@ const teamMembers = [
   {
     name: "Santiago Aristizabal",
     role: "Engineering Team",
-    image: "https://isectra.com/hubfs/Santialog%20Aristizabal-3.png",
+    image: "/images/Santiago-Aristizabal.jpg",
     objectPos: "center" as const,
   },
   {
@@ -104,7 +104,7 @@ export default function DataCenter() {
             <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/60 bg-white/70 backdrop-blur">
               <div className="aspect-[4/3] relative">
                 <img
-                  src="https://isectra.com/hs-fs/hubfs/iSectraDatacenter%20(1).jpg"
+                  src="/images/iSectraDatacenter.jpg"
                   alt="iSectra Data Center in Jacksonville FL"
                   className="w-full h-full object-cover"
                   onError={(e) => {

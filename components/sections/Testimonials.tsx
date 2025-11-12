@@ -163,7 +163,7 @@ export default function Testimonials() {
 
                 {/* Quote */}
                 <p className="text-slate-700 mb-5 leading-relaxed text-[15px]">
-                  “{t.text}”
+                  "{t.text}"
                 </p>
 
                 {/* Footer */}
@@ -186,8 +186,7 @@ export default function Testimonials() {
         <div className="mt-14 text-center">
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white transition-all
-            bg-[linear-gradient(90deg,#3b82f6,#06b6d4)] hover:shadow-2xl hover:shadow-blue-400/30 hover:translate-y-[-1px]"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white transition-all bg-[linear-gradient(90deg,#3b82f6,#06b6d4)] hover:shadow-2xl hover:shadow-blue-400/30 hover:translate-y-[-1px]"
           >
             Start Your Free Trial
             <svg

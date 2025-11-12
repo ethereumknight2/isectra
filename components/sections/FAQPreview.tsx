@@ -23,12 +23,12 @@ const faqs: FAQItem[] = [
   {
     question: "Why Are You Different Than MSPs?",
     answer:
-      "Traditional MSPs optimize “nodes.” We align technology to business drivers and outcomes—roadmaps, compliance, uptime, security, and cost of ownership.",
+      "Traditional MSPs optimize nodes. We align technology to business drivers and outcomes—roadmaps, compliance, uptime, security, and cost of ownership.",
   },
   {
     question: "What If We Do Not Need All Your Services?",
     answer:
-      "We tailor scope to needs and risk. You don’t pay for what you don’t use.",
+      "We tailor scope to needs and risk. You don't pay for what you don't use.",
   },
   {
     question: "How Do You Onboard Customers?",
@@ -267,8 +267,7 @@ export default function FAQAndNewsletter() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-white transition-all
-                             bg-[linear-gradient(90deg,#7dca00,#5ea300)] hover:shadow-2xl hover:shadow-lime-500/30 hover:translate-y-[-1px] disabled:opacity-60"
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-semibold text-white transition-all bg-[linear-gradient(90deg,#7dca00,#5ea300)] hover:shadow-2xl hover:shadow-lime-500/30 hover:translate-y-[-1px] disabled:opacity-60"
                 >
                   {loading ? (
                     <>

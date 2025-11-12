@@ -94,8 +94,7 @@ export default function CTA() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="tel:+1-845-563-0346"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-semibold text-white
-                         bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-2xl hover:shadow-blue-500/30 hover:translate-y-[-1px] transition-all"
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:shadow-2xl hover:shadow-blue-500/30 hover:translate-y-[-1px] transition-all"
             >
               <Phone className="w-5 h-5" />
               Call (845) 563-0346
@@ -103,8 +102,7 @@ export default function CTA() {
 
             <a
               href="mailto:info@isectra.com"
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-semibold
-                         bg-white text-slate-900 border border-slate-300 shadow-sm hover:bg-slate-50 hover:border-slate-400 transition-all"
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-semibold bg-white text-slate-900 border border-slate-300 shadow-sm hover:bg-slate-50 hover:border-slate-400 transition-all"
             >
               <Mail className="w-5 h-5" />
               Email Us
@@ -112,8 +110,7 @@ export default function CTA() {
 
             <button
               onClick={() => setOpen(true)}
-              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-semibold text-white
-                         bg-[linear-gradient(90deg,#7dca00,#5ea300)] hover:shadow-2xl hover:shadow-lime-500/30 hover:translate-y-[-1px] transition-all"
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-semibold text-white bg-[linear-gradient(90deg,#7dca00,#5ea300)] hover:shadow-2xl hover:shadow-lime-500/30 hover:translate-y-[-1px] transition-all"
             >
               <CalendarDays className="w-5 h-5" />
               Get Free Assessment
