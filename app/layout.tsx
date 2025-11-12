@@ -342,6 +342,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-inter antialiased">
+        {/* Preconnect to YouTube for faster loading */}
+        <link rel="preconnect" href="https://i.ytimg.com" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+
         {/* LocalBusiness Schema for SEO */}
         <Script
           id="localbusiness-schema"
@@ -399,10 +404,11 @@ export default function RootLayout({
 
                 <a
                   href="tel:+1-845-563-0346"
-                  className="flex items-center gap-2 text-white/85 hover:text-white transition-colors"
+                  aria-label="Call (845) 563-0346"
+                  className="flex items-center gap-2 text-white/85 hover:text-white transition-colors p-2 min-w-[48px] min-h-[48px]"
                 >
                   <svg
-                    className="w-4 h-4"
+                    className="w-4 h-4 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="1.8"
@@ -414,7 +420,9 @@ export default function RootLayout({
                       d="M3.5 5.5A2.5 2.5 0 016 3h2.3a1 1 0 01.95.68l1.3 3.9a1 1 0 01-.5 1.2l-1.8.9a10.5 10.5 0 005.82 5.82l.9-1.8a1 1 0 011.2-.5l3.9 1.3a1 1 0 01.68.95V18a2.5 2.5 0 01-2.5 2.5H19C10.72 20.5 3.5 13.28 3.5 5.5z"
                     />
                   </svg>
-                  <span>(845) 563-0346</span>
+                  <span className="hidden sm:inline whitespace-nowrap">
+                    (845) 563-0346
+                  </span>
                 </a>
               </div>
 
@@ -424,7 +432,7 @@ export default function RootLayout({
                   href="https://www.linkedin.com/company/isectra/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors p-2 min-w-[48px] min-h-[48px] inline-flex items-center justify-center"
                   aria-label="LinkedIn"
                 >
                   <svg
@@ -439,7 +447,7 @@ export default function RootLayout({
                   href="https://www.youtube.com/channel/UC-wt1L0VzRFdHGPnIPL3FmA"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors p-2 min-w-[48px] min-h-[48px] inline-flex items-center justify-center"
                   aria-label="YouTube"
                 >
                   <svg
@@ -454,7 +462,7 @@ export default function RootLayout({
                   href="https://twitter.com/iSectraIT"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors p-2 min-w-[48px] min-h-[48px] inline-flex items-center justify-center"
                   aria-label="Twitter"
                 >
                   <svg
@@ -469,7 +477,7 @@ export default function RootLayout({
                   href="https://www.facebook.com/iSectra/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors p-2 min-w-[48px] min-h-[48px] inline-flex items-center justify-center"
                   aria-label="Facebook"
                 >
                   <svg
@@ -484,7 +492,7 @@ export default function RootLayout({
                   href="https://www.instagram.com/Isectrait/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/80 hover:text-white transition-colors"
+                  className="text-white/80 hover:text-white transition-colors p-2 min-w-[48px] min-h-[48px] inline-flex items-center justify-center"
                   aria-label="Instagram"
                 >
                   <svg

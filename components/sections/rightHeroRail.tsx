@@ -40,7 +40,7 @@ export default function RightHeroRail() {
 
           <rect x="0" y="0" width="800" height="800" fill="url(#heroRad)" />
 
-          {/* “molecule” nodes for Pharma */}
+          {/* "molecule" nodes for Pharma */}
           {[
             [560, 210],
             [660, 290],
@@ -87,7 +87,7 @@ export default function RightHeroRail() {
             strokeDasharray="6 12"
           />
 
-          {/* “storefront lines” for SMBs */}
+          {/* "storefront lines" for SMBs */}
           <path
             d="M520 520 h220"
             stroke="url(#heroStroke)"

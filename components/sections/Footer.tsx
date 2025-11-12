@@ -40,7 +40,7 @@ const complianceBadges = [
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-950 text-slate-300 border-t border-slate-800">
+    <footer className="bg-slate-950 text-slate-200 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-6">
         {/* Main Footer - Compact Grid */}
         <div className="py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -264,14 +264,14 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               <Link
                 href="/privacy"
-                className="hover:text-slate-300 transition-colors"
+                className="hover:text-slate-200 transition-colors"
               >
                 Privacy
               </Link>
               <span>•</span>
               <Link
                 href="/terms"
-                className="hover:text-slate-300 transition-colors"
+                className="hover:text-slate-200 transition-colors"
               >
                 Terms
               </Link>

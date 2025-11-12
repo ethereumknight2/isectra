@@ -1,0 +1,15 @@
+[production]
+last 2 Chrome versions
+last 2 Firefox versions
+last 2 Edge versions
+last 2 Safari major versions
+iOS >= 15.6
+Firefox ESR
+not dead
+not op_mini all
+not IE 11
+
+[development]
+last 1 Chrome version
+last 1 Firefox version
+last 1 Safari version

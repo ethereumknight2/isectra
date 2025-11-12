@@ -128,9 +128,10 @@ function VideoWithPoster({
   onPlay: () => void;
   posterOverride?: string;
 }) {
-  // Prefer maxres; gracefully fall back to hqdefault if the first 404s
-  const maxres = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
-  const hq = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+  // Use medium quality for mobile, max quality for desktop
+  const mqdefault = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`; // 320x180
+  const maxres = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`; // 1280x720
+  const hq = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`; // 480x360
 
   return (
     <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/60 bg-white/70 backdrop-blur shadow-sm">
@@ -151,18 +152,28 @@ function VideoWithPoster({
           className="absolute inset-0 text-left"
           aria-label={`Play video: ${title}`}
         >
-          {/* Poster image with graceful fallback */}
+          {/* Poster image with graceful fallback and responsive loading */}
           <picture>
-            {/* <source srcSet={`https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp`} type="image/webp" /> */}
+            <source
+              media="(min-width: 1024px)"
+              srcSet={posterOverride ?? maxres}
+            />
+            <source media="(min-width: 640px)" srcSet={posterOverride ?? hq} />
             <img
-              src={posterOverride ?? maxres}
+              src={posterOverride ?? mqdefault}
               onError={(e) => {
                 const img = e.currentTarget as HTMLImageElement;
-                if (img.src !== (posterOverride ?? hq))
+                // Fallback chain: maxres -> hq -> mqdefault
+                if (img.src.includes("maxresdefault")) {
                   img.src = posterOverride ?? hq;
+                } else if (img.src.includes("hqdefault")) {
+                  img.src = posterOverride ?? mqdefault;
+                }
               }}
               alt={title}
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </picture>
 
