@@ -4,7 +4,7 @@ const nextConfig = {
     // EITHER use remotePatterns...
     remotePatterns: [
       { protocol: "https", hostname: "isectra.com" },
-      // HubSpot CDN (wildcard): use **.domain, not *.
+      // HubSpot CDN (wildcard)
       { protocol: "https", hostname: "**.hubspotusercontent-na1.net" },
     ],
     // ...OR the simpler images.domains approach:
@@ -12,24 +12,17 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
 
-  // Strict mode is good for dev; harmless in prod
   reactStrictMode: true,
-
-  // (Optional in Next 13/14; safe to leave on, but not required)
-  // optimizeFonts is ignored in modern Next, you can remove it if you want.
   optimizeFonts: true,
 
   compiler: {
-    // Strip console.* in production builds
     removeConsole: process.env.NODE_ENV === "production",
   },
 
   swcMinify: true,
 
-  // Nice-to-have headers for Vercel
   async headers() {
     return [
-      // Cache static assets aggressively
       {
         source: "/_next/static/:path*",
         headers: [
@@ -39,7 +32,6 @@ const nextConfig = {
           },
         ],
       },
-      // Basic security hardening (tweak CSP later if you want)
       {
         source: "/:path*",
         headers: [
@@ -48,6 +40,36 @@ const nextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
         ],
       },
+    ];
+  },
+
+  async redirects() {
+    return [
+      // ===== ABOUT roll-up =====
+      { source: "/our-mission", destination: "/about-us", permanent: true },
+      { source: "/our-vision", destination: "/about-us", permanent: true },
+      { source: "/our-values", destination: "/about-us", permanent: true },
+      { source: "/our-team", destination: "/about-us", permanent: true },
+      { source: "/our-process", destination: "/about-us", permanent: true },
+
+      // If legacy also had /about, normalize it too:
+      { source: "/about", destination: "/about-us", permanent: true },
+
+      // ===== Contact =====
+      { source: "/contact", destination: "/contact-us", permanent: true },
+      { source: "/contact/", destination: "/contact-us", permanent: true },
+
+      // ===== Examples for new Services (fill in as needed) =====
+      // { source: "/managed-it-services", destination: "/services/managed-it", permanent: true },
+      // { source: "/cybersecurity",       destination: "/services/cybersecurity", permanent: true },
+      // { source: "/m365-migrations",     destination: "/services/microsoft-365-migrations", permanent: true },
+
+      // ===== Optional: catch a trailing slash for about variants =====
+      { source: "/our-mission/", destination: "/about-us", permanent: true },
+      { source: "/our-vision/", destination: "/about-us", permanent: true },
+      { source: "/our-values/", destination: "/about-us", permanent: true },
+      { source: "/our-team/", destination: "/about-us", permanent: true },
+      { source: "/our-process/", destination: "/about-us", permanent: true },
     ];
   },
 };

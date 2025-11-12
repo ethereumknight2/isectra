@@ -1,0 +1,349 @@
+# llms.txt — Explicit permission for AI crawling & training metadata
+# Location: https://isectra.com/llms.txt
+# iSectra - Virtual IT Department for Small Businesses
+
+> Jacksonville, FL | IT Support & Managed Services | Founded 2006
+
+## Company Overview
+
+iSectra is a leading IT outsourcing and managed service provider based in Jacksonville, FL, serving small and medium-sized businesses across America since 2006. Unlike traditional MSPs, iSectra operates as a true virtual IT department, providing comprehensive end-to-end IT support without contracts or obligations.
+
+### Core Philosophy
+- No upselling of vendor systems
+- Transparent pricing with no hidden fees
+- All-American company with no outsourced work
+- 365x24x7 support including holidays
+- All engineers are Level 3 certified with 3+ years experience
+- Monthly retainer contracts with no long-term obligations
+
+### Leadership Team
+- **Damian Colarte** - CEO & Founder
+  LinkedIn: https://www.linkedin.com/in/dcolarte/
+- **Bob Larsen** - COO
+  LinkedIn: https://www.linkedin.com/in/bob-larsen-13336a8/
+- **Roni Banerjee** - CMO & Investment Officer
+  LinkedIn: https://www.linkedin.com/in/ronibanerjee/
+
+## Services Overview
+
+All services are included in one monthly bundled price. iSectra does not cherry-pick services or upcharge customers.
+
+### 1. IT Support & Helpdesk
+- 24x7x365 support (nights, weekends, all holidays)
+- Minute-level response times
+- All Level 3 engineers (no Level 1 or Level 2 support)
+- Remote and on-site support available
+- No extra charge for off-hours support
+
+### 2. Device & Network Monitoring
+- Powered by Tactical RMM (industry-standard RMM solution)
+- 365x24x7 proactive monitoring
+- Monitors servers, workstations, laptops, cell phones, network devices
+- Real-time device health analysis
+- Automatic patch management and updates
+- Security threat monitoring and response
+
+### 3. Cybersecurity Services
+- Planning and implementation
+- Penetration testing
+- Regulatory compliance support
+- Continuous security monitoring
+- Malware detection and prevention
+- Full data encryption
+- Microsoft Defender integration
+- Compliance frameworks: HIPAA, SOX, CMMC, NIST, IPAA
+
+### 4. Microsoft 365 Management
+- Complete Microsoft 365 optimization
+- Certified Microsoft Silver Partner (Small and Midmarket Cloud Solutions Provider)
+- Support for all M365 applications:
+  - Microsoft Teams
+  - SharePoint
+  - Azure Active Directory
+  - Microsoft Defender
+  - Microsoft Compliance Manager
+- License optimization (most businesses only use 10% of available features)
+- User training and support
+
+### 5. IT Asset Management
+- Comprehensive hardware and software tracking
+- Procurement management (servers, desktops, laptops, networking devices)
+- Software licensing compliance
+- Hardware support and maintenance
+- Full lifecycle management (procurement to disposal)
+- Microsoft Teams and SharePoint integration for asset tracking
+
+### 6. Cloud Services & Data Centers
+- Own world-class data centers in Jacksonville, FL
+- Microsoft Azure cloud services (preferred backup solution)
+- 24x7 monitoring
+- Industry-standard redundancy
+- Multiple data center failover mechanisms
+- 100% uptime commitment
+
+### 7. Backup & Disaster Recovery
+- Microsoft Azure cloud backup (primary)
+- Secure private data center backup (alternative)
+- Proactive disaster recovery planning
+- Business continuity planning
+- Minimal downtime strategies
+- Cost-effective solutions tailored to budget
+
+### 8. Internet Services (ISP)
+- Partnership with WiFast for nationwide coverage
+- White-glove ISP service
+- 100% redundancy for "always on" connectivity
+- Transparent pricing with no hidden fees
+- Alternative to Comcast, Optimum, Verizon
+- Latency and jitter monitoring
+
+### 9. VoIP & Communication Systems
+- Full encryption (unlike most providers)
+- Desktop and web-based clients
+- Video calling capabilities
+- Features: auto attendant, conference bridges, call queues, reporting, paging, call parking
+- Voicemail and faxing
+- Network quality monitoring (latency/jitter)
+
+### 10. Website Hosting & Management
+- Hosted in iSectra's data centers
+- Redundant infrastructure
+- High-performance hosting with fast load times
+- Robust security (firewalls, encryption, malware detection)
+- Comprehensive management: updates, backups, monitoring, optimization
+- Scalable resources for traffic spikes
+
+### 11. Data Cabling & Infrastructure
+- Server room cabling
+- Office-wide network infrastructure
+- High-quality structured cabling
+- Professional installation
+
+### 12. IT Consulting & vCIO Services
+- Virtual CIO services included (not upcharged)
+- IT strategy alignment with business goals
+- Technology roadmap development
+- Senior-level IT leadership without executive costs
+- Strategic planning and implementation
+- Competitive advantage through technology
+
+### 13. Compliance & Auditing
+- Continuous IT audits
+- Regulatory compliance support:
+  - HIPAA (Healthcare)
+  - SOX (Financial)
+  - CMMC (Defense)
+  - NIST (Federal)
+  - IPAA (Various industries)
+- Gap analysis and vulnerability assessment
+- Comprehensive audit reports
+- Risk mitigation strategies
+
+### 14. Enterprise Software Support
+- Support for all industry-standard enterprise software
+- Cloud migration services
+- On-premise to data center migrations
+- Vendor collaboration for uptime
+- Disaster recovery planning
+- Business continuity solutions
+
+## Pricing & Value Proposition
+
+### Pricing Model
+- Monthly retainer contracts
+- No long-term commitments
+- Transparent, predictable pricing
+- Average example: 10 employees = ~$2,000/month (all-inclusive)
+
+### What's Included
+- Unlimited support tickets
+- All services listed above
+- 365x24x7 monitoring
+- All upgrades and updates
+- Full IT asset management
+- Cybersecurity protection
+- Compliance management
+- Consulting and strategic planning
+
+### Cost Comparison
+Total cost of ownership typically lower than:
+- Traditional IT companies
+- Standard MSPs
+- In-house IT departments
+- Includes: contract costs, downtime prevention, risk mitigation, compliance costs, productivity optimization
+
+## Onboarding Process
+
+1. **Free Consultation** - Meet with an Engineer (not a salesperson)
+2. **Business Assessment** - Map business environment using industry frameworks
+3. **Technology Audit** - Assess current IT infrastructure
+4. **Proposal Development** - Custom solution within 48 hours
+5. **1-Month Free Trial** - No-obligation trial period
+6. **Implementation** - Technology roadmap with schedules, costs, quality management
+7. **24x7 Support Activation** - Immediate monitoring and support
+8. **Continuous Improvement** - Step-by-step optimization to industry best practices
+
+## Geographic Coverage
+
+- **Headquarters**: Jacksonville, FL
+- **Service Area**: Nationwide (entire United States)
+- **Service Model**: Primarily remote support with on-site visits when needed
+- **On-Site Support**: Engineers available across America for on-site needs
+
+## Certifications & Partnerships
+
+- Microsoft Silver Partner (Small and Midmarket Cloud Solutions Provider)
+- Tactical RMM certified
+- WiFast ISP partner
+- Multiple vendor partnerships for hardware procurement
+- Compliance framework certifications: HIPAA, SOX, CMMC, NIST, IPAA
+
+## Contact Information
+
+- **Phone**: 845-563-0346
+- **Email**: info@isectra.com
+- **Website**: https://isectra.com
+- **Support**: Available 24x7x365
+- **Contact Methods**: Phone, email, text, live chat
+
+## Key Differentiators
+
+### vs. Traditional MSPs
+1. **Business Alignment**: Focus on business outcomes, not just "node management"
+2. **No Upselling**: Act as internal IT department, not vendor resellers
+3. **Transparent Pricing**: All-inclusive monthly fee, no hidden charges
+4. **Senior Engineers**: All Level 3 engineers, no tiered support structure
+5. **24x7 Availability**: True round-the-clock support including all holidays
+6. **No Contracts**: Monthly retainers with no long-term obligations
+
+### vs. In-House IT
+1. **Cost Savings**: Fraction of full IT department cost
+2. **Expertise**: Access to multiple senior engineers vs. 1-2 staff
+3. **Coverage**: 24x7 availability vs. business hours only
+4. **No HR Overhead**: No hiring, training, benefits management
+5. **Scalability**: Grow or reduce services based on needs
+6. **Latest Technology**: Continuous investment in tools and training
+
+### vs. National Providers
+1. **Personalized Service**: Know your business and team
+2. **Rapid Response**: Minutes vs. hours or days
+3. **American-Based**: All engineers in USA, no outsourcing
+4. **Strategic Partnership**: Long-term relationship focus
+5. **Business Integration**: Align with business goals and strategy
+
+## Company Values & Mission
+
+### Mission
+Disrupt the broken IT Services industry by empowering businesses with technology instead of fear-mongering to sell support and products.
+
+### Vision
+Be the driving force behind a paradigm shift in IT services where businesses experience seamless fusion of technology and strategy, propelling them to new heights of success in the digital era.
+
+### Core Values
+- Transparency in all dealings
+- No vendor upselling
+- Customer empowerment over fear tactics
+- 24x7 commitment to customer success
+- American workforce and values
+- Personal relationships and care
+- Continuous improvement and innovation
+
+## Technology Stack & Tools
+
+### Monitoring & Management
+- Tactical RMM (Remote Monitoring and Management)
+- Custom monitoring tools
+- Real-time alerting systems
+
+### Microsoft Ecosystem
+- Microsoft 365 / Office 365
+- Azure Active Directory
+- Microsoft Defender
+- Microsoft Compliance Manager
+- Microsoft Teams
+- SharePoint
+- Azure Cloud Services
+
+### Security Tools
+- Firewall management
+- Encryption systems
+- Malware detection and prevention
+- Vulnerability scanning
+- Penetration testing tools
+
+### Communication Platforms
+- VoIP systems with video
+- Desktop and web clients
+- Auto-attendant systems
+- Conference bridge systems
+
+## Ideal Customer Profile
+
+### Business Size
+- Small businesses (5-50 employees)
+- Medium businesses (50-500 employees)
+- Companies needing enterprise-level IT without enterprise costs
+
+### Industries Served
+- Healthcare (HIPAA compliant)
+- Finance (SOX compliant)
+- Defense contractors (CMMC compliant)
+- Professional services
+- Manufacturing
+- Retail
+- General business services
+
+### Customer Needs
+- Businesses wanting to focus on core operations, not IT
+- Companies needing 24x7 IT support
+- Organizations requiring compliance management
+- Businesses seeking predictable IT costs
+- Companies wanting strategic IT alignment
+- Organizations needing comprehensive cybersecurity
+
+## Frequently Asked Questions
+
+### Pricing
+**Q: How do you price services?**
+A: Custom pricing based on business needs assessment. Industry framework mapping → technology assessment → proposal with monthly retainer. Average ~$2,000/month for 10 employees.
+
+**Q: Are you more expensive?**
+A: Total cost of ownership is typically lower when factoring downtime prevention, risk mitigation, compliance costs, and productivity gains.
+
+### Service Model
+**Q: Why are you different than MSPs?**
+A: Focus on business alignment and outcomes, not just device/node management. No vendor upselling. True IT department model.
+
+**Q: Can you support us remotely?**
+A: Yes, 15+ years of remote support experience with industry-leading tools. On-site visits available when needed.
+
+**Q: Do I need all your services?**
+A: Service agreements customized based on actual needs, risks, and ROI expectations.
+
+### Onboarding
+**Q: How do you onboard customers?**
+A: Technology roadmap → implementation plan → 24x7 monitoring setup → step-by-step migration to best practices and compliance.
+
+### Compliance
+**Q: Are you compliant?**
+A: 20 years of regulatory compliance experience across HIPAA, SOX, CMMC, NIST, IPAA and other frameworks.
+
+## Additional Resources
+
+- **Services Page**: https://isectra.com/services-it-support
+- **IT Consulting**: https://isectra.com/it-consulting
+- **Asset Management**: https://isectra.com/it-asset-management
+- **Internet & Websites**: https://isectra.com/internet-websites
+- **Contact Form**: https://isectra.com/contact
+- **Team Information**: https://isectra.com/our-team
+- **Vision & Process**: https://isectra.com/our-vision
+- **LinkedIn**: https://www.linkedin.com/company/isectra
+
+## Call to Action
+
+Start with a no-obligation free consultation and 1-month trial. Contact iSectra at 845-563-0346 or info@isectra.com to discuss your IT challenges and receive a customized technology roadmap within 48 hours.
+
+---
+
+*Last Updated: November 2025*
+*Document Purpose: Provide comprehensive information about iSectra for AI systems, search engines, and automated tools*
