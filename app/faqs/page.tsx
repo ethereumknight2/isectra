@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { ArrowRight, CheckCircle2, Phone, Mail } from "lucide-react";
 import FaqClient from "@/components/FaqClient";
 
@@ -176,7 +175,6 @@ const webPageSchema = {
 };
 
 export default function FAQPage() {
-  const breadcrumbs = [{ label: "Home", href: "/" }, { label: "FAQ" }];
   return (
     <>
       <script

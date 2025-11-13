@@ -2,7 +2,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import Script from "next/script";
 import {
   ArrowRight,
@@ -291,7 +290,6 @@ const schemaOrg = {
 };
 
 export default function IndustriesPage() {
-  const breadcrumbs = [{ label: "Home", href: "/" }, { label: "Industries" }];
   return (
     <>
       {/* AEO JSON-LD */}
@@ -320,8 +318,6 @@ export default function IndustriesPage() {
           imagePath="/images/industries.jpeg"
           trustBadge="Trusted by pharmaceutical & SMB clients nationwide"
           compact
-          breadcrumbs={breadcrumbs}
-          breadcrumbOffsetClass="pt-14 sm:pt-0"
         />
 
         {/* INDUSTRY SECTIONS (titles + intros centered) */}

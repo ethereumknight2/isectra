@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Calendar, Clock, Search, ArrowRight } from "lucide-react";
 import { blogPosts } from "./posts";
+import Newsletter from "@/components/sections/Newsletter";
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -186,21 +187,9 @@ export default function BlogPage() {
         )}
       </div>
 
-      {/* Newsletter CTA */}
+      {/* Newsletter Signup */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl shadow-lg p-8 lg:p-12 text-white text-center">
-          <h2 className="text-3xl font-bold mb-4">Never Miss an Update</h2>
-          <p className="text-xl mb-8 text-white/90">
-            Subscribe to our newsletter for weekly IT insights and tips
-          </p>
-          <Link
-            href="/#newsletter"
-            className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all hover:scale-105"
-          >
-            Subscribe Now
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
+        <Newsletter />
       </div>
     </div>
   );

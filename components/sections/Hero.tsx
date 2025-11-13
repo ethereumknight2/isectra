@@ -146,7 +146,7 @@ export default function HeroAnimated() {
               }`}
             >
               {[
-                "99.97% Uptime Guaranteed",
+                "99.99% Uptime Guaranteed",
                 "<10min Response Time",
                 "Never Lost a Customer",
                 "35% Average Cost Savings",

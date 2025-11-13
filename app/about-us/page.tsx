@@ -4,7 +4,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import {
   CheckCircle,
   ArrowRight,
@@ -235,7 +234,6 @@ const team = [
 ];
 
 export default function AboutPage() {
-  const breadcrumbs = [{ label: "Home", href: "/" }, { label: "About Us" }];
   // Organization Schema with Team Members
   const organizationSchema = {
     "@context": "https://schema.org",
