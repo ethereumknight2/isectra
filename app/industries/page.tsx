@@ -146,8 +146,8 @@ const caseStudies = [
     bannerTo: "to-lime-500",
     icon: LineChart,
     quote:
-      "iSectra provided us with outstanding IT management with excellent business acumen. They understand the need for 'real world' solutions and deliver what works for our business.",
-    attribution: "Business Owner",
+      "iSectra provided us with outstanding IT management with excellent business acumen. They understand the need for 'real world' solutions to business problems. iSectra is resourceful and their engineers know how to find answers to problem in the business process and makes good use of resources to offer solutions that work for your business.",
+    attribution: "Jan Becev, Project Manager, Medicem",
   },
   {
     slug: "office-move",
@@ -174,8 +174,8 @@ const caseStudies = [
     bannerTo: "to-cyan-500",
     icon: Server,
     quote:
-      "The level of expertise and responsiveness from the iSectra team is unmatched. They truly act as our IT department.",
-    attribution: "CEO",
+      "We could not be happier with iSectra. They always come through in critical situations with a professional and positive attitude. Their knowledge and ability has far exceeded our expectations!",
+    attribution: "Lindsey Rey, Administration, Eagle Pharmaceuticals",
   },
 ];
 
