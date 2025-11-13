@@ -116,7 +116,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-06-11",
     author: "iSectra CIO",
     categories: ["Microsoft"],
-    image: "images/blog/porsche.jpeg",
+    image: "/images/blog/porsche.jpeg",
     readingTime: "4 min",
   },
   {
@@ -165,7 +165,7 @@ export const blogPosts: BlogPost[] = [
     date: "2025-04-03",
     author: "iSectra CIO",
     categories: ["pharmaceutical"],
-    image: "images/blog/Cover_DCAT_Week_2025.png",
+    image: "/images/blog/Cover_DCAT_Week_2025.png",
     readingTime: "6 min",
   },
   {
