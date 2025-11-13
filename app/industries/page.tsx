@@ -115,6 +115,9 @@ const caseStudies = [
     bannerFrom: "from-blue-600",
     bannerTo: "to-cyan-500",
     icon: Shield,
+    quote:
+      "iSectra quickly understood the needs of our business and was able to design an IT platform that completely supported our business needs.",
+    attribution: "Nick DiMaio, President & CEO, Dash Pharmaceuticals",
   },
   {
     slug: "smb-logistics",
@@ -142,6 +145,9 @@ const caseStudies = [
     bannerFrom: "from-emerald-600",
     bannerTo: "to-lime-500",
     icon: LineChart,
+    quote:
+      "iSectra provided us with outstanding IT management with excellent business acumen. They understand the need for 'real world' solutions and deliver what works for our business.",
+    attribution: "Business Owner",
   },
   {
     slug: "office-move",
@@ -167,6 +173,9 @@ const caseStudies = [
     bannerFrom: "from-blue-600",
     bannerTo: "to-cyan-500",
     icon: Server,
+    quote:
+      "The level of expertise and responsiveness from the iSectra team is unmatched. They truly act as our IT department.",
+    attribution: "CEO",
   },
 ];
 
@@ -544,13 +553,10 @@ export default function IndustriesPage() {
                           <Quote className="w-7 h-7 text-blue-600 mt-1 flex-shrink-0" />
                           <div>
                             <p className="italic text-slate-800 text-lg leading-relaxed">
-                              "iSectra quickly understood the needs of our
-                              business and was able to design an IT platform
-                              that completely supported our business needs."
+                              “{cs.quote}”
                             </p>
                             <p className="mt-3 text-sm text-slate-600 font-semibold">
-                              — Nick DiMaio, President & CEO, Dash
-                              Pharmaceuticals
+                              — {cs.attribution}
                             </p>
                           </div>
                         </div>

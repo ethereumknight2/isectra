@@ -9,15 +9,35 @@ type QA = { q: string; a: string; id: string };
 export default function FaqClient({ faqs }: { faqs: QA[] }) {
   const [query, setQuery] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
+  const [category, setCategory] = useState<string>("");
 
   const filtered = useMemo(() => {
-    if (!query.trim()) return faqs;
+    let base = faqs;
+
+    // Apply category-based filter first (using keyword as a regex pattern)
+    if (category) {
+      try {
+        const regex = new RegExp(category, "i");
+        base = base.filter((item) => regex.test(item.q) || regex.test(item.a));
+      } catch {
+        // Fallback if regex is invalid for some reason
+        const catLower = category.toLowerCase();
+        base = base.filter(
+          (item) =>
+            item.q.toLowerCase().includes(catLower) ||
+            item.a.toLowerCase().includes(catLower)
+        );
+      }
+    }
+
+    // Then apply free-text search on top of the category filter
+    if (!query.trim()) return base;
     const q = query.toLowerCase();
-    return faqs.filter(
+    return base.filter(
       (item) =>
         item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q)
     );
-  }, [faqs, query]);
+  }, [faqs, query, category]);
 
   // Group questions by category for sidebar
   const categories = [
@@ -32,6 +52,9 @@ export default function FaqClient({ faqs }: { faqs: QA[] }) {
     { name: "Compliance & Security", count: 2, keyword: "compliant|data|safe" },
     { name: "Remote & Location", count: 1, keyword: "remote" },
   ];
+
+  const activeCategory =
+    categories.find((c) => c.keyword === category) ?? categories[0];
 
   return (
     <section className="py-16 md:py-24 bg-slate-50">
@@ -85,9 +108,9 @@ export default function FaqClient({ faqs }: { faqs: QA[] }) {
                   {categories.map((cat, i) => (
                     <button
                       key={i}
-                      onClick={() => setQuery(cat.keyword)}
+                      onClick={() => setCategory(cat.keyword)}
                       className={`w-full text-left px-4 py-3 rounded-xl transition-all ${
-                        query === cat.keyword
+                        category === cat.keyword
                           ? "bg-blue-50 text-blue-700 font-semibold border-2 border-blue-200"
                           : "hover:bg-slate-50 text-slate-700 border-2 border-transparent"
                       }`}
@@ -96,7 +119,7 @@ export default function FaqClient({ faqs }: { faqs: QA[] }) {
                         <span>{cat.name}</span>
                         <span
                           className={`text-sm ${
-                            query === cat.keyword
+                            category === cat.keyword
                               ? "text-blue-600"
                               : "text-slate-400"
                           }`}
@@ -140,7 +163,9 @@ export default function FaqClient({ faqs }: { faqs: QA[] }) {
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
                 {query
                   ? `Search Results for "${query}"`
-                  : "All Questions & Answers"}
+                  : category
+                    ? activeCategory.name
+                    : "All Questions & Answers"}
               </h2>
               <p className="text-lg text-slate-600">
                 {filtered.length}{" "}
@@ -233,7 +258,10 @@ export default function FaqClient({ faqs }: { faqs: QA[] }) {
                 <p className="text-slate-600 mb-6">
                   Try different keywords or{" "}
                   <button
-                    onClick={() => setQuery("")}
+                    onClick={() => {
+                      setQuery("");
+                      setCategory("");
+                    }}
                     className="text-blue-600 hover:text-blue-700 font-semibold"
                   >
                     view all questions
