@@ -137,7 +137,7 @@ export default function ContactPage() {
 
       <main>
         {/* HERO - extra top padding so it clears the header nicely */}
-        <section className="relative min-h-[58vh] flex items-center overflow-hidden pt-28 md:pt-32 pb-12">
+        <section className="relative min-h-[58vh] flex items-center overflow-hidden pt-20 md:pt-24 pb-12">
           <div className="absolute inset-0 bg-gradient-to-r from-white via-blue-50 via-50% to-blue-200" />
 
           {/* Right side image with stronger blue overlay */}
