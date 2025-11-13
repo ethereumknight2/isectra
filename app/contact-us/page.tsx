@@ -1,4 +1,3 @@
-// app/contact/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -49,14 +48,11 @@ export const metadata: Metadata = {
   },
 };
 
-// === Updated constants (removed physical address, added regions + support) ===
 const PHONE = "+1-845-563-0346";
 const EMAIL = "info@isectra.com";
 const SUPPORT_EMAIL = "support@isectra.com";
 const REGIONS = ["NY", "NJ", "MA", "CT", "PA", "MD", "VA", "FL"];
 
-/* ------------------------------ JSON-LD SCHEMA ---------------------------- */
-/** NOTE: Physical street address removed. We declare service footprint via areaServed. */
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "LocalBusiness"],
@@ -65,7 +61,6 @@ const organizationSchema = {
   logo: "https://isectra.com/logo.png",
   telephone: PHONE,
   email: EMAIL,
-  // Reflect operating states + national coverage
   areaServed: [
     "US-NY",
     "US-NJ",
@@ -75,7 +70,7 @@ const organizationSchema = {
     "US-MD",
     "US-VA",
     "US-FL",
-    "US", // customers across all 50 states
+    "US",
   ],
   contactPoint: [
     {
@@ -141,8 +136,8 @@ export default function ContactPage() {
       />
 
       <main>
-        {/* HERO - Service Page Style with Image - COMPACT VERSION */}
-        <section className="relative min-h-[58vh] flex items-center overflow-hidden pt-22 pb-12">
+        {/* HERO - extra top padding so it clears the header nicely */}
+        <section className="relative min-h-[58vh] flex items-center overflow-hidden pt-28 md:pt-32 pb-12">
           <div className="absolute inset-0 bg-gradient-to-r from-white via-blue-50 via-50% to-blue-200" />
 
           {/* Right side image with stronger blue overlay */}
@@ -180,7 +175,6 @@ export default function ContactPage() {
           </div>
 
           <div className="relative container mx-auto px-6">
-            {/* Constrain content to left 45% to avoid image overlap */}
             <div className="max-w-2xl lg:max-w-[45%]">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6 animate-fadeInUp">
                 <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
@@ -198,7 +192,6 @@ export default function ContactPage() {
                 all 50 states with U.S.-based senior engineers.
               </p>
 
-              {/* Highlight Grid */}
               <div className="grid md:grid-cols-2 gap-3 mb-8 animate-fadeInUp animation-delay-600">
                 {[
                   "Free 30-minute consultation",

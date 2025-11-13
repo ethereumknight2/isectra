@@ -1,4 +1,4 @@
-// components/FaqClient.tsx - REDESIGNED with Side Menu Search
+// components/FaqClient.tsx - Side Menu Search + Category Filter with Dynamic Counts
 "use client";
 
 import { useMemo, useState } from "react";
@@ -6,21 +6,70 @@ import { ChevronDown, CheckCircle2, HelpCircle, Search, X } from "lucide-react";
 
 type QA = { q: string; a: string; id: string };
 
+type CategoryConfig = {
+  name: string;
+  keyword: string;
+};
+
 export default function FaqClient({ faqs }: { faqs: QA[] }) {
   const [query, setQuery] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
   const [category, setCategory] = useState<string>("");
 
+  // Base category configs (counts are computed from faqs)
+  const categoryConfigs: CategoryConfig[] = [
+    { name: "All Questions", keyword: "" },
+    { name: "Pricing & Cost", keyword: "pricing|price|cost|expensive" },
+    { name: "Services", keyword: "services|onboard|support|help desk" },
+    {
+      name: "Trial & Contract",
+      keyword: "trial|termination|switching|contract",
+    },
+    {
+      name: "Compliance & Security",
+      keyword: "compliant|compliance|data|secure|security",
+    },
+    { name: "Remote & Location", keyword: "remote|location|onsite|on-site" },
+  ];
+
+  // Dynamically compute counts per category
+  const categories = useMemo(() => {
+    return categoryConfigs.map((cfg) => {
+      if (!cfg.keyword) {
+        return { ...cfg, count: faqs.length };
+      }
+
+      let count = 0;
+      try {
+        const regex = new RegExp(cfg.keyword, "i");
+        count = faqs.filter(
+          (item) => regex.test(item.q) || regex.test(item.a)
+        ).length;
+      } catch {
+        const kw = cfg.keyword.toLowerCase();
+        count = faqs.filter(
+          (item) =>
+            item.q.toLowerCase().includes(kw) ||
+            item.a.toLowerCase().includes(kw)
+        ).length;
+      }
+
+      return { ...cfg, count };
+    });
+  }, [faqs, categoryConfigs]);
+
+  const activeCategory =
+    categories.find((c) => c.keyword === category) ?? categories[0];
+
+  // Apply category filter first, then free-text search
   const filtered = useMemo(() => {
     let base = faqs;
 
-    // Apply category-based filter first (using keyword as a regex pattern)
     if (category) {
       try {
         const regex = new RegExp(category, "i");
         base = base.filter((item) => regex.test(item.q) || regex.test(item.a));
       } catch {
-        // Fallback if regex is invalid for some reason
         const catLower = category.toLowerCase();
         base = base.filter(
           (item) =>
@@ -30,31 +79,14 @@ export default function FaqClient({ faqs }: { faqs: QA[] }) {
       }
     }
 
-    // Then apply free-text search on top of the category filter
     if (!query.trim()) return base;
+
     const q = query.toLowerCase();
     return base.filter(
       (item) =>
         item.q.toLowerCase().includes(q) || item.a.toLowerCase().includes(q)
     );
   }, [faqs, query, category]);
-
-  // Group questions by category for sidebar
-  const categories = [
-    { name: "All Questions", count: faqs.length, keyword: "" },
-    { name: "Pricing & Cost", count: 2, keyword: "pricing|cost|expensive" },
-    { name: "Services", count: 3, keyword: "services|onboarding|support" },
-    {
-      name: "Trial & Contract",
-      count: 3,
-      keyword: "trial|termination|switching",
-    },
-    { name: "Compliance & Security", count: 2, keyword: "compliant|data|safe" },
-    { name: "Remote & Location", count: 1, keyword: "remote" },
-  ];
-
-  const activeCategory =
-    categories.find((c) => c.keyword === category) ?? categories[0];
 
   return (
     <section className="py-16 md:py-24 bg-slate-50">
@@ -93,8 +125,7 @@ export default function FaqClient({ faqs }: { faqs: QA[] }) {
                     <span className="font-semibold text-blue-600">
                       {filtered.length}
                     </span>{" "}
-                    result
-                    {filtered.length === 1 ? "" : "s"}
+                    result{filtered.length === 1 ? "" : "s"}
                   </p>
                 )}
               </div>
@@ -248,7 +279,7 @@ export default function FaqClient({ faqs }: { faqs: QA[] }) {
 
             {/* No Results */}
             {filtered.length === 0 && (
-              <div className="text-center py-16 bg-white rounded-2xl border-2 border-slate-200">
+              <div className="text-center py-16 bg-white rounded-2xl border-2 border-slate-200 mt-8">
                 <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
                   <Search className="w-10 h-10 text-slate-400" />
                 </div>
