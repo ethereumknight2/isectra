@@ -12,7 +12,8 @@ import FAQPreview from "../components/sections/FAQPreview";
 import CTA from "../components/sections/CTA";
 
 export const metadata: Metadata = {
-  title: "IT Services, Cybersecurity & Cloud for Pharma | iSectra",
+  title:
+    "IT Services, Cybersecurity & Cloud Solutions for Pharma & SMBs | iSectra",
   description:
     "iSectra provides end-to-end Managed IT, Cloud, and Cybersecurity solutions for Pharmaceutical companies and small-to-mid-sized businesses (15–50 employees). Trusted for 20+ years.",
 };
