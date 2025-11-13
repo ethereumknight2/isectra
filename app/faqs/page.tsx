@@ -236,22 +236,6 @@ export default function FAQPage() {
           <div className="relative container mx-auto px-6">
             {/* Constrain content to left 45% to avoid image overlap */}
             <div className="max-w-2xl lg:max-w-[45%]">
-              {/* Breadcrumb */}
-              <nav className="flex mb-6 animate-fadeIn">
-                <ol className="flex items-center space-x-2 text-sm text-slate-600">
-                  <li>
-                    <Link
-                      href="/"
-                      className="hover:text-blue-600 transition-colors"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>›</li>
-                  <li className="text-blue-600 font-semibold">FAQ</li>
-                </ol>
-              </nav>
-
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full mb-6 animate-fadeInUp">
                 <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
                 <span className="text-sm font-semibold text-blue-600 tracking-wide uppercase">
