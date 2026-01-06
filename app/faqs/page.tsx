@@ -1,13 +1,9 @@
-// app/faq/page.tsx
+// app/faqs/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, Phone, Mail } from "lucide-react";
 import FaqClient from "@/components/FaqClient";
-
-// 🔹 Storyblok imports
-import { getStoryblokApi } from "@storyblok/react/rsc";
-import "../../lib/storyblok";
 
 export const metadata: Metadata = {
   title: "IT Services FAQ | iSectra — Pharma & SMB IT Experts",
@@ -132,38 +128,11 @@ If your business prefers not to use public cloud services, we also offer secure 
   },
 ];
 
-// 🔹 Fetch extra FAQs from Storyblok (folder: faq/)
-async function getStoryblokFaqs() {
-  try {
-    const storyblokApi = getStoryblokApi();
-    const { data } = await storyblokApi.get("cdn/stories", {
-      version: "draft",
-      starts_with: "faqs/", // 🔹 change from "faq/" to "faqs/"
-      is_startpage: false,
-      cv: Date.now(),
-    });
-
-    return data.stories.map((story: any, index: number) => ({
-      id: story.content.id || `sb-faq-${index}`,
-      q: story.content.question,
-      a: story.content.answer,
-    }));
-  } catch (error) {
-    console.error("Error fetching Storyblok FAQs:", error);
-    return [];
-  }
-}
-
-export default async function FAQPage() {
-  // merge static FAQs + Storyblok FAQs
-  const storyblokFaqs = await getStoryblokFaqs();
-  const allFaqs = [...FaqData, ...storyblokFaqs];
-
-  // JSON-LD schemas (now use allFaqs so Storyblok entries are included)
+export default function FAQPage() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: allFaqs.map((item) => ({
+    mainEntity: FaqData.map((item) => ({
       "@type": "Question",
       name: item.q,
       acceptedAnswer: {
@@ -218,7 +187,6 @@ export default async function FAQPage() {
 
       <main>
         {/* HERO - Service Page Style with Image - COMPACT VERSION */}
-        {/* Added more top padding so hero clears the header nicely */}
         <section className="relative min-h-[58vh] flex items-center overflow-hidden pt-20 md:pt-34 pb-12">
           <div className="absolute inset-0 bg-gradient-to-r from-white via-blue-50 via-50% to-blue-200" />
 
@@ -325,8 +293,7 @@ export default async function FAQPage() {
 
         {/* FAQ CONTENT */}
         <div id="faqs">
-          {/* 🔹 now includes Storyblok + static FAQs */}
-          <FaqClient faqs={allFaqs} />
+          <FaqClient faqs={FaqData} />
         </div>
 
         {/* CTA + CONTACT SECTION - Matches Contact Page Style */}
