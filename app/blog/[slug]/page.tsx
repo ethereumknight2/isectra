@@ -15,8 +15,6 @@ async function getPost(slug: string): Promise<BlogPost | undefined> {
       version: "published",
     });
 
-    // Use the correct richtext field name from Storyblok:
-    // often "body" (recommended) or "content" depending on your schema.
     const contentHtml =
       renderRichText(data.story.content.body ?? data.story.content.content) ||
       "";
@@ -35,13 +33,12 @@ async function getPost(slug: string): Promise<BlogPost | undefined> {
       image:
         data.story.content.featured_image?.filename ||
         "/images/default-blog.jpg",
-      content: contentHtml, // always a string
+      content: contentHtml,
     };
 
     return post;
   } catch (error) {
     console.log(`Post ${slug} not found in Storyblok, checking posts.ts...`);
-    // Fallback to static posts
     return blogPosts.find((p) => p.slug === slug);
   }
 }
@@ -70,11 +67,11 @@ export async function generateStaticParams() {
   }
 }
 
-// ✅ FIXED: Use inline type instead of destructuring to avoid PageProps conflict
 export async function generateMetadata(props: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const post = await getPost(props.params.slug);
+  const { slug } = await props.params;
+  const post = await getPost(slug);
 
   if (!post) {
     return {
@@ -111,11 +108,11 @@ export async function generateMetadata(props: {
   };
 }
 
-// ✅ FIXED: Use inline type and props.params.slug to avoid PageProps conflict
 export default async function BlogPostPage(props: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = await getPost(props.params.slug);
+  const { slug } = await props.params;
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();
