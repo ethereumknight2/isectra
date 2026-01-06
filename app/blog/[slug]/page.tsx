@@ -70,12 +70,11 @@ export async function generateStaticParams() {
   }
 }
 
-export async function generateMetadata({
-  params,
-}: {
+// ✅ FIXED: Use inline type instead of destructuring to avoid PageProps conflict
+export async function generateMetadata(props: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const post = await getPost(params.slug);
+  const post = await getPost(props.params.slug);
 
   if (!post) {
     return {
@@ -112,13 +111,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
+// ✅ FIXED: Use inline type and props.params.slug to avoid PageProps conflict
+export default async function BlogPostPage(props: {
   params: { slug: string };
 }) {
-  const { slug } = params;
-  const post = await getPost(slug);
+  const post = await getPost(props.params.slug);
 
   if (!post) {
     notFound();
