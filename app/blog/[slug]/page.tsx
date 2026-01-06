@@ -75,8 +75,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { slug } = params;
-  const post = await getPost(slug);
+  const post = await getPost(params.slug);
 
   if (!post) {
     return {
