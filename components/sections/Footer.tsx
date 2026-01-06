@@ -263,7 +263,7 @@ export default function Footer() {
 
         {/* Bottom Bar - Minimal */}
         <div className="py-3 border-t border-slate-800">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-slate-500">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-slate-400">
             <p>© {new Date().getFullYear()} iSectra. All rights reserved.</p>
             <div className="flex items-center gap-3">
               <Link

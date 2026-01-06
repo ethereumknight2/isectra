@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   Server,
   Shield,
@@ -21,8 +22,7 @@ const teamMembers = [
   {
     name: "Joseph Cerniglia",
     role: "Engineering Team",
-    image: "/images/Joseph_Cerniglia.png",
-    // Use top focus so hair/forehead aren't clipped in the circle crop
+    image: "/images/Joseph_Cerniglia.jpg",
     objectPos: "top" as const,
   },
 ];
@@ -99,18 +99,18 @@ export default function DataCenter() {
       <div className="container mx-auto px-6 relative">
         {/* Main Grid */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          {/* Left - Data Center Image */}
+          {/* Left - Data Center Image - FIXED WITH NEXT/IMAGE */}
           <div>
             <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/60 bg-white/70 backdrop-blur">
               <div className="aspect-[4/3] relative">
-                <img
+                <Image
                   src="/images/iSectraDatacenter.png"
                   alt="iSectra Data Center in Jacksonville FL"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.display =
-                      "none";
-                  }}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={85}
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-slate-900/20 to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-center gap-3">
@@ -143,7 +143,7 @@ export default function DataCenter() {
               of experience with proper certifications.
             </p>
             <p className="text-lg text-slate-600 leading-relaxed">
-              Our support is 24×7: nights, weekends, holidays. We’re a phone
+              Our support is 24×7: nights, weekends, holidays. We're a phone
               call, email, or text away—and on site when you need us. We never
               outsource work. We are proudly an all-American company.
             </p>
@@ -195,7 +195,7 @@ export default function DataCenter() {
           ))}
         </div>
 
-        {/* Team */}
+        {/* Team - FIXED WITH NEXT/IMAGE */}
         <div className="space-y-6">
           <div className="flex flex-col items-center gap-3">
             <h3 className="text-3xl md:text-4xl font-bold text-center text-slate-900">
@@ -205,7 +205,6 @@ export default function DataCenter() {
               </span>
             </h3>
 
-            {/* Premium link */}
             <Link
               href="/about-us#team"
               className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 p-[2px] shadow-sm hover:shadow-md transition-shadow"
@@ -224,19 +223,18 @@ export default function DataCenter() {
                 key={member.name}
                 className="relative rounded-2xl border border-white/60 bg-white/70 backdrop-blur p-8 text-center shadow-sm hover:shadow-xl transition-shadow"
               >
-                <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden bg-slate-100 ring-4 ring-white/60">
-                  <img
+                <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden bg-slate-100 ring-4 ring-white/60 relative">
+                  <Image
                     src={member.image}
                     alt={member.name}
-                    className={`w-full h-full object-cover ${
+                    fill
+                    className={`object-cover ${
                       member.objectPos === "top"
                         ? "object-top"
                         : "object-center"
                     }`}
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).style.display =
-                        "none";
-                    }}
+                    sizes="160px"
+                    quality={80}
                   />
                 </div>
                 <h4 className="text-2xl font-bold text-slate-900 mb-1">

@@ -1,23 +1,82 @@
+// app/blog/[slug]/page.tsx
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { getStoryblokApi } from "@storyblok/react/rsc";
+import { renderRichText } from "@storyblok/react";
+import "../../../lib/storyblok";
 import BlogShell from "@/components/Blogshell";
-import { blogPosts } from "../posts";
+import { blogPosts, BlogPost } from "../posts";
 
-// Generate static params for all blog posts
-export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+// Fetch a single post: Storyblok first, then fallback to posts.ts
+async function getPost(slug: string): Promise<BlogPost | undefined> {
+  try {
+    const storyblokApi = getStoryblokApi();
+    const { data } = await storyblokApi.get(`cdn/stories/blog/${slug}`, {
+      version: "published",
+    });
+
+    // Use the correct richtext field name from Storyblok:
+    // often "body" (recommended) or "content" depending on your schema.
+    const contentHtml =
+      renderRichText(data.story.content.body ?? data.story.content.content) ||
+      "";
+
+    const post: BlogPost = {
+      slug: data.story.slug,
+      title: data.story.content.title,
+      description:
+        data.story.content.excerpt || data.story.content.description || "",
+      date: data.story.content.date || data.story.created_at,
+      author: data.story.content.author || "iSectra",
+      readingTime: data.story.content.reading_time || "5 min read",
+      categories: data.story.content.category
+        ? [data.story.content.category]
+        : [],
+      image:
+        data.story.content.featured_image?.filename ||
+        "/images/default-blog.jpg",
+      content: contentHtml, // always a string
+    };
+
+    return post;
+  } catch (error) {
+    console.log(`Post ${slug} not found in Storyblok, checking posts.ts...`);
+    // Fallback to static posts
+    return blogPosts.find((p) => p.slug === slug);
+  }
 }
 
-// Generate metadata for each blog post
+// Build static params from both local posts and Storyblok
+export async function generateStaticParams() {
+  const staticSlugs = blogPosts.map((post) => ({
+    slug: post.slug,
+  }));
+
+  try {
+    const storyblokApi = getStoryblokApi();
+    const { data } = await storyblokApi.get("cdn/stories", {
+      version: "published",
+      starts_with: "blog/",
+      is_startpage: false,
+    });
+
+    const storyblokSlugs = data.stories.map((story: any) => ({
+      slug: story.slug,
+    }));
+
+    return [...staticSlugs, ...storyblokSlugs];
+  } catch (error) {
+    return staticSlugs;
+  }
+}
+
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }): Promise<Metadata> {
-  const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const { slug } = params;
+  const post = await getPost(slug);
 
   if (!post) {
     return {
@@ -57,10 +116,10 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const { slug } = params;
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();

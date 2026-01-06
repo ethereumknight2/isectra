@@ -1,9 +1,13 @@
-// app/faq/page.tsx - REDESIGNED
+// app/faq/page.tsx - REDESIGNED WITH STORYBLOK FAQ MERGE
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, Phone, Mail } from "lucide-react";
 import FaqClient from "@/components/FaqClient";
+
+// 🔹 Storyblok imports
+import { getStoryblokApi } from "@storyblok/react/rsc";
+import "../../lib/storyblok";
 
 export const metadata: Metadata = {
   title: "IT Services FAQ | iSectra — Pharma & SMB IT Experts",
@@ -128,53 +132,79 @@ If your business prefers not to use public cloud services, we also offer secure 
   },
 ];
 
-/* ------------------------------ JSON-LD SCHEMAS ---------------------------- */
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FaqData.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: item.a.replace(/\n/g, " "),
+// 🔹 Fetch extra FAQs from Storyblok (folder: faq/)
+async function getStoryblokFaqs() {
+  try {
+    const storyblokApi = getStoryblokApi();
+    const { data } = await storyblokApi.get("cdn/stories", {
+      version: "draft",
+      starts_with: "faqs/", // 🔹 change from "faq/" to "faqs/"
+      is_startpage: false,
+      cv: Date.now(),
+    });
+
+    return data.stories.map((story: any, index: number) => ({
+      id: story.content.id || `sb-faq-${index}`,
+      q: story.content.question,
+      a: story.content.answer,
+    }));
+  } catch (error) {
+    console.error("Error fetching Storyblok FAQs:", error);
+    return [];
+  }
+}
+
+export default async function FAQPage() {
+  // merge static FAQs + Storyblok FAQs
+  const storyblokFaqs = await getStoryblokFaqs();
+  const allFaqs = [...FaqData, ...storyblokFaqs];
+
+  // JSON-LD schemas (now use allFaqs so Storyblok entries are included)
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: allFaqs.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a.replace(/\n/g, " "),
+      },
+    })),
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Frequently Asked Questions — iSectra",
+    url: "https://isectra.com/faq",
+    description:
+      "Frequently asked questions about iSectra's industry-focused IT services for pharma and SMBs, including pricing, onboarding, compliance, and trials.",
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://isectra.com/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "FAQ",
+          item: "https://isectra.com/faq",
+        },
+      ],
     },
-  })),
-};
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2"],
+    },
+    inLanguage: "en",
+    isPartOf: { "@type": "WebSite", url: "https://isectra.com/" },
+  };
 
-const webPageSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  name: "Frequently Asked Questions — iSectra",
-  url: "https://isectra.com/faq",
-  description:
-    "Frequently asked questions about iSectra's industry-focused IT services for pharma and SMBs, including pricing, onboarding, compliance, and trials.",
-  breadcrumb: {
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://isectra.com/",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "FAQ",
-        item: "https://isectra.com/faq",
-      },
-    ],
-  },
-  speakable: {
-    "@type": "SpeakableSpecification",
-    cssSelector: ["h1", "h2"],
-  },
-  inLanguage: "en",
-  isPartOf: { "@type": "WebSite", url: "https://isectra.com/" },
-};
-
-export default function FAQPage() {
   return (
     <>
       <script
@@ -295,7 +325,8 @@ export default function FAQPage() {
 
         {/* FAQ CONTENT */}
         <div id="faqs">
-          <FaqClient faqs={FaqData} />
+          {/* 🔹 now includes Storyblok + static FAQs */}
+          <FaqClient faqs={allFaqs} />
         </div>
 
         {/* CTA + CONTACT SECTION - Matches Contact Page Style */}

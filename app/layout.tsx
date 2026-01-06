@@ -4,11 +4,14 @@ import Script from "next/script";
 import "./globals.css";
 import Header from "../components/sections/Header";
 import Footer from "../components/sections/Footer";
+import StoryblokProvider from "../components/StoryblokProvider";
+import "../lib/storyblok";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  preload: true, // ADD: Preload for performance
 });
 
 const poppins = Poppins({
@@ -16,6 +19,7 @@ const poppins = Poppins({
   weight: ["400", "600", "700"],
   variable: "--font-poppins",
   display: "swap",
+  preload: true, // ADD: Preload for performance
 });
 
 export const metadata: Metadata = {
@@ -341,12 +345,15 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="font-inter antialiased">
-        {/* Preconnect to YouTube for faster loading */}
+      <head>
+        {/* OPTIMIZED: Preconnect to YouTube for faster loading */}
         <link rel="preconnect" href="https://i.ytimg.com" />
-        <link rel="dns-prefetch" href="https://i.ytimg.com" />
         <link rel="preconnect" href="https://www.youtube-nocookie.com" />
-
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
+        {/* OPTIMIZED: Preconnect to Storyblok */}
+        <link rel="preconnect" href="https://a.storyblok.com" />
+      </head>
+      <body className="font-inter antialiased">
         {/* LocalBusiness Schema for SEO */}
         <Script
           id="localbusiness-schema"
@@ -516,9 +523,11 @@ export default function RootLayout({
           </div>
         </div>
 
-        <Header />
-        {children}
-        <Footer />
+        <StoryblokProvider>
+          <Header />
+          {children}
+          <Footer />
+        </StoryblokProvider>
       </body>
     </html>
   );

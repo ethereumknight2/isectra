@@ -205,6 +205,7 @@ export default function Header() {
                         type="button"
                         aria-expanded={activeDropdown === item.name}
                         aria-controls={`mobile-submenu-${item.name}`}
+                        aria-label="Toggle services menu"
                         onClick={(e) => {
                           e.stopPropagation();
                           setActiveDropdown(

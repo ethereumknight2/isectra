@@ -5,21 +5,25 @@ const nextConfig = {
       { protocol: "https", hostname: "isectra.com" },
       // HubSpot CDN (wildcard)
       { protocol: "https", hostname: "**.hubspotusercontent-na1.net" },
+      // Storyblok CDN
+      { protocol: "https", hostname: "a.storyblok.com" },
+      { protocol: "https", hostname: "a2.storyblok.com" },
     ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 3600, // ← OPTIMIZED: Increased from 60 to 3600 (1 hour) for better caching
+    minimumCacheTTL: 31536000, // ← OPTIMIZED: 1 year cache for production images
   },
 
   reactStrictMode: true,
-  // optimizeFonts is removed - it's enabled by default in Next.js 15
-  // swcMinify is removed - it's enabled by default in Next.js 15
 
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
     styledComponents: true,
   },
+
+  // Enable compression
+  compress: true,
 
   // Optimize CSS loading
   experimental: {
@@ -28,6 +32,7 @@ const nextConfig = {
 
   async headers() {
     return [
+      // Cache static assets forever
       {
         source: "/_next/static/:path*",
         headers: [
@@ -37,12 +42,23 @@ const nextConfig = {
           },
         ],
       },
+      // Cache images for 1 year
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      // Security headers for all pages
       {
         source: "/:path*",
         headers: [
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
         ],
       },
     ];
