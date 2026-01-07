@@ -1,5 +1,6 @@
 // app/blog/[slug]/page.tsx
 import { notFound } from "next/navigation";
+import { draftMode } from "next/headers";
 import type { Metadata } from "next";
 import { getStoryblokApi } from "@storyblok/react/rsc";
 import { renderRichText } from "@storyblok/react";
@@ -8,11 +9,14 @@ import BlogShell from "@/components/Blogshell";
 import { blogPosts, BlogPost } from "../posts";
 
 // Fetch a single post: Storyblok first, then fallback to posts.ts
-async function getPost(slug: string): Promise<BlogPost | undefined> {
+async function getPost(
+  slug: string,
+  preview: boolean = false
+): Promise<BlogPost | undefined> {
   try {
     const storyblokApi = getStoryblokApi();
     const { data } = await storyblokApi.get(`cdn/stories/blog/${slug}`, {
-      version: "published",
+      version: preview ? "draft" : "published", // Use draft in preview mode
     });
 
     const contentHtml =
@@ -71,7 +75,8 @@ export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await props.params;
-  const post = await getPost(slug);
+  const { isEnabled } = await draftMode();
+  const post = await getPost(slug, isEnabled);
 
   if (!post) {
     return {
@@ -112,7 +117,8 @@ export default async function BlogPostPage(props: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await props.params;
-  const post = await getPost(slug);
+  const { isEnabled } = await draftMode();
+  const post = await getPost(slug, isEnabled);
 
   if (!post) {
     notFound();
