@@ -22,7 +22,7 @@ const teamMembers = [
   {
     name: "Joseph Cerniglia",
     role: "Engineering Team",
-    image: "/images/Joseph_Cerniglia.jpg",
+    image: "/images/Joseph_Cerniglia.png",
     objectPos: "top" as const,
   },
 ];
