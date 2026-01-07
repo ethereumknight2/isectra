@@ -16,7 +16,7 @@ async function getPost(
   try {
     const storyblokApi = getStoryblokApi();
     const { data } = await storyblokApi.get(`cdn/stories/blog/${slug}`, {
-      version: preview ? "draft" : "published", // Use draft in preview mode
+      version: preview ? "draft" : "published",
     });
 
     const contentHtml =
@@ -73,10 +73,16 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }): Promise<Metadata> {
   const { slug } = await props.params;
-  const { isEnabled } = await draftMode();
-  const post = await getPost(slug, isEnabled);
+  const searchParams = await props.searchParams;
+
+  // Check if we're in Storyblok preview mode
+  const isPreview = searchParams._storyblok !== undefined;
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  const post = await getPost(slug, isPreview || isDraftMode);
 
   if (!post) {
     return {
@@ -115,10 +121,16 @@ export async function generateMetadata(props: {
 
 export default async function BlogPostPage(props: {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { slug } = await props.params;
-  const { isEnabled } = await draftMode();
-  const post = await getPost(slug, isEnabled);
+  const searchParams = await props.searchParams;
+
+  // Check if we're in Storyblok preview mode by looking for _storyblok param
+  const isPreview = searchParams._storyblok !== undefined;
+  const { isEnabled: isDraftMode } = await draftMode();
+
+  const post = await getPost(slug, isPreview || isDraftMode);
 
   if (!post) {
     notFound();
