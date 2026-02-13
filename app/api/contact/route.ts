@@ -27,7 +27,7 @@ function subscriberHash(email: string) {
 async function mcFetch(path: string, init: RequestInit) {
   const headers = {
     Authorization: `Basic ${Buffer.from(`anystring:${API_KEY}`).toString(
-      "base64"
+      "base64",
     )}`,
     "Content-Type": "application/json",
     ...(init.headers || {}),
@@ -59,11 +59,11 @@ async function sendNotificationEmail(contactData: {
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${contactData.firstName} ${
-        contactData.lastName || ""
-      }</p>
+          contactData.lastName || ""
+        }</p>
         <p><strong>Email:</strong> <a href="mailto:${contactData.email}">${
-        contactData.email
-      }</a></p>
+          contactData.email
+        }</a></p>
         ${
           contactData.phone
             ? `<p><strong>Phone:</strong> ${contactData.phone}</p>`
@@ -97,23 +97,24 @@ export async function POST(req: NextRequest) {
       phone,
       company,
       message,
-      source, // optional: "Contact Form"
+      source,
+      tags, // New addition for the assessment page
     } = body || {};
 
     if (!email || !firstName) {
       return NextResponse.json(
         { error: "First name and email are required." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const hash = subscriberHash(email);
     const status_if_new = DOUBLE_OPT_IN ? "pending" : "subscribed";
 
-    // Map UI → Mailchimp merge fields (make sure these MERGE tags exist in Mailchimp)
+    // Map UI → Mailchimp merge fields
     const upsertPayload = {
       email_address: email,
-      status_if_new, // "pending" triggers confirm email if double opt-in enabled
+      status_if_new,
       merge_fields: {
         FNAME: firstName || "",
         LNAME: lastName || "",
@@ -121,13 +122,22 @@ export async function POST(req: NextRequest) {
         COMPANY: company || "",
         MESSAGE: message || "",
       },
-      tags: ["Contact Form"],
     };
 
-    // PUT is idempotent: create or update member by subscriber hash
+    // PUT is idempotent: create or update member
     await mcFetch(`/lists/${AUDIENCE_ID}/members/${hash}`, {
       method: "PUT",
       body: JSON.stringify(upsertPayload),
+    });
+
+    // Handle Tags: Mailchimp requires a specific endpoint to add tags to an existing/new member
+    // We default to ["Contact Form"] if no specific tags are passed
+    const finalTags = Array.isArray(tags) ? tags : ["Contact Form"];
+    await mcFetch(`/lists/${AUDIENCE_ID}/members/${hash}/tags`, {
+      method: "POST",
+      body: JSON.stringify({
+        tags: finalTags.map((tag: string) => ({ name: tag, status: "active" })),
+      }),
     });
 
     // Optional: add a Note to the contact
@@ -165,7 +175,7 @@ ${message || "(none)"}`,
     console.error("Mailchimp error:", err?.message || err);
     return NextResponse.json(
       { error: "Failed to submit. Please try again later." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
