@@ -123,10 +123,10 @@ export default function ThankYouPage() {
           </ol>
         </div>
 
-        {/* Gradient Style Button to match landing page */}
+        {/* Single Gradient Button */}
         <Link
           href="/"
-          className="w-full py-4 text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-center mb-6"
+          className="w-full py-4 text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-center"
           style={{
             background: "linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)",
             boxShadow: "0 10px 25px -5px rgba(37, 99, 235, 0.4)",
@@ -134,27 +134,11 @@ export default function ThankYouPage() {
         >
           Return to iSectra.com
         </Link>
-
-        <Link
-          href="/"
-          className="group inline-flex items-center gap-2 text-slate-400 hover:text-slate-700 text-sm font-semibold transition-colors"
-        >
-          <svg
-            className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M11 17l-5-5m0 0l5-5m-5 5h12"
-            />
-          </svg>
-          Visit Homepage
-        </Link>
       </div>
+
+      <p className="mt-12 text-slate-400 text-xs">
+        © {new Date().getFullYear()} iSectra. All rights reserved.
+      </p>
     </div>
   );
 }
