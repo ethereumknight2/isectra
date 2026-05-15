@@ -1,62 +1,55 @@
 // app/api/subscribe/route.ts
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
-const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
-const MAILCHIMP_AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
-const MAILCHIMP_DC = process.env.MAILCHIMP_SERVER_PREFIX; // e.g., 'us21'
+export const runtime = "nodejs";
 
-export async function POST(request: Request) {
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const TO_EMAILS = ["sarisitizabal@isectra.com", "rbanerjee@isectra.com"];
+
+export async function POST(req: NextRequest) {
   try {
-    const { email } = await request.json();
+    const body = await req.json();
+
+    const { email, firstName, lastName, phone, company } = body || {};
 
     if (!email || !email.includes("@")) {
       return NextResponse.json(
-        { error: "Valid email is required" },
-        { status: 400 }
+        { error: "Valid email is required." },
+        { status: 400 },
       );
     }
 
-    const response = await fetch(
-      `https://${MAILCHIMP_DC}.api.mailchimp.com/3.0/lists/${MAILCHIMP_AUDIENCE_ID}/members`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Basic ${Buffer.from(
-            `anystring:${MAILCHIMP_API_KEY}`
-          ).toString("base64")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email_address: email,
-          status: "subscribed", // or 'pending' for double opt-in
-          tags: ["AltStreet Website"],
-        }),
-      }
-    );
+    await resend.emails.send({
+      from: "notifications@isectra.com",
+      to: TO_EMAILS,
+      subject: `New Subscriber: ${email}`,
+      html: `
+        <h2 style="color:#07588a;">New Newsletter Subscriber</h2>
+        <table style="border-collapse:collapse;width:100%;max-width:600px;font-family:sans-serif;font-size:15px;">
+          <tr><td style="padding:8px 12px;font-weight:bold;width:140px;">Email</td><td style="padding:8px 12px;"><a href="mailto:${email}">${email}</a></td></tr>
+          ${firstName ? `<tr style="background:#f5f5f5;"><td style="padding:8px 12px;font-weight:bold;">First Name</td><td style="padding:8px 12px;">${firstName}</td></tr>` : ""}
+          ${lastName ? `<tr><td style="padding:8px 12px;font-weight:bold;">Last Name</td><td style="padding:8px 12px;">${lastName}</td></tr>` : ""}
+          ${phone ? `<tr style="background:#f5f5f5;"><td style="padding:8px 12px;font-weight:bold;">Phone</td><td style="padding:8px 12px;">${phone}</td></tr>` : ""}
+          ${company ? `<tr><td style="padding:8px 12px;font-weight:bold;">Company</td><td style="padding:8px 12px;">${company}</td></tr>` : ""}
+        </table>
+        <div style="margin-top:24px;padding:16px;background:#fff8e1;border-left:4px solid #f59e0b;font-family:sans-serif;font-size:14px;">
+          <strong>Action needed:</strong> Please manually add this contact to the newsletter list.
+        </div>
+        <p style="color:#999;font-size:12px;margin-top:24px;">Submitted at ${new Date().toLocaleString()}</p>
+      `,
+    });
 
-    const data = await response.json();
-
-    if (response.ok) {
-      return NextResponse.json(
-        { message: "Successfully subscribed!" },
-        { status: 200 }
-      );
-    } else if (data.title === "Member Exists") {
-      return NextResponse.json(
-        { error: "Email already subscribed" },
-        { status: 400 }
-      );
-    } else {
-      return NextResponse.json(
-        { error: data.detail || "Subscription failed" },
-        { status: 400 }
-      );
-    }
-  } catch (error) {
-    console.error("Mailchimp error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
+      { message: "Thanks for subscribing!" },
+      { status: 200 },
+    );
+  } catch (err: any) {
+    console.error("Subscribe form error:", err?.message || err);
+    return NextResponse.json(
+      { error: "Failed to subscribe. Please try again later." },
+      { status: 500 },
     );
   }
 }

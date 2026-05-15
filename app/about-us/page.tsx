@@ -219,7 +219,7 @@ const team = [
   },
   {
     name: "Santiago Aristizabal",
-    role: "CTO",
+    role: "President & COO",
     focus: "Infrastructure design, cloud architecture, security",
     photo: "/images/Santiago-Aristizabal.jpg",
     linkedin: "https://www.linkedin.com/in/santiago-aristizabal-1a5b89146/",

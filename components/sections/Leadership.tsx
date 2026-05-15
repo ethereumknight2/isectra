@@ -32,10 +32,10 @@ const leaders: Leader[] = [
     videoId: "EcYST3Rbyuo",
   },
   {
-    name: "Santiago Aristizabale",
-    title: "CTO",
+    name: "Santiago Aristizabal",
+    title: "President & COO",
     description:
-      "Watch Santiago Aristizabale, CTO of iSectra talk about why his training and IT work in the Navy shaped his beliefs and motivations, and how he stays on the forefront of technology to bring the best of IT to all our customers.",
+      "Watch Santiago Aristizabal, President and COO of iSectra talk about why his training and IT work in the Navy shaped his beliefs and motivations, and how he stays on the forefront of technology to bring the best of IT to all our customers.",
     linkedin: "https://www.linkedin.com/in/santiago-aristizabal-1a5b89146/",
     videoId: "2rU9JONRhPc",
   },
