@@ -63,13 +63,36 @@ export async function POST(req: NextRequest) {
               <td align="center">
                 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
 
-                  <!-- Header -->
+                  <!-- Header: white bg, logo visible, blue/green accents -->
                   <tr>
-                    <td style="background:linear-gradient(135deg,#07588a 0%,#054a75 60%,#033a5e 100%);padding:40px 40px 32px;text-align:center;">
-                      <img src="https://isectra.com/images/logo.svg" alt="iSectra" width="64" height="64" style="display:block;margin:0 auto 16px;"/>
-                      <h1 style="margin:0;font-size:28px;font-weight:700;color:#ffffff;letter-spacing:-0.5px;">iSectra</h1>
-                      <p style="margin:6px 0 0;font-size:13px;color:#a8cce0;letter-spacing:2px;text-transform:uppercase;">Managed IT Services</p>
-                      <div style="margin:24px auto 0;width:48px;height:4px;background:#7dca00;border-radius:2px;"></div>
+                    <td style="background:#ffffff;padding:0;text-align:center;">
+
+                      <!-- Top accent bar: split blue | green -->
+                      <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td style="background:#07588a;height:6px;width:75%;"></td>
+                          <td style="background:#7dca00;height:6px;width:25%;"></td>
+                        </tr>
+                      </table>
+
+                      <!-- Logo area -->
+                      <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td style="padding:36px 40px 28px;text-align:center;">
+                            <img src="https://isectra.com/images/logo.svg" alt="iSectra" width="120" height="auto" style="display:block;margin:0 auto;max-width:160px;"/>
+                          </td>
+                        </tr>
+                      </table>
+
+                      <!-- Blue banner below logo -->
+                      <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td style="background:#07588a;padding:16px 40px;text-align:center;">
+                            <p style="margin:0;font-size:12px;color:#a8cce0;letter-spacing:3px;text-transform:uppercase;font-weight:600;">Managed IT Services</p>
+                          </td>
+                        </tr>
+                      </table>
+
                     </td>
                   </tr>
 
@@ -176,6 +199,18 @@ export async function POST(req: NextRequest) {
                         You're receiving this because you subscribed at isectra.com.<br/>
                         <a href="https://isectra.com/unsubscribe" style="color:#bbb;">Unsubscribe</a>
                       </p>
+                    </td>
+                  </tr>
+
+                  <!-- Bottom accent bar -->
+                  <tr>
+                    <td style="padding:0;">
+                      <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td style="background:#7dca00;height:4px;width:25%;"></td>
+                          <td style="background:#07588a;height:4px;width:75%;"></td>
+                        </tr>
+                      </table>
                     </td>
                   </tr>
 
