@@ -1,12 +1,29 @@
 // app/api/contact/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 
 export const runtime = "nodejs";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
+const BREVO_API_KEY = process.env.BREVO_API_KEY!;
 const TO_EMAILS = ["sarisitizabal@isectra.com", "rbanerjee@isectra.com"];
+
+async function sendEmail(payload: object) {
+  const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      "api-key": BREVO_API_KEY,
+      "Content-Type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({}));
+    throw new Error(error?.message || "Brevo API error");
+  }
+
+  return res.json();
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,15 +35,15 @@ export async function POST(req: NextRequest) {
     if (!email || !firstName) {
       return NextResponse.json(
         { error: "First name and email are required." },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
-    await resend.emails.send({
-      from: "notifications@isectra.com",
-      to: TO_EMAILS,
+    await sendEmail({
+      sender: { name: "iSectra Notifications", email: "notifications@isectra.com" },
+      to: TO_EMAILS.map((e) => ({ email: e })),
       subject: `New Lead: ${firstName}${lastName ? " " + lastName : ""}${company ? " — " + company : ""}`,
-      html: `
+      htmlContent: `
         <h2 style="color:#07588a;">New Contact Form Submission</h2>
         <table style="border-collapse:collapse;width:100%;max-width:600px;font-family:sans-serif;font-size:15px;">
           <tr><td style="padding:8px 12px;font-weight:bold;width:140px;">Name</td><td style="padding:8px 12px;">${firstName} ${lastName || ""}</td></tr>
@@ -42,13 +59,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       { message: "Thanks! We'll be in touch soon." },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (err: any) {
     console.error("Contact form error:", err?.message || err);
     return NextResponse.json(
       { error: "Failed to submit. Please try again later." },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

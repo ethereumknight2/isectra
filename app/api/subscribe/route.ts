@@ -1,12 +1,29 @@
 // app/api/subscribe/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 
 export const runtime = "nodejs";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
+const BREVO_API_KEY = process.env.BREVO_API_KEY!;
 const TO_EMAILS = ["sarisitizabal@isectra.com", "rbanerjee@isectra.com"];
+
+async function sendEmail(payload: object) {
+  const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      "api-key": BREVO_API_KEY,
+      "Content-Type": "application/json",
+      accept: "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({}));
+    throw new Error(error?.message || "Brevo API error");
+  }
+
+  return res.json();
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,18 +33,18 @@ export async function POST(req: NextRequest) {
     if (!email || !email.includes("@")) {
       return NextResponse.json(
         { error: "Valid email is required." },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     const displayName = firstName ? firstName : "there";
 
     // Send internal notification
-    await resend.emails.send({
-      from: "iSectra Notifications <notifications@isectra.com>",
-      to: TO_EMAILS,
+    await sendEmail({
+      sender: { name: "iSectra Notifications", email: "notifications@isectra.com" },
+      to: TO_EMAILS.map((e) => ({ email: e })),
       subject: `New Subscriber: ${email}`,
-      html: `
+      htmlContent: `
         <h2 style="color:#07588a;">New Newsletter Subscriber</h2>
         <table style="border-collapse:collapse;width:100%;max-width:600px;font-family:sans-serif;font-size:15px;">
           <tr><td style="padding:8px 12px;font-weight:bold;width:140px;">Email</td><td style="padding:8px 12px;"><a href="mailto:${email}">${email}</a></td></tr>
@@ -44,11 +61,11 @@ export async function POST(req: NextRequest) {
     });
 
     // Send welcome email to subscriber
-    await resend.emails.send({
-      from: "iSectra <notifications@isectra.com>",
-      to: email,
+    await sendEmail({
+      sender: { name: "iSectra", email: "notifications@isectra.com" },
+      to: [{ email }],
       subject: "Welcome to the iSectra Newsletter",
-      html: `
+      htmlContent: `
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -57,25 +74,20 @@ export async function POST(req: NextRequest) {
           <title>Welcome to iSectra</title>
         </head>
         <body style="margin:0;padding:0;background-color:#f0f4f8;font-family:'Segoe UI',Arial,sans-serif;">
-
           <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f0f4f8;padding:40px 0;">
             <tr>
               <td align="center">
                 <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
 
-                  <!-- Header: white bg, logo visible, blue/green accents -->
+                  <!-- Header -->
                   <tr>
                     <td style="background:#ffffff;padding:0;text-align:center;">
-
-                      <!-- Top accent bar: split blue | green -->
                       <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                           <td style="background:#07588a;height:6px;width:75%;"></td>
                           <td style="background:#7dca00;height:6px;width:25%;"></td>
                         </tr>
                       </table>
-
-                      <!-- Logo area -->
                       <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                           <td style="padding:36px 40px 28px;text-align:center;">
@@ -83,8 +95,6 @@ export async function POST(req: NextRequest) {
                           </td>
                         </tr>
                       </table>
-
-                      <!-- Blue banner below logo -->
                       <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                           <td style="background:#07588a;padding:16px 40px;text-align:center;">
@@ -92,7 +102,6 @@ export async function POST(req: NextRequest) {
                           </td>
                         </tr>
                       </table>
-
                     </td>
                   </tr>
 
@@ -107,47 +116,39 @@ export async function POST(req: NextRequest) {
                         Here's what you can expect from us:
                       </p>
 
-                      <!-- Feature list -->
                       <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
                         <tr>
                           <td style="padding:10px 0;border-bottom:1px solid #f0f0f0;">
-                            <table cellpadding="0" cellspacing="0">
-                              <tr>
-                                <td style="width:32px;vertical-align:top;padding-top:2px;">
-                                  <div style="width:20px;height:20px;background:#7dca00;border-radius:50%;text-align:center;line-height:20px;font-size:12px;color:#fff;font-weight:bold;">✓</div>
-                                </td>
-                                <td style="font-size:14px;color:#333;line-height:1.6;padding-left:8px;"><strong>IT tips &amp; best practices</strong> to keep your business secure and running smoothly</td>
-                              </tr>
-                            </table>
+                            <table cellpadding="0" cellspacing="0"><tr>
+                              <td style="width:32px;vertical-align:top;padding-top:2px;">
+                                <div style="width:20px;height:20px;background:#7dca00;border-radius:50%;text-align:center;line-height:20px;font-size:12px;color:#fff;font-weight:bold;">&#10003;</div>
+                              </td>
+                              <td style="font-size:14px;color:#333;line-height:1.6;padding-left:8px;"><strong>IT tips &amp; best practices</strong> to keep your business secure and running smoothly</td>
+                            </tr></table>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding:10px 0;border-bottom:1px solid #f0f0f0;">
-                            <table cellpadding="0" cellspacing="0">
-                              <tr>
-                                <td style="width:32px;vertical-align:top;padding-top:2px;">
-                                  <div style="width:20px;height:20px;background:#7dca00;border-radius:50%;text-align:center;line-height:20px;font-size:12px;color:#fff;font-weight:bold;">✓</div>
-                                </td>
-                                <td style="font-size:14px;color:#333;line-height:1.6;padding-left:8px;"><strong>Cybersecurity alerts</strong> and what they mean for small and mid-size businesses</td>
-                              </tr>
-                            </table>
+                            <table cellpadding="0" cellspacing="0"><tr>
+                              <td style="width:32px;vertical-align:top;padding-top:2px;">
+                                <div style="width:20px;height:20px;background:#7dca00;border-radius:50%;text-align:center;line-height:20px;font-size:12px;color:#fff;font-weight:bold;">&#10003;</div>
+                              </td>
+                              <td style="font-size:14px;color:#333;line-height:1.6;padding-left:8px;"><strong>Cybersecurity alerts</strong> and what they mean for small and mid-size businesses</td>
+                            </tr></table>
                           </td>
                         </tr>
                         <tr>
                           <td style="padding:10px 0;">
-                            <table cellpadding="0" cellspacing="0">
-                              <tr>
-                                <td style="width:32px;vertical-align:top;padding-top:2px;">
-                                  <div style="width:20px;height:20px;background:#7dca00;border-radius:50%;text-align:center;line-height:20px;font-size:12px;color:#fff;font-weight:bold;">✓</div>
-                                </td>
-                                <td style="font-size:14px;color:#333;line-height:1.6;padding-left:8px;"><strong>Updates from iSectra</strong> — new services, industry news, and exclusive offers</td>
-                              </tr>
-                            </table>
+                            <table cellpadding="0" cellspacing="0"><tr>
+                              <td style="width:32px;vertical-align:top;padding-top:2px;">
+                                <div style="width:20px;height:20px;background:#7dca00;border-radius:50%;text-align:center;line-height:20px;font-size:12px;color:#fff;font-weight:bold;">&#10003;</div>
+                              </td>
+                              <td style="font-size:14px;color:#333;line-height:1.6;padding-left:8px;"><strong>Updates from iSectra</strong> — new services, industry news, and exclusive offers</td>
+                            </tr></table>
                           </td>
                         </tr>
                       </table>
 
-                      <!-- CTA Button -->
                       <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
                         <tr>
                           <td align="center">
@@ -161,9 +162,7 @@ export async function POST(req: NextRequest) {
                       <p style="margin:0;font-size:15px;line-height:1.7;color:#444;">
                         In the meantime, if you have any IT questions or just want to chat about what we can do for your business, reply to this email or give us a call — we're always happy to help.
                       </p>
-                      <p style="margin:20px 0 0;font-size:15px;color:#444;">
-                        — The iSectra Team
-                      </p>
+                      <p style="margin:20px 0 0;font-size:15px;color:#444;">— The iSectra Team</p>
                     </td>
                   </tr>
 
@@ -218,7 +217,6 @@ export async function POST(req: NextRequest) {
               </td>
             </tr>
           </table>
-
         </body>
         </html>
       `,
@@ -226,13 +224,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       { message: "Thanks for subscribing!" },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (err: any) {
     console.error("Subscribe form error:", err?.message || err);
     return NextResponse.json(
       { error: "Failed to subscribe. Please try again later." },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
