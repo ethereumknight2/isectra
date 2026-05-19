@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY!;
-const TO_EMAILS = ["sarisitizabal@isectra.com", "rbanerjee@isectra.com"];
+const TO_EMAILS = ["saristizabal@isectra.com", "rbanerjee@isectra.com"];
 
 async function sendEmail(payload: object) {
   const res = await fetch("https://api.brevo.com/v3/smtp/email", {
