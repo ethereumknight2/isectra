@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@getbrevo/brevo": "^5.0.4",
     "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@storyblok/js": "^4.4.1",
     "@storyblok/react": "^5.4.18",

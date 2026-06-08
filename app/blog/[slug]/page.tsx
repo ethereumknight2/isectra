@@ -17,32 +17,32 @@ async function getPost(
     const storyblokApi = getStoryblokApi();
     const { data } = await storyblokApi.get(`cdn/stories/blog/${slug}`, {
       version: preview ? "draft" : "published",
+      cv: preview ? Date.now() : undefined,
     });
 
-    const contentHtml =
-      renderRichText(data.story.content.body ?? data.story.content.content) ||
-      "";
+    if (!data?.story) {
+      return blogPosts.find((p) => p.slug === slug);
+    }
+
+    const c = data.story.content ?? {};
+    const richtext = c.body ?? c.content ?? c.long_text ?? null;
+    const contentHtml = richtext ? renderRichText(richtext) || "" : "";
 
     const post: BlogPost = {
       slug: data.story.slug,
-      title: data.story.content.title,
-      description:
-        data.story.content.excerpt || data.story.content.description || "",
-      date: data.story.content.date || data.story.created_at,
-      author: data.story.content.author || "iSectra",
-      readingTime: data.story.content.reading_time || "5 min read",
-      categories: data.story.content.category
-        ? [data.story.content.category]
-        : [],
-      image:
-        data.story.content.featured_image?.filename ||
-        "/images/default-blog.jpg",
+      title: c.title || data.story.name || "Untitled",
+      description: c.excerpt || c.description || "",
+      date: c.date || data.story.created_at,
+      author: c.author || "iSectra",
+      readingTime: c.reading_time || "5 min read",
+      categories: c.category ? [c.category] : [],
+      image: c.featured_image?.filename || "/images/default-blog.jpg",
       content: contentHtml,
     };
 
     return post;
   } catch (error) {
-    console.log(`Post ${slug} not found in Storyblok, checking posts.ts...`);
+    console.error(`[blog/${slug}] Storyblok fetch/parse failed:`, error);
     return blogPosts.find((p) => p.slug === slug);
   }
 }
