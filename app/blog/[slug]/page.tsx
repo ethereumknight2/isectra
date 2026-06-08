@@ -7,12 +7,9 @@ import { renderRichText } from "@storyblok/react";
 import "../../../lib/storyblok";
 import BlogShell from "@/components/Blogshell";
 import { blogPosts, BlogPost } from "../posts";
+import BlogPostClient from "./BlogPostClient";
 
-// Fetch a single post: Storyblok first, then fallback to posts.ts
-async function getPost(
-  slug: string,
-  preview: boolean = false
-): Promise<BlogPost | undefined> {
+async function getStory(slug: string, preview: boolean) {
   try {
     const storyblokApi = getStoryblokApi();
     const { data } = await storyblokApi.get(`cdn/stories/blog/${slug}`, {
@@ -20,31 +17,47 @@ async function getPost(
       cv: preview ? Date.now() : undefined,
     });
 
-    if (!data?.story) {
-      return blogPosts.find((p) => p.slug === slug);
-    }
-
-    const c = data.story.content ?? {};
-    const richtext = c.body ?? c.content ?? c.long_text ?? null;
-    const contentHtml = richtext ? renderRichText(richtext) || "" : "";
-
-    const post: BlogPost = {
-      slug: data.story.slug,
-      title: c.title || data.story.name || "Untitled",
-      description: c.excerpt || c.description || "",
-      date: c.date || data.story.created_at,
-      author: c.author || "iSectra",
-      readingTime: c.reading_time || "5 min read",
-      categories: c.category ? [c.category] : [],
-      image: c.featured_image?.filename || "/images/default-blog.jpg",
-      content: contentHtml,
-    };
-
-    return post;
+    return data?.story ?? null;
   } catch (error) {
-    console.error(`[blog/${slug}] Storyblok fetch/parse failed:`, error);
-    return blogPosts.find((p) => p.slug === slug);
+    console.error(`[blog/${slug}] Storyblok fetch failed:`, error);
+    return null;
   }
+}
+
+function storyToPost(story: any): BlogPost {
+  const c = story.content ?? {};
+  const richtext = c.body ?? c.content ?? c.long_text ?? null;
+  const contentHtml = richtext ? renderRichText(richtext) ?? "" : "";
+
+  return {
+    slug: story.slug,
+    title: c.title || story.name || "Untitled",
+    description: c.excerpt || c.description || "",
+    date: c.date || story.created_at,
+    author: c.author || "iSectra",
+    readingTime: c.reading_time || "5 min read",
+    categories: c.category ? [c.category] : [],
+    image: c.featured_image?.filename || "/images/default-blog.jpg",
+    content: contentHtml,
+  };
+}
+
+// Fetch a single post: Storyblok first, then fallback to posts.ts
+async function getPost(
+  slug: string,
+  preview: boolean = false
+): Promise<BlogPost | undefined> {
+  const story = await getStory(slug, preview);
+
+  if (story) {
+    try {
+      return storyToPost(story);
+    } catch (error) {
+      console.error(`[blog/${slug}] Storyblok parse failed:`, error);
+    }
+  }
+
+  return blogPosts.find((p) => p.slug === slug);
 }
 
 // Build static params from both local posts and Storyblok
@@ -129,12 +142,17 @@ export default async function BlogPostPage(props: {
   // Check if we're in Storyblok preview mode by looking for _storyblok param
   const isPreview = searchParams._storyblok !== undefined;
   const { isEnabled: isDraftMode } = await draftMode();
+  const preview = isPreview || isDraftMode;
 
-  const post = await getPost(slug, isPreview || isDraftMode);
+  const story = await getStory(slug, preview);
 
-  if (!post) {
-    notFound();
+  if (story) {
+    return <BlogPostClient initialStory={story} />;
   }
 
-  return <BlogShell post={post} />;
+  // Fallback to static posts.ts for the migrated HubSpot articles
+  const fallback = blogPosts.find((p) => p.slug === slug);
+  if (!fallback) notFound();
+
+  return <BlogShell post={fallback} />;
 }
