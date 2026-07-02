@@ -11,7 +11,9 @@ export default function BlogListing({ posts }: { posts: any[] }) {
 
   const allCategories = Array.from(
     new Set(posts.flatMap((post) => post.categories))
-  ).sort();
+  )
+    .filter((c): c is string => typeof c === "string" && c.length > 0)
+    .sort();
 
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
@@ -57,7 +59,7 @@ export default function BlogListing({ posts }: { posts: any[] }) {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-600 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
               >
                 <option value="all">All Categories</option>
                 {allCategories.map((category) => (

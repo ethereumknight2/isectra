@@ -5,46 +5,78 @@ import "../../lib/storyblok";
 import BlogListing from "./BlogListing";
 import { blogPosts, BlogPost } from "./posts";
 
+// Always fetch fresh — the listing shouldn't be baked at build time,
+// otherwise new Storyblok articles won't appear until the next deploy.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+function storyToPost(story: any): BlogPost {
+  const c = story.content ?? {};
+
+  // Prefer raw HTML field when the client hands us pre-formatted markup;
+  // fall back to the rich-text field otherwise.
+  const rawHtml =
+    typeof c.html_content === "string" && c.html_content.trim().length > 0
+      ? c.html_content
+      : null;
+  const richtext = c.body ?? c.content ?? c.long_text ?? null;
+
+  const contentHtml =
+    rawHtml ?? (richtext ? renderRichText(richtext) ?? "" : "");
+
+  return {
+    slug: story.slug,
+    title: c.title || story.name || "Untitled",
+    description: c.excerpt || c.description || "",
+    date: c.date || story.created_at,
+    author: c.author || "iSectra",
+    readingTime: c.reading_time || "5 min read",
+    categories: c.category ? [c.category] : [],
+    image: c.featured_image?.filename || "/images/default-blog.jpg",
+    content: contentHtml,
+  };
+}
+
 async function getBlogPosts(): Promise<BlogPost[]> {
+  let storyblokPosts: BlogPost[] = [];
+
   try {
     const storyblokApi = getStoryblokApi();
     const { data } = await storyblokApi.get("cdn/stories", {
       version: "published",
       starts_with: "blog/",
       is_startpage: false,
+      per_page: 100,
       cv: Date.now(),
     });
 
-    // Transform Storyblok posts to match BlogPost format
-    const storyblokPosts: BlogPost[] = data.stories.map((story: any) => {
-      const contentHtml =
-        renderRichText(story.content.body ?? story.content.content) || "";
-
-      return {
-        slug: story.slug,
-        title: story.content.title,
-        description: story.content.excerpt || story.content.description || "",
-        date: story.content.date || story.created_at,
-        author: story.content.author || "iSectra",
-        readingTime: story.content.reading_time || "5 min read",
-        categories: story.content.category ? [story.content.category] : [],
-        image:
-          story.content.featured_image?.filename || "/images/default-blog.jpg",
-        content: contentHtml, // HTML string
-      };
-    });
-
-    // Combine Storyblok posts + existing posts from posts.ts
-    const allPosts: BlogPost[] = [...storyblokPosts, ...blogPosts].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
-
-    return allPosts;
+    // Transform each story individually so one bad story does not
+    // wipe out the entire list.
+    storyblokPosts = (data.stories ?? [])
+      .map((story: any) => {
+        try {
+          return storyToPost(story);
+        } catch (err) {
+          console.error(
+            `[blog index] failed to transform story ${story?.slug}:`,
+            err
+          );
+          return null;
+        }
+      })
+      .filter((p: BlogPost | null): p is BlogPost => p !== null);
   } catch (error) {
-    console.error("Error fetching Storyblok posts:", error);
-    // Fallback to just existing posts if Storyblok fails
-    return blogPosts;
+    console.error("[blog index] Storyblok fetch failed:", error);
   }
+
+  // De-duplicate by slug (Storyblok wins over posts.ts if both exist)
+  const bySlug = new Map<string, BlogPost>();
+  for (const p of blogPosts) bySlug.set(p.slug, p);
+  for (const p of storyblokPosts) bySlug.set(p.slug, p);
+
+  return Array.from(bySlug.values()).sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 }
 
 export const metadata = {
