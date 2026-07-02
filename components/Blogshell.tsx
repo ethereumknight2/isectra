@@ -275,6 +275,281 @@ export default function BlogShell({ post }: BlogShellProps) {
           font-weight: 600 !important;
           color: #111827 !important;
         }
+
+        /* ============================================
+           Client-authored article support
+           Styles for custom class names used in
+           pre-formatted article HTML (html_content field)
+           ============================================ */
+
+        /* Article header block duplicates the shell's hero — hide it */
+        .blog-content .article-header {
+          display: none !important;
+        }
+
+        /* Small eyebrow label above headings (kept in case reused elsewhere) */
+        .blog-content .eyebrow {
+          display: inline-block !important;
+          font-size: 13px !important;
+          font-weight: 700 !important;
+          letter-spacing: 0.12em !important;
+          text-transform: uppercase !important;
+          color: #2563eb !important;
+          margin-bottom: 24px !important;
+        }
+
+        /* Article subtitle / meta — only render if outside .article-header */
+        .blog-content .article-subtitle {
+          font-size: 22px !important;
+          line-height: 1.6 !important;
+          color: #4b5563 !important;
+          margin-bottom: 32px !important;
+        }
+
+        .blog-content .article-meta {
+          display: flex !important;
+          flex-wrap: wrap !important;
+          gap: 16px !important;
+          font-size: 15px !important;
+          color: #6b7280 !important;
+          margin-bottom: 48px !important;
+          padding-bottom: 24px !important;
+          border-bottom: 1px solid #e5e7eb !important;
+        }
+
+        /* Inline Table of Contents (useful on mobile where the sidebar TOC is hidden) */
+        .blog-content .table-of-contents {
+          background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%) !important;
+          border: 1px solid #dbeafe !important;
+          border-radius: 12px !important;
+          padding: 32px 40px !important;
+          margin-top: 48px !important;
+          margin-bottom: 64px !important;
+        }
+
+        .blog-content .table-of-contents h2 {
+          font-size: 20px !important;
+          font-weight: 700 !important;
+          color: #1e3a8a !important;
+          margin: 0 0 20px 0 !important;
+          padding: 0 !important;
+          border: none !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.08em !important;
+        }
+
+        .blog-content .table-of-contents ol {
+          margin: 0 !important;
+          padding-left: 0 !important;
+          counter-reset: toc !important;
+        }
+
+        .blog-content .table-of-contents ol li {
+          counter-increment: toc !important;
+          padding-left: 40px !important;
+          margin-bottom: 12px !important;
+          font-size: 16px !important;
+          line-height: 1.6 !important;
+        }
+
+        .blog-content .table-of-contents ol li::before {
+          content: counter(toc, decimal-leading-zero) !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 0 !important;
+          width: auto !important;
+          height: auto !important;
+          background: none !important;
+          color: #2563eb !important;
+          font-size: 14px !important;
+          font-weight: 700 !important;
+          font-family: "Inter", monospace !important;
+        }
+
+        .blog-content .table-of-contents ol li a {
+          color: #1f2937 !important;
+          border-bottom: none !important;
+        }
+
+        .blog-content .table-of-contents ol li a:hover {
+          color: #2563eb !important;
+          border-bottom: none !important;
+        }
+
+        /* On desktop, the sidebar TOC covers this — hide inline TOC on large screens */
+        @media (min-width: 1024px) {
+          .blog-content .table-of-contents {
+            display: none !important;
+          }
+        }
+
+        /* Callout / Key takeaway boxes */
+        .blog-content .callout {
+          background: linear-gradient(135deg, #f0f9ff 0%, #ecfeff 100%) !important;
+          border-left: 4px solid #07588a !important;
+          border-radius: 8px !important;
+          padding: 32px 40px !important;
+          margin: 56px 0 !important;
+        }
+
+        .blog-content .callout h3 {
+          font-size: 14px !important;
+          font-weight: 700 !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.1em !important;
+          color: #07588a !important;
+          margin: 0 0 16px 0 !important;
+        }
+
+        .blog-content .callout p {
+          font-size: 18px !important;
+          line-height: 1.7 !important;
+          color: #1f2937 !important;
+          margin-bottom: 0 !important;
+        }
+
+        .blog-content .callout p:not(:last-child) {
+          margin-bottom: 16px !important;
+        }
+
+        /* Mid-article CTA box */
+        .blog-content .cta-box {
+          background: linear-gradient(135deg, #07588a 0%, #0891b2 100%) !important;
+          color: white !important;
+          border-radius: 16px !important;
+          padding: 48px 40px !important;
+          margin: 72px 0 !important;
+          text-align: center !important;
+        }
+
+        .blog-content .cta-box h2 {
+          color: white !important;
+          font-size: 30px !important;
+          margin: 0 0 20px 0 !important;
+          padding: 0 !important;
+          border: none !important;
+        }
+
+        .blog-content .cta-box p {
+          color: rgba(255, 255, 255, 0.95) !important;
+          font-size: 18px !important;
+          margin-bottom: 20px !important;
+        }
+
+        .blog-content .cta-box p:last-of-type {
+          margin-bottom: 32px !important;
+        }
+
+        /* Inline buttons */
+        .blog-content .button,
+        .blog-content a.button {
+          display: inline-block !important;
+          padding: 16px 36px !important;
+          border-radius: 8px !important;
+          font-weight: 600 !important;
+          font-size: 16px !important;
+          text-decoration: none !important;
+          border-bottom: none !important;
+          transition: all 0.2s ease !important;
+        }
+
+        .blog-content .button-primary,
+        .blog-content a.button-primary,
+        .blog-content .cta-box a.button {
+          background: #7dca00 !important;
+          color: #ffffff !important;
+        }
+
+        .blog-content .button-primary:hover,
+        .blog-content a.button-primary:hover,
+        .blog-content .cta-box a.button:hover {
+          background: #6ab000 !important;
+          color: #ffffff !important;
+          border-bottom: none !important;
+        }
+
+        /* Tables (comparison, spec, etc.) */
+        .blog-content table {
+          width: 100% !important;
+          border-collapse: collapse !important;
+          margin: 48px 0 !important;
+          font-size: 17px !important;
+          background: white !important;
+          border-radius: 12px !important;
+          overflow: hidden !important;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        .blog-content thead {
+          background: linear-gradient(135deg, #07588a 0%, #0891b2 100%) !important;
+        }
+
+        .blog-content th {
+          color: white !important;
+          font-weight: 600 !important;
+          text-align: left !important;
+          padding: 18px 24px !important;
+          font-size: 15px !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.05em !important;
+        }
+
+        .blog-content td {
+          padding: 18px 24px !important;
+          border-top: 1px solid #e5e7eb !important;
+          color: #374151 !important;
+          line-height: 1.6 !important;
+          vertical-align: top !important;
+        }
+
+        .blog-content tbody tr:nth-child(even) {
+          background: #f9fafb !important;
+        }
+
+        .blog-content tbody tr:hover {
+          background: #eff6ff !important;
+        }
+
+        /* FAQ section */
+        .blog-content .faq-section {
+          margin-top: 96px !important;
+        }
+
+        .blog-content .faq-item {
+          background: white !important;
+          border: 1px solid #e5e7eb !important;
+          border-radius: 12px !important;
+          padding: 32px 36px !important;
+          margin-bottom: 20px !important;
+          transition: box-shadow 0.2s ease !important;
+        }
+
+        .blog-content .faq-item:hover {
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+          border-color: #dbeafe !important;
+        }
+
+        .blog-content .faq-item h3 {
+          font-size: 20px !important;
+          font-weight: 700 !important;
+          color: #07588a !important;
+          margin: 0 0 16px 0 !important;
+          padding: 0 !important;
+        }
+
+        .blog-content .faq-item p {
+          font-size: 17px !important;
+          line-height: 1.75 !important;
+          color: #374151 !important;
+          margin-bottom: 0 !important;
+        }
+
+        /* Prevent nested <article> from adding extra spacing */
+        .blog-content > article,
+        .blog-content article.blog-article {
+          margin: 0 !important;
+          padding: 0 !important;
+        }
       `}</style>
 
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">

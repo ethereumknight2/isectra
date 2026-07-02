@@ -26,8 +26,17 @@ async function getStory(slug: string, preview: boolean) {
 
 function storyToPost(story: any): BlogPost {
   const c = story.content ?? {};
+
+  // Prefer raw HTML field when the client hands us pre-formatted markup;
+  // fall back to the rich-text field otherwise.
+  const rawHtml =
+    typeof c.html_content === "string" && c.html_content.trim().length > 0
+      ? c.html_content
+      : null;
   const richtext = c.body ?? c.content ?? c.long_text ?? null;
-  const contentHtml = richtext ? renderRichText(richtext) ?? "" : "";
+
+  const contentHtml =
+    rawHtml ?? (richtext ? renderRichText(richtext) ?? "" : "");
 
   return {
     slug: story.slug,
