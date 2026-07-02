@@ -376,11 +376,12 @@ export default function BlogShell({ post }: BlogShellProps) {
           border-bottom: none !important;
         }
 
-        /* On desktop, the sidebar TOC covers this — hide inline TOC on large screens */
-        @media (min-width: 1024px) {
-          .blog-content .table-of-contents {
-            display: none !important;
-          }
+        /* The shell renders its own TOC on both desktop (sidebar) and mobile
+           (inline above the article). Hide any inline TOC in the article
+           HTML to avoid duplication. Kept styled above so legacy articles
+           that still include it fall back gracefully if this rule changes. */
+        .blog-content .table-of-contents {
+          display: none !important;
         }
 
         /* Callout / Key takeaway boxes */
@@ -615,7 +616,7 @@ export default function BlogShell({ post }: BlogShellProps) {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 lg:pt-8 lg:pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Sidebar - Table of Contents (Desktop) */}
             <aside className="hidden lg:block lg:col-span-3">
