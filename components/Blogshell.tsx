@@ -258,6 +258,17 @@ export default function BlogShell({ post }: BlogShellProps) {
           margin-top: 0 !important;
         }
 
+        /* Zero the top margin on the FIRST heading in the article. The
+           article card already has generous padding above it; stacking
+           the 96px h2 margin on top of that creates a huge gap between
+           the summary and the first section. */
+        .blog-content > h2:first-child,
+        .blog-content > article:first-child > h2:first-child,
+        .blog-content > article:first-child > section:first-of-type > h2:first-child,
+        .blog-content > section:first-of-type > h2:first-child {
+          margin-top: 0 !important;
+        }
+
         /* Links */
         .blog-content a {
           color: #2563eb !important;
