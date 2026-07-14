@@ -380,7 +380,7 @@ export default function RootLayout({
               <div className="flex items-center gap-3 sm:gap-5">
                 {/* Support Portal: icon-only on mobile, label shows ≥ sm */}
                 <a
-                  href="https://halo.isectra.com/portal"
+                  href="https://support.isectra.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open iSectra Support Portal"
