@@ -232,7 +232,7 @@ export default function RealResults() {
                 <span className="absolute left-0 right-0 top-0 h-1 rounded-t-2xl bg-[linear-gradient(90deg,#3b82f6,#06b6d4)] opacity-90" />
 
                 {/* Icon chip */}
-                <div className="w-14 h-14 rounded-xl mx-auto mb-4 flex items-center justify-center bg-gradient-to-br from-cyan-500 to-blue-600 shadow-sm group-hover:shadow-cyan-300/40 transition-shadow">
+                <div className="w-14 h-14 rounded-xl mb-4 flex items-center justify-center bg-gradient-to-br from-cyan-500 to-blue-600 shadow-sm group-hover:shadow-cyan-300/40 transition-shadow">
                   <Icon className="w-7 h-7 text-white" />
                 </div>
 
