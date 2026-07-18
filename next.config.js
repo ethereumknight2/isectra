@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
+const isProduction = process.env.NODE_ENV === "production";
+
 const nextConfig = {
+  outputFileTracingRoot: __dirname,
+
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "isectra.com" },
@@ -10,9 +14,10 @@ const nextConfig = {
       { protocol: "https", hostname: "a2.storyblok.com" },
     ],
     formats: ["image/avif", "image/webp"],
+    qualities: [60, 75, 80, 85, 90],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // ← OPTIMIZED: 1 year cache for production images
+    minimumCacheTTL: isProduction ? 31536000 : 0,
   },
 
   reactStrictMode: true,
@@ -30,9 +35,50 @@ const nextConfig = {
     optimizeCss: true,
   },
 
-  async headers() {
+  // Keep older cached About-page bundles working after the team portraits
+  // moved from underscore-named PNG paths to JPG files.
+  async rewrites() {
     return [
-      // Cache static assets forever
+      { source: "/images/Adam_Looney.png", destination: "/images/Adam_Looney.jpg" },
+      { source: "/images/Brian_Martins.png", destination: "/images/Brian_Martins.jpg" },
+      { source: "/images/Christian_Park.png", destination: "/images/Christian_Park.jpg" },
+      { source: "/images/Dalton_Thompson.png", destination: "/images/Dalton_Thompson.jpg" },
+      { source: "/images/Damian_Colarte.png", destination: "/images/Damian_Colarte.jpg" },
+      { source: "/images/Daniel_Park.png", destination: "/images/Daniel_Park.jpg" },
+      { source: "/images/Joseph_Cerniglia.png", destination: "/images/Joseph_Cerniglia_v2.jpg" },
+      { source: "/images/Michael_Colarte.png", destination: "/images/Michael_Colarte.jpg" },
+      { source: "/images/Roni_Banerjee.png", destination: "/images/Roni_Banerjee.jpg" },
+      { source: "/images/Santiago_Aristizabal.png", destination: "/images/Santiago_Aristizabal.jpg" },
+      { source: "/images/Thomas_Mauro.png", destination: "/images/Thomas_Mauro.jpg" },
+    ];
+  },
+
+  async headers() {
+    const securityHeaders = {
+      source: "/:path*",
+      headers: [
+        { key: "X-Content-Type-Options", value: "nosniff" },
+        { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        {
+          key: "Content-Security-Policy",
+          value: "frame-ancestors 'self' https://app.storyblok.com;",
+        },
+      ],
+    };
+
+    if (!isProduction) {
+      const clearStaleLocalCache = {
+        headers: [{ key: "Clear-Site-Data", value: '"cache"' }],
+      };
+
+      return [
+        { source: "/", ...clearStaleLocalCache },
+        { source: "/about-us", ...clearStaleLocalCache },
+        securityHeaders,
+      ];
+    }
+
+    return [
       {
         source: "/_next/static/:path*",
         headers: [
@@ -42,7 +88,6 @@ const nextConfig = {
           },
         ],
       },
-      // Cache images for 1 year
       {
         source: "/images/:path*",
         headers: [
@@ -52,19 +97,7 @@ const nextConfig = {
           },
         ],
       },
-      // Security headers for all pages
-      {
-        source: "/:path*",
-        headers: [
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          // Allow Storyblok Visual Editor to iframe the site
-          {
-            key: "Content-Security-Policy",
-            value: "frame-ancestors 'self' https://app.storyblok.com;",
-          },
-        ],
-      },
+      securityHeaders,
     ];
   },
 

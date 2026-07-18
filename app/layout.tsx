@@ -137,7 +137,7 @@ export default function RootLayout({
       {
         "@type": "Person",
         name: "Roni Banerjee",
-        jobTitle: "CMO & Investment Officer",
+        jobTitle: "Chief Investment Officer",
       },
     ],
     aggregateRating: {

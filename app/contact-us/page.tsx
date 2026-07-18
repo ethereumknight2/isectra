@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import ComplianceSupport from "@/components/sections/ComplianceSupport";
 import {
   Mail,
   Phone,
@@ -294,6 +295,8 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
+
+        <ComplianceSupport />
 
         {/* CONTACT FORM SECTION */}
         <section id="contact-form" className="py-24 md:py-32 bg-slate-50">

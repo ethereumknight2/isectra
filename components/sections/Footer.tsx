@@ -31,7 +31,7 @@ const footerLinks = {
 };
 
 const complianceBadges = [
-  { src: "/images/HIPAA.png", alt: "HIPAA Compliant" },
+  { src: "/images/HIPAA.png", alt: "HIPAA" },
   { src: "/images/ISO9001.jpeg", alt: "ISO 9001" },
   { src: "/images/ISO27001.png", alt: "ISO 27001" },
   { src: "/images/SOC2.jpg", alt: "SOC 2" },
@@ -226,24 +226,34 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* OPTIMIZED COMPLIANCE BADGES */}
-        <div className="py-4 border-t border-slate-800">
-          <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex items-center gap-3 ml-auto">
+        {/* Compliance support */}
+        <div className="py-6 border-t border-slate-800">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+            <p className="max-w-xl text-sm leading-relaxed text-slate-300 text-center lg:text-left">
+              We support and administer systems designed to meet these
+              compliance requirements.
+            </p>
+            <div className="grid grid-cols-2 min-[440px]:grid-cols-3 sm:grid-cols-5 gap-3 w-full lg:w-auto">
               {complianceBadges.map((badge) => (
                 <div
                   key={badge.src}
-                  className="h-10 bg-white rounded px-3 py-1.5 flex items-center justify-center"
+                  className="h-16 sm:h-[72px] min-w-0 bg-white rounded-lg px-3 py-2 flex items-center justify-center"
                 >
                   <Image
                     src={badge.src}
                     alt={badge.alt}
-                    width={56}
-                    height={28}
-                    quality={60}
+                    width={96}
+                    height={48}
+                    quality={85}
                     loading="lazy"
                     decoding="async"
-                    className="h-7 w-auto object-contain"
+                    className={`h-10 sm:h-12 w-full max-w-24 object-contain ${
+                      badge.src === "/images/ISO9001.jpeg"
+                        ? "scale-150"
+                        : badge.src === "/images/ISO27001.png"
+                          ? "scale-125"
+                          : ""
+                    }`}
                   />
                 </div>
               ))}

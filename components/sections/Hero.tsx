@@ -1,7 +1,6 @@
 // ^^^ Replace the stub above with this full component body ↓
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -14,9 +13,6 @@ import {
 import Link from "next/link";
 
 export default function HeroAnimated() {
-  const [isVisible, setIsVisible] = useState(false);
-  useEffect(() => setIsVisible(true), []);
-
   return (
     <section
       id="home"
@@ -96,13 +92,7 @@ export default function HeroAnimated() {
 
       {/* ===== Content ===== */}
       <div className="relative container mx-auto px-6">
-        <div
-          className={`inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur border border-white/40 rounded-full mb-6 shadow-sm ${
-            isVisible
-              ? "motion-safe:animate-[fadeIn_.6s_ease_forwards]"
-              : "opacity-0"
-          }`}
-        >
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur border border-white/40 rounded-full mb-6 shadow-sm motion-safe:animate-[fadeIn_.6s_ease_forwards]">
           <span className="w-2 h-2 bg-blue-600 rounded-full motion-safe:animate-pulse" />
           <span className="text-sm font-semibold text-blue-700 tracking-wide uppercase">
             Free Trial • No Obligations
@@ -113,38 +103,20 @@ export default function HeroAnimated() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* LEFT */}
           <div className="lg:col-span-7">
-            <h1
-              className={`text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-slate-900 mb-6 ${
-                isVisible
-                  ? "motion-safe:animate-[rise_.7s_.1s_ease_forwards]"
-                  : "opacity-0"
-              }`}
-            >
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-slate-900 mb-6 motion-safe:animate-[rise_.7s_.1s_ease_forwards]">
               Enterprise-Grade IT for{" "}
               <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
                 Pharma &amp; Growing Businesses
               </span>
             </h1>
 
-            <p
-              className={`text-xl md:text-2xl text-slate-700 leading-relaxed mb-10 ${
-                isVisible
-                  ? "motion-safe:animate-[rise_.7s_.25s_ease_forwards]"
-                  : "opacity-0"
-              }`}
-            >
+            <p className="text-xl md:text-2xl text-slate-700 leading-relaxed mb-10 motion-safe:animate-[rise_.7s_.25s_ease_forwards]">
               For over 20 years, iSectra has been the technology backbone for
               pharmaceutical innovators and 15-to-50-employee businesses across
               the United States.
             </p>
 
-            <div
-              className={`grid md:grid-cols-2 gap-5 mb-8 ${
-                isVisible
-                  ? "motion-safe:animate-[rise_.7s_.35s_ease_forwards]"
-                  : "opacity-0"
-              }`}
-            >
+            <div className="grid md:grid-cols-2 gap-5 mb-8 motion-safe:animate-[rise_.7s_.35s_ease_forwards]">
               {[
                 "99.99% Uptime Guaranteed",
                 "<10min Response Time",
@@ -163,13 +135,7 @@ export default function HeroAnimated() {
               ))}
             </div>
 
-            <div
-              className={`flex flex-col sm:flex-row gap-4 ${
-                isVisible
-                  ? "motion-safe:animate-[rise_.7s_.45s_ease_forwards]"
-                  : "opacity-0"
-              }`}
-            >
+            <div className="flex flex-col sm:flex-row gap-4 motion-safe:animate-[rise_.7s_.45s_ease_forwards]">
               <Link
                 href="#contact"
                 className="group px-8 py-4 rounded-xl font-semibold text-lg text-white transition-all duration-300 flex items-center justify-center gap-2
@@ -189,14 +155,7 @@ export default function HeroAnimated() {
           </div>
 
           {/* RIGHT — Premium Trust Panel (Bigger + Organized) */}
-          <aside
-            className={`lg:col-span-5 justify-self-end w-full max-w-[640px] rounded-3xl p-8 md:p-10 bg-white/80 backdrop-blur-xl border border-slate-200/80 shadow-xl relative overflow-hidden
-                        ${
-                          isVisible
-                            ? "motion-safe:animate-[rise_.7s_.55s_ease_forwards]"
-                            : "opacity-0"
-                        }`}
-          >
+          <aside className="lg:col-span-5 justify-self-end w-full max-w-[640px] rounded-3xl p-8 md:p-10 bg-white/80 backdrop-blur-xl border border-slate-200/80 shadow-xl relative overflow-hidden motion-safe:animate-[rise_.7s_.55s_ease_forwards]">
             {/* Decorative lines inside the card only */}
             <svg
               className="pointer-events-none absolute opacity-20 -z-10"

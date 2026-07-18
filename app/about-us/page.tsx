@@ -4,6 +4,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import ComplianceSupport from "@/components/sections/ComplianceSupport";
 import {
   CheckCircle,
   ArrowRight,
@@ -157,78 +158,86 @@ const steps = [
 ];
 
 /**
- * Team — replaced with the 10 members from Images_new/OurTeam,
- * alphabetized by first name. LinkedIn included where provided.
+ * Current team, alphabetized by first name. LinkedIn included where provided.
  */
 const team = [
+
+  {
+    name: "Damian Colarte",
+    role: "Founder & CEO",
+    focus: "Strategic vision, client relationships, long-term growth",
+    photo: "/images/Damian_Colarte.jpg",
+    linkedin: "https://www.linkedin.com/in/dcolarte/",
+  },
+  {
+    name: "Santiago Aristizabal",
+    role: "President & COO",
+    focus: "Infrastructure design, cloud architecture, security",
+    photo: "/images/Santiago_Aristizabal.jpg",
+    linkedin: "https://www.linkedin.com/in/santiago-aristizabal-1a5b89146/",
+  },
+  {
+    name: "Roni Banerjee",
+    role: "Chief Investment Officer",
+    focus: "Systems architecture, compliance alignment, analytics",
+    photo: "/images/Roni_Banerjee.jpg",
+    linkedin: "https://www.linkedin.com/in/ronibanerjee/",
+  },
   {
     name: "Adam Looney",
     role: "Lead Engineer",
     focus: "Network performance, endpoint security, operations",
-    photo: "/images/Adam-Looney.png",
+    photo: "/images/Adam_Looney.jpg",
     linkedin: "https://www.linkedin.com/company/isectra/",
   },
   {
     name: "Brian Martins",
     role: "Senior Support Engineer",
     focus: "Help desk leadership, customer experience",
-    photo: "/images/Brian-Martins.png",
+    photo: "/images/Brian_Martins.jpg",
     linkedin: "https://www.linkedin.com/in/brian-martins-46246a262/",
+  },
+  {
+    name: "Christian Park",
+    role: "IT Support Technician",
+    focus: "End-user support, troubleshooting, technical assistance",
+    photo: "/images/Christian-Park.jpg",
+    linkedin: "https://www.linkedin.com/in/christian-p-509a4431/",
   },
   {
     name: "Dalton Thompson",
     role: "Support Engineer",
     focus: "End-user support, onboarding, monitoring",
-    photo: "/images/Dalton-Thompson.png",
+    photo: "/images/Dalton_Thompson.jpg",
     linkedin: "https://www.linkedin.com/in/dalton-lee-thompson/",
   },
+
   {
-    name: "Damian Colarte",
-    role: "Founder & CEO",
-    focus: "Strategic vision, client relationships, long-term growth",
-    photo: "/images/Damian-Colarte.png",
-    linkedin: "https://www.linkedin.com/in/dcolarte/",
+    name: "Daniel Park",
+    role: "IT Specialist",
+    focus: "IT systems, technical support, operations",
+    photo: "/images/Daniel_Park.jpg",
+    linkedin: "https://www.linkedin.com/in/danielpark3/",
   },
   {
     name: "Joseph Cerniglia",
     role: "Project Manager",
     focus: "Office relocations, new build-outs, implementation logistics",
-    photo: "/images/Joseph_Cerniglia.png",
+    photo: "/images/Joseph_Cerniglia_v2.jpg",
     linkedin: "https://www.linkedin.com/company/isectra/",
   },
   {
     name: "Michael Colarte",
     role: "Operations",
     focus: "Vendor coordination, asset management",
-    photo: "/images/Michael-Colarte.png",
+    photo: "/images/Michael_Colarte.jpg",
     linkedin: "https://www.linkedin.com/in/michael-colarte-5b74a5228/",
-  },
-  {
-    name: "RJ Garrett",
-    role: "Cloud Specialist",
-    focus: "Microsoft 365, Azure, hybrid cloud setups",
-    photo: "/images/RJ-Garrett.png",
-    linkedin: "https://www.linkedin.com/company/isectra/",
-  },
-  {
-    name: "Roni Banerjee",
-    role: "Chief Strategy Officer",
-    focus: "Systems architecture, compliance alignment, analytics",
-    photo: "/images/Roni-Banerjee.png",
-    linkedin: "https://www.linkedin.com/in/ronibanerjee/",
-  },
-  {
-    name: "Santiago Aristizabal",
-    role: "President & COO",
-    focus: "Infrastructure design, cloud architecture, security",
-    photo: "/images/Santiago-Aristizabal.jpg",
-    linkedin: "https://www.linkedin.com/in/santiago-aristizabal-1a5b89146/",
   },
   {
     name: "Thomas Mauro",
     role: "Systems Specialist",
     focus: "Servers, backups, monitoring and automation",
-    photo: "/images/Thomas-Mauro.png",
+    photo: "/images/Thomas_Mauro.jpg",
     linkedin: "https://www.linkedin.com/company/isectra/",
   },
 ];
@@ -398,11 +407,12 @@ export default function AboutPage() {
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src="/images/iSectraTeam.png"
+              src="/images/isectra_team_new.webp"
               alt="iSectra Team"
               fill
               priority
-              quality={90}
+              quality={85}
+              sizes="100vw"
               className="object-cover object-[50%_30%] md:object-[50%_28%]"
             />
             {/* Premium Overlays */}
@@ -1039,6 +1049,8 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+
+        <ComplianceSupport />
 
         {/* ====== TESTIMONIAL ====== */}
         <section className="py-20 md:py-28 bg-slate-50">

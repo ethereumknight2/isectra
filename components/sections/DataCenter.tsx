@@ -15,14 +15,14 @@ import {
 const teamMembers = [
   {
     name: "Santiago Aristizabal",
-    role: "Engineering Team",
-    image: "/images/Santiago-Aristizabal.jpg",
+    role: "President & COO",
+    image: "/images/Santiago_Aristizabal.jpg",
     objectPos: "center" as const,
   },
   {
     name: "Joseph Cerniglia",
     role: "Engineering Team",
-    image: "/images/Joseph_Cerniglia.png",
+    image: "/images/Joseph_Cerniglia_v2.jpg",
     objectPos: "top" as const,
   },
 ];
